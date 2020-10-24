@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17510.1" systemVersion="20A5323l" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="TokenData" representedClassName="TokenData" syncable="YES">
+        <attribute name="displayAccountName" optional="YES" attributeType="String"/>
+        <attribute name="displayIssuer" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="indexNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uri" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="TokenData" positionX="-54" positionY="-9" width="128" height="118"/>
+    </elements>
+</model>
