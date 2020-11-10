@@ -56,60 +56,33 @@ struct ScannerView: UIViewControllerRepresentable {
         }
         #else
         class ScannerViewController: UIViewController {
-                var captureSession: AVCaptureSession!
-                var previewLayer: AVCaptureVideoPreviewLayer!
+                private let captureSession: AVCaptureSession = AVCaptureSession()
+                private var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer()
                 var delegate: ScannerCoordinator?
-
+                
                 override func viewDidLoad() {
                         super.viewDidLoad()
-
-
-                        NotificationCenter.default.addObserver(self,
-                                                               selector: #selector(updateOrientation),
-                                                               name: Notification.Name("UIDeviceOrientationDidChangeNotification"),
-                                                               object: nil)
-
-                        captureSession = AVCaptureSession()
-
+                        
                         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-                        let videoInput: AVCaptureDeviceInput
-
-                        do {
-                                videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-                        } catch {
-                                return
-                        }
-
-                        if (captureSession.canAddInput(videoInput)) {
-                                captureSession.addInput(videoInput)
-                        } else {
+                        guard let videoInput: AVCaptureDeviceInput = try? AVCaptureDeviceInput(device: videoCaptureDevice) else { return }
+                        guard captureSession.canAddInput(videoInput) else {
                                 delegate?.didFail(reason: .badInput)
                                 return
                         }
-
+                        captureSession.addInput(videoInput)
+                        
                         let metadataOutput = AVCaptureMetadataOutput()
-
-                        if (captureSession.canAddOutput(metadataOutput)) {
-                                captureSession.addOutput(metadataOutput)
-
-                                metadataOutput.setMetadataObjectsDelegate(delegate, queue: DispatchQueue.main)
-                                metadataOutput.metadataObjectTypes = delegate?.parent.codeTypes
-                        } else {
+                        guard captureSession.canAddOutput(metadataOutput) else {
                                 delegate?.didFail(reason: .badOutput)
                                 return
                         }
+                        captureSession.addOutput(metadataOutput)
+                        metadataOutput.setMetadataObjectsDelegate(delegate, queue: DispatchQueue.main)
+                        metadataOutput.metadataObjectTypes = delegate?.parent.codeTypes
                 }
-
+                
                 override func viewWillLayoutSubviews() {
-                        previewLayer?.frame = view.layer.bounds
-                }
-
-                @objc func updateOrientation() {
-                        guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
-                                return
-                        }
-                        let previewConnection = captureSession.connections[1]
-                        previewConnection.videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
+                        previewLayer.frame = view.layer.bounds
                 }
 
                 override func viewDidAppear(_ animated: Bool) {
@@ -118,30 +91,26 @@ struct ScannerView: UIViewControllerRepresentable {
                         previewLayer.frame = view.layer.bounds
                         previewLayer.videoGravity = .resizeAspectFill
                         view.layer.addSublayer(previewLayer)
-                        updateOrientation()
-                        captureSession.startRunning()
-                }
-
-                override func viewWillAppear(_ animated: Bool) {
-                        super.viewWillAppear(animated)
-
-                        if (captureSession?.isRunning == false) {
+                        if !captureSession.isRunning {
                                 captureSession.startRunning()
                         }
                 }
-
+                
+                override func viewWillAppear(_ animated: Bool) {
+                        super.viewWillAppear(animated)
+                        if !captureSession.isRunning {
+                                captureSession.startRunning()
+                        }
+                }
                 override func viewWillDisappear(_ animated: Bool) {
                         super.viewWillDisappear(animated)
-
-                        if (captureSession?.isRunning == true) {
+                        if captureSession.isRunning {
                                 captureSession.stopRunning()
                         }
-
-                        NotificationCenter.default.removeObserver(self)
                 }
         }
         #endif
-
+        
         let codeTypes: [AVMetadataObject.ObjectType]
         let completion: (Result<String, ScanError>) -> Void
         
