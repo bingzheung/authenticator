@@ -37,24 +37,7 @@ struct ScannerView: UIViewControllerRepresentable {
                         parent.completion(.failure(reason))
                 }
         }
-        #if targetEnvironment(simulator)
-        class ScannerViewController: UIViewController {
-                var delegate: ScannerCoordinator?
-                override func loadView() {
-                        view = UIView()
-                        let label = UILabel()
-                        label.translatesAutoresizingMaskIntoConstraints = false
-                        label.numberOfLines = 0
-                        label.text = "Running in simulator"
-                        view.addSubview(label)
-                        NSLayoutConstraint.activate([
-                                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-                                label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-                                label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-                        ])
-                }
-        }
-        #else
+        
         class ScannerViewController: UIViewController {
                 private let captureSession: AVCaptureSession = AVCaptureSession()
                 private var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer()
@@ -109,7 +92,6 @@ struct ScannerView: UIViewControllerRepresentable {
                         }
                 }
         }
-        #endif
         
         let codeTypes: [AVMetadataObject.ObjectType]
         let completion: (Result<String, ScanError>) -> Void
