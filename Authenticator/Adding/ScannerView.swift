@@ -121,6 +121,7 @@ struct Scanner: View {
                 NavigationView {
                         ScannerView(codeTypes: codeTypes, completion: completion)
                                 .navigationTitle("Scanning")
+                                .navigationBarTitleDisplayMode(.inline)
                                 .toolbar {
                                         ToolbarItem(placement: .navigationBarLeading) {
                                                 Button(action: {
