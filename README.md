@@ -3,7 +3,8 @@
 
 Two-Factor TOTP Authenticator for iOS
 
+[Download on the App Store](https://apps.apple.com/app/id1511791282)
 
-## Third-Party Libraries
+## Third-party Libraries
 - [SwiftOTP](https://github.com/lachlanbell/SwiftOTP)  
 - [Zip](https://github.com/marmelroy/Zip)
