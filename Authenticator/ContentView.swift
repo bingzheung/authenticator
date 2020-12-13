@@ -325,10 +325,11 @@ struct ContentView: View {
         private var fetchedTokens: FetchedResults<TokenData>
         
         private func setupTokens() {
-                guard tokens.isEmpty else { return }
-                _ = fetchedTokens.map {
-                        if let token: Token = Token(id: $0.id, uri: $0.uri, displayIssuer: $0.displayIssuer, displayAccountName: $0.displayAccountName) {
-                                tokens.append(token)
+                if tokens.isEmpty {
+                        _ = fetchedTokens.map {
+                                if let token: Token = Token(id: $0.id, uri: $0.uri, displayIssuer: $0.displayIssuer, displayAccountName: $0.displayAccountName) {
+                                        tokens.append(token)
+                                }
                         }
                 }
                 codes = genCodes()
