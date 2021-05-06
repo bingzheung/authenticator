@@ -1,19 +1,17 @@
 import SwiftUI
 
 struct AboutView: View {
-        
+
         @Binding var isPresented: Bool
-        
+
         var body: some View {
                 NavigationView {
                         ZStack {
                                 GlobalBackgroundColor().ignoresSafeArea()
                                 ScrollView {
                                         VersionLabel()
-                                                .padding()
-                                        
                                         LinkCardView(heading: "Source Code", message: "https://github.com/ososoio/authenticator")
-                                                .padding()
+                                                .padding(.horizontal)
                                         
                                         LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy-policy")
                                                 .padding()
@@ -34,13 +32,13 @@ struct AboutView: View {
 }
 
 private struct VersionLabel: View {
-        
-        @State private var isBannerPresented: Bool = false
-        
-        private let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "__ERROR__"
-        private let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "__ERROR__"
-        private var versionString: String { version + " (" + build + ")" }
-        
+
+        private let versionString: String = {
+                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
+                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
+                return version + " (" + build + ")"
+        }()
+
         var body: some View {
                 HStack {
                         Text("Version")
@@ -49,24 +47,17 @@ private struct VersionLabel: View {
                 }
                 .padding()
                 .fillBackground()
-                .onTapGesture {
-                        UIPasteboard.general.string = versionString
-                        isBannerPresented = true
-                }
-                .onLongPressGesture {
-                        UIPasteboard.general.string = versionString
-                        isBannerPresented = true
-                }
-                .banner(isPresented: $isBannerPresented)
+                .contextMenu(menuItems: {
+                        MenuCopyButton(content: versionString)
+                })
+                .padding()
         }
 }
 private struct LinkCardView: View {
-        
+
         let heading: String
         let message: String
-        
-        @State private var isBannerPresented: Bool = false
-        
+
         var body: some View {
                 VStack {
                         HStack {
@@ -80,14 +71,25 @@ private struct LinkCardView: View {
                 }
                 .padding()
                 .fillBackground()
-                .onTapGesture {
-                        UIPasteboard.general.string = message
-                        isBannerPresented = true
+                .contextMenu(menuItems: {
+                        MenuCopyButton(content: message)
+                })
+        }
+}
+
+struct MenuCopyButton: View {
+
+        let content: String
+
+        var body: some View {
+                Button(action: {
+                        UIPasteboard.general.string = content
+                }) {
+                        HStack {
+                                Text("Copy")
+                                Spacer()
+                                Image(systemName: "doc.on.doc")
+                        }
                 }
-                .onLongPressGesture {
-                        UIPasteboard.general.string = message
-                        isBannerPresented = true
-                }
-                .banner(isPresented: $isBannerPresented)
         }
 }
