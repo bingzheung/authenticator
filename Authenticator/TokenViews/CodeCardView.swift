@@ -76,8 +76,8 @@ struct CodeCard: View {
         private var issuerImage: Image {
                 let imageName: String = token.displayIssuer.lowercased()
                 guard !imageName.isEmpty else { return Image(systemName: "person.circle") }
-                guard let _ = UIImage(named: imageName) else { return Image(systemName: "person.circle") }
-                return Image(imageName)
+                guard let uiImage: UIImage = UIImage(named: imageName) else { return Image(systemName: "person.circle") }
+                return Image(uiImage: uiImage)
         }
 
         private var endAngle: Double { Double((30 - timeRemaining) * 12 - 89) }
