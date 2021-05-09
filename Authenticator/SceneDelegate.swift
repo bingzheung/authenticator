@@ -1,7 +1,4 @@
 import SwiftUI
-import os.log
-
-let logger: Logger = Logger(subsystem: "io.ososo.authenticator", category: "debug")
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -107,9 +104,9 @@ extension View {
         }
 }
 private struct BannerModifier: ViewModifier {
-        
+
         @Binding var isPresented: Bool
-        
+
         func body(content: Content) -> some View {
                 ZStack {
                         content

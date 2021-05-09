@@ -213,7 +213,7 @@ struct ContentView: View {
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
         }
-        
+
         private func genCodes() -> [String] {
                 // prevent crash while deleting
                 let placeholder: [String] = Array(repeating: "000000", count: 30)
@@ -226,9 +226,9 @@ struct ContentView: View {
                 gened += placeholder
                 return gened
         }
-        
+
         // MARK: - Handlers
-        
+
         private func delete(at offsets: IndexSet) {
                 indexSetOnDelete = offsets
                 isDeletionAlertPresented = true
@@ -248,8 +248,8 @@ struct ContentView: View {
                         codes = genCodes()
                         updateTokenData()
                 case .failure(let error):
-                        logger.debug("Scanning failed")
-                        logger.debug("\(error.localizedDescription)")
+                        debugLog("Scanning failed")
+                        debugLog(error.localizedDescription)
                 }
         }
         private func handleImagePick(uri: String?) {
@@ -280,7 +280,7 @@ struct ContentView: View {
                 codes = genCodes()
                 updateTokenData()
         }
-        
+
         private var deletionAlert: Alert {
                 let message: String = """
                 Removing account will NOT turn off Two-Factor Authentication.
@@ -310,13 +310,13 @@ struct ContentView: View {
                 indexSetOnDelete.removeAll()
                 selectedTokens.removeAll()
         }
-        
-        
+
+
         // MARK: - Core Data
-        
+
         @FetchRequest(entity: TokenData.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \TokenData.indexNumber, ascending: false).reversedSortDescriptor as! NSSortDescriptor])
         private var fetchedTokens: FetchedResults<TokenData>
-        
+
         private func setupTokens() {
                 if tokens.isEmpty {
                         _ = fetchedTokens.map {
@@ -333,7 +333,7 @@ struct ContentView: View {
                 do {
                         try context.execute(deleteRequest)
                 } catch {
-                        logger.debug("\(error.localizedDescription)")
+                        debugLog(error.localizedDescription)
                 }
                 _ = tokens.map { saveTokenData(token: $0) }
         }
@@ -347,8 +347,14 @@ struct ContentView: View {
                 do {
                         try context.save()
                 } catch {
-                        logger.debug("\(error.localizedDescription)")
+                        debugLog(error.localizedDescription)
                 }
+        }
+
+        private func debugLog(_ text: String) {
+                #if DEBUG
+                print(text)
+                #endif
         }
 }
 
