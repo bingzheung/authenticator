@@ -2,49 +2,25 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-        
+
         @Environment(\.managedObjectContext) var context
-        
-        
-        // MARK: - @State instances
-        
+
         @State private var editMode: EditMode = .inactive
-        
+
         @State private var tokens: [Token] = []
         @State private var selectedTokens = Set<Token>()
-        @State var tokenID: String = "id"
-        private var tokenIndex: Int { (tokens.firstIndex { $0.id == tokenID }) ?? 0 }
-        
+        @State private var tokenIndex: Int = 0
+
         private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         @State private var timeRemaining: Int = 30 - (Int(Date().timeIntervalSince1970) % 30)
         @State var codes: [String] = ["000000"]
-        
+
         @State private var isDeletionAlertPresented: Bool = false
         @State private var indexSetOnDelete: IndexSet = IndexSet()
-        
-        @State private var isActionSheetPresented: Bool = false
-        
-        /// 0: None.
-        /// 1: More Action.
-        /// 2: Adding token.
-        /// 3: Code Card action.
-        @State private var actionSheetState: Int = 0
-        
-        enum SheetSet {
-                case moreExport
-                case moreAbout
-                case addByScanner
-                case addByQRCodeImage
-                case addByURIFile
-                case addByManualy
-                case cardViewDetail
-                case cardEditing
-        }
-        @State private var presentingSheet: SheetSet = .addByScanner
+
+        @State private var presentingSheet: SheetSet = .moreAbout
         @State private var isSheetPresented: Bool = false
-        
-        // MARK: - Body
-        
+
         var body: some View {
                 NavigationView {
                         List(selection: $selectedTokens) {
@@ -52,24 +28,43 @@ struct ContentView: View {
                                         if editMode == .active {
                                                 CodeCard(token: token,
                                                          totp: $codes[tokens.firstIndex(of: token) ?? 0],
-                                                         timeRemaining: $timeRemaining,
-                                                         isActionSheetPresented: $isActionSheetPresented,
-                                                         actionSheetState: $actionSheetState,
-                                                         tokenID: $tokenID)
+                                                         timeRemaining: $timeRemaining)
                                         } else {
                                                 ZStack {
                                                         GlobalBackgroundColor()
                                                         CodeCard(token: token,
                                                                  totp: $codes[tokens.firstIndex(of: token) ?? 0],
-                                                                 timeRemaining: $timeRemaining,
-                                                                 isActionSheetPresented: $isActionSheetPresented,
-                                                                 actionSheetState: $actionSheetState,
-                                                                 tokenID: $tokenID)
-                                                                .padding(.vertical, 8)
+                                                                 timeRemaining: $timeRemaining)
+                                                                .contextMenu(menuItems: {
+                                                                        Button(action: {
+                                                                                UIPasteboard.general.string = codes[tokens.firstIndex(of: token) ?? 0]
+                                                                        }) {
+                                                                                MenuLabel(text: "Copy code", image: "doc.on.doc")
+                                                                        }
+                                                                        Button(action: {
+                                                                                tokenIndex = tokens.firstIndex(of: token) ?? 0
+                                                                                presentingSheet = .cardViewDetail
+                                                                                isSheetPresented = true
+                                                                        }) {
+                                                                                MenuLabel(text: "View detail", image: "text.justifyleft")
+                                                                        }
+                                                                        Button(action: {
+                                                                                tokenIndex = tokens.firstIndex(of: token) ?? 0
+                                                                                presentingSheet = .cardEditing
+                                                                                isSheetPresented = true
+                                                                        }) {
+                                                                                MenuLabel(text: "Edit account", image: "square.and.pencil")
+                                                                        }
+                                                                        Button(action: {
+                                                                                tokenIndex = tokens.firstIndex(of: token) ?? 0
+                                                                                isDeletionAlertPresented = true
+                                                                        }) {
+                                                                                MenuLabel(text: "Delete", image: "trash")
+                                                                        }
+                                                                })
                                                 }
                                                 .listRowInsets(EdgeInsets())
                                         }
-                                        
                                 }
                                 .onDelete(perform: delete(at:))
                                 .onMove(perform: move(from:to:))
@@ -88,46 +83,107 @@ struct ContentView: View {
                         .navigationTitle("2FA Auth")
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
-                                        Button(action: {
-                                                if self.editMode == .inactive {
-                                                        actionSheetState = 1
-                                                        isActionSheetPresented = true
-                                                }
-                                                if self.editMode == .active {
+                                        if self.editMode == .active {
+                                                Button(action: {
                                                         self.editMode = .inactive
                                                         self.selectedTokens.removeAll()
                                                         self.updateTokenData()
-                                                }
-                                        }) {
-                                                if editMode == .active {
+                                                }) {
                                                         Text("Done")
-                                                } else {
+                                                }
+                                        } else {
+                                                Menu {
+                                                        Button(action: {
+                                                                self.editMode = .active
+                                                        }) {
+                                                                HStack {
+                                                                        Text("Edit")
+                                                                        Spacer()
+                                                                        Image(systemName: "list.bullet")
+                                                                }
+                                                        }
+                                                        Button(action: {
+                                                                presentingSheet = .moreExport
+                                                                isSheetPresented = true
+                                                        }) {
+                                                                HStack {
+                                                                        Text("Export")
+                                                                        Spacer()
+                                                                        Image(systemName: "square.and.arrow.up")
+                                                                }
+                                                        }
+                                                        Button(action: {
+                                                                presentingSheet = .moreAbout
+                                                                isSheetPresented = true
+                                                        }) {
+                                                                HStack {
+                                                                        Text("About")
+                                                                        Spacer()
+                                                                        Image(systemName: "info.circle")
+                                                                }
+                                                        }
+                                                } label: {
                                                         Image(systemName: "ellipsis.circle")
                                                 }
                                         }
                                 }
                                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                                        if editMode != .active {
+                                        if self.editMode == .active {
+                                                Button(action: {
+                                                        isDeletionAlertPresented = true
+                                                        self.editMode = .inactive
+                                                }){
+                                                        Image(systemName: "trash").opacity(selectedTokens.isEmpty ? 0.2 : 1)
+                                                }
+                                        } else {
                                                 Button(action: {
                                                         presentingSheet = .addByScanner
                                                         isSheetPresented = true
                                                 }) {
                                                         Image(systemName: "qrcode.viewfinder")
                                                 }
-                                        }
-                                        Button(action: {
-                                                if self.editMode == .inactive {
-                                                        actionSheetState = 2
-                                                        isActionSheetPresented = true
-                                                }
-                                                if self.editMode == .active {
-                                                        triggerDeletion()
-                                                        self.editMode = .inactive
-                                                }
-                                        }) {
-                                                if editMode == .active {
-                                                        Image(systemName: "trash").opacity(selectedTokens.isEmpty ? 0.2 : 1)
-                                                } else {
+                                                Menu {
+                                                        Button(action: {
+                                                                presentingSheet = .addByScanner
+                                                                isSheetPresented = true
+                                                        }) {
+                                                                HStack {
+                                                                        Text("Scan QR Code")
+                                                                        Spacer()
+                                                                        Image(systemName: "qrcode.viewfinder")
+                                                                }
+                                                        }
+                                                        Button(action: {
+                                                                presentingSheet = .addByQRCodeImage
+                                                                isSheetPresented = true
+                                                        }) {
+                                                                HStack {
+                                                                        Text("Read QR Code image")
+                                                                        Spacer()
+                                                                        Image(systemName: "photo")
+                                                                }
+                                                        }
+                                                        Button(action: {
+                                                                presentingSheet = .addByURIFile
+                                                                isSheetPresented = true
+                                                        }) {
+                                                                HStack {
+                                                                        Text("Import from file")
+                                                                        Spacer()
+                                                                        Image(systemName: "doc.badge.plus")
+                                                                }
+                                                        }
+                                                        Button(action: {
+                                                                presentingSheet = .addByManually
+                                                                isSheetPresented = true
+                                                        }) {
+                                                                HStack {
+                                                                        Text("Enter manually")
+                                                                        Spacer()
+                                                                        Image(systemName: "text.cursor")
+                                                                }
+                                                        }
+                                                } label: {
                                                         Image(systemName: "plus")
                                                 }
                                         }
@@ -145,72 +201,12 @@ struct ContentView: View {
                                         ImagePickerView(isPresented: $isSheetPresented, completion: handleImagePick(uri:))
                                 case .addByURIFile:
                                         DocumentPickerView(isPresented: $isSheetPresented, completion: handleImportFromFile(url:))
-                                case .addByManualy:
+                                case .addByManually:
                                         ManualEntryView(isPresented: $isSheetPresented, completion: handleManualEntry(token:))
                                 case .cardViewDetail:
                                         TokenDetailView(isPresented: $isSheetPresented, token: tokens[tokenIndex])
                                 case .cardEditing:
                                         EditAccountView(isPresented: $isSheetPresented, token: $tokens[tokenIndex], completion: updateTokenData)
-                                }
-                        }
-                        .actionSheet(isPresented: $isActionSheetPresented) {
-                                switch actionSheetState {
-                                case 1:
-                                        return ActionSheet(title: Text("2FA Auth"), buttons: [
-                                                .default(Text("Edit")) {
-                                                        self.editMode = .active
-                                                },
-                                                .default(Text("Export")) {
-                                                        presentingSheet = .moreExport
-                                                        isSheetPresented = true
-                                                },
-                                                .default(Text("About")) {
-                                                        presentingSheet = .moreAbout
-                                                        isSheetPresented = true
-                                                },
-                                                .cancel()
-                                        ])
-                                case 2:
-                                        return ActionSheet(title: Text("Add accounts"), buttons: [
-                                                .default(Text("Scan QR Code"), action: {
-                                                        presentingSheet = .addByScanner
-                                                        isSheetPresented = true
-                                                }),
-                                                .default(Text("Read QR Code image"), action: {
-                                                        presentingSheet = .addByQRCodeImage
-                                                        isSheetPresented = true
-                                                }),
-                                                .default(Text("Import from file"), action: {
-                                                        presentingSheet = .addByURIFile
-                                                        isSheetPresented = true
-                                                }),
-                                                .default(Text("Enter manually"), action: {
-                                                        presentingSheet = .addByManualy
-                                                        isSheetPresented = true
-                                                }),
-                                                .cancel()
-                                        ])
-                                default:
-                                        let token: Token = tokens[tokenIndex]
-                                        let title: String = token.displayIssuer
-                                        let message: String = token.displayAccountName
-                                        return ActionSheet(title: Text(title), message: Text(message), buttons: [
-                                                .default(Text("Copy code")) {
-                                                        UIPasteboard.general.string = codes[tokenIndex]
-                                                },
-                                                .default(Text("View detail")) {
-                                                        presentingSheet = .cardViewDetail
-                                                        isSheetPresented = true
-                                                },
-                                                .default(Text("Edit account")) {
-                                                        presentingSheet = .cardEditing
-                                                        isSheetPresented = true
-                                                },
-                                                .destructive(Text("Delete")) {
-                                                        triggerDeletion()
-                                                },
-                                                .cancel()
-                                        ])
                                 }
                         }
                         .environment(\.editMode, $editMode)
@@ -219,7 +215,7 @@ struct ContentView: View {
         }
         
         private func genCodes() -> [String] {
-                // prevent crash while delete
+                // prevent crash while deleting
                 let placeholder: [String] = Array(repeating: "000000", count: 30)
                 
                 guard !tokens.isEmpty else { return placeholder }
@@ -235,17 +231,14 @@ struct ContentView: View {
         
         private func delete(at offsets: IndexSet) {
                 indexSetOnDelete = offsets
-                triggerDeletion()
+                isDeletionAlertPresented = true
         }
         private func move(from source: IndexSet, to destination: Int) {
                 tokens.move(fromOffsets: source, toOffset: destination)
                 codes = genCodes()
                 updateTokenData()
         }
-        private func triggerDeletion() {
-                isDeletionAlertPresented = true
-        }
-        
+
         private func handleScan(result: Result<String, ScannerView.ScanError>) {
                 isSheetPresented = false
                 switch result {
@@ -301,7 +294,7 @@ struct ContentView: View {
                 )
         }
         private func cancelDeletion() {
-                indexSetOnDelete = IndexSet()
+                indexSetOnDelete.removeAll()
                 selectedTokens.removeAll()
         }
         private func performDeletion() {
@@ -310,11 +303,11 @@ struct ContentView: View {
                 } else if !selectedTokens.isEmpty {
                         tokens.removeAll { selectedTokens.contains($0) }
                 } else {
-                        tokens.removeAll { $0.id == self.tokenID }
+                        tokens.removeAll { $0.id == tokens[tokenIndex].id }
                 }
                 codes = genCodes()
                 updateTokenData()
-                indexSetOnDelete = IndexSet()
+                indexSetOnDelete.removeAll()
                 selectedTokens.removeAll()
         }
         
@@ -357,4 +350,15 @@ struct ContentView: View {
                         logger.debug("\(error.localizedDescription)")
                 }
         }
+}
+
+private enum SheetSet {
+        case moreExport
+        case moreAbout
+        case addByScanner
+        case addByQRCodeImage
+        case addByURIFile
+        case addByManually
+        case cardViewDetail
+        case cardEditing
 }

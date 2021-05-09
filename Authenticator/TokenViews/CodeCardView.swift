@@ -1,17 +1,13 @@
 import SwiftUI
 
 struct CodeCard: View {
-        
+
         let token: Token
         @Binding var totp: String
         @Binding var timeRemaining: Int
-        
-        @Binding var isActionSheetPresented: Bool
-        @Binding var actionSheetState: Int
-        @Binding var tokenID: String
-        
+
         @State private var isBannerPresented: Bool = false
-        
+
         var body: some View {
                 VStack {
                         HStack {
@@ -19,18 +15,22 @@ struct CodeCard: View {
                                 Spacer().frame(width: 16)
                                 Text(token.displayIssuer).font(.headline)
                                 Spacer(minLength: 16)
-                                Image(systemName: "ellipsis.circle")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                                        .padding(.trailing, 4)
-                                        .onTapGesture {
-                                                tokenID = token.id
-                                                actionSheetState = 3
-                                                isActionSheetPresented = true
+                                Menu {
+                                        Button(action: {
+                                                UIPasteboard.general.string = totp
+                                        }) {
+                                                MenuLabel(text: "Copy code", image: "doc.on.doc")
                                         }
+                                } label: {
+                                        Image(systemName: "ellipsis.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 20, height: 20)
+                                }
+                                .foregroundColor(.primary)
+                                .padding(.trailing, 4)
                         }
-                        
+
                         HStack {
                                 Text(formattedTotp).font(.largeTitle)
                                 Spacer()
@@ -40,12 +40,8 @@ struct CodeCard: View {
                                 UIPasteboard.general.string = totp
                                 isBannerPresented = true
                         }
-                        .onLongPressGesture {
-                                UIPasteboard.general.string = totp
-                                isBannerPresented = true
-                        }
                         .banner(isPresented: $isBannerPresented)
-                        
+
                         HStack {
                                 Text(token.displayAccountName).font(.footnote)
                                 Spacer()
@@ -64,7 +60,7 @@ struct CodeCard: View {
                 .padding()
                 .fillBackground()
         }
-        
+
         private var formattedTotp: String {
                 var code: String = totp
                 switch code.count {
@@ -76,14 +72,14 @@ struct CodeCard: View {
                 }
                 return code
         }
-        
+
         private var issuerImage: Image {
                 let imageName: String = token.displayIssuer.lowercased()
                 guard !imageName.isEmpty else { return Image(systemName: "person.circle") }
                 guard let _ = UIImage(named: imageName) else { return Image(systemName: "person.circle") }
                 return Image(imageName)
         }
-        
+
         private var endAngle: Double { Double((30 - timeRemaining) * 12 - 89) }
 }
 

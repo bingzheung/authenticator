@@ -13,7 +13,7 @@ struct AboutView: View {
                                         LinkCardView(heading: "Source Code", message: "https://github.com/ososoio/authenticator")
                                                 .padding(.horizontal)
                                         
-                                        LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy-policy")
+                                        LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy")
                                                 .padding()
                                 }
                         }

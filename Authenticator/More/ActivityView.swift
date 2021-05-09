@@ -17,3 +17,15 @@ struct ActivityView: UIViewControllerRepresentable {
         
         func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+
+struct MenuLabel: View {
+        let text: String
+        let image: String
+        var body: some View {
+                HStack {
+                        Text(NSLocalizedString(text, comment: ""))
+                        Spacer()
+                        Image(systemName: image)
+                }
+        }
+}
