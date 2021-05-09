@@ -109,14 +109,14 @@ struct ManualEntryView: View {
         private var newToken: Token? {
                 if selection == 0 {
                         guard !keyUri.isEmpty else { return nil }
-                        guard let token: Token = Token(uri: keyUri.trimmingSpaces) else { return nil }
+                        guard let token: Token = Token(uri: keyUri.trimmingSpaces()) else { return nil }
                         return token
                 } else {
                         guard !secretKey.isEmpty else { return nil }
-                        guard let token: Token = Token(issuerPrefix: issuer.trimmingSpaces,
-                                                       accountName: accountName.trimmingSpaces,
-                                                       secret: secretKey.trimmingSpaces,
-                                                       issuer: issuer.trimmingSpaces) else { return nil }
+                        guard let token: Token = Token(issuerPrefix: issuer.trimmingSpaces(),
+                                                       accountName: accountName.trimmingSpaces(),
+                                                       secret: secretKey.trimmingSpaces(),
+                                                       issuer: issuer.trimmingSpaces()) else { return nil }
                         return token
                 }
         }

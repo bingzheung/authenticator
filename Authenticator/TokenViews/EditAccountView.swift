@@ -51,8 +51,8 @@ struct EditAccountView: View {
                                 }
                                 ToolbarItem(placement: .navigationBarTrailing) {
                                         Button(action: {
-                                                token.displayIssuer = token.displayIssuer.trimmingSpaces
-                                                token.displayAccountName = token.displayAccountName.trimmingSpaces
+                                                token.displayIssuer = token.displayIssuer.trimmingSpaces()
+                                                token.displayAccountName = token.displayAccountName.trimmingSpaces()
                                                 completion()
                                                 isPresented = false
                                         }) {
