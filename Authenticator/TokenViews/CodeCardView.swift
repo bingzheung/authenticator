@@ -40,7 +40,7 @@ struct CodeCard: View {
                                 UIPasteboard.general.string = totp
                                 isBannerPresented = true
                         }
-                        .banner(isPresented: $isBannerPresented)
+                        .modifier(BannerModifier(isPresented: $isBannerPresented))
 
                         HStack {
                                 Text(token.displayAccountName).font(.footnote)
@@ -92,4 +92,28 @@ private struct Arc: Shape {
                 path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
                 return path
         }
+}
+
+private struct BannerModifier: ViewModifier {
+
+        @Binding var isPresented: Bool
+
+        func body(content: Content) -> some View {
+                ZStack {
+                        content
+                        if isPresented {
+                                Text("Copied")
+                                        .animation(.default)
+                                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                                        .onAppear {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                                        withAnimation {
+                                                                self.isPresented = false
+                                                        }
+                                                }
+                                }
+                        }
+                }
+        }
+
 }

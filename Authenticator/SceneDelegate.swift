@@ -96,33 +96,3 @@ struct GlobalBackgroundColor: View {
                 }
         }
 }
-
-
-extension View {
-        func banner(isPresented: Binding<Bool>) -> some View {
-                self.modifier(BannerModifier(isPresented: isPresented))
-        }
-}
-private struct BannerModifier: ViewModifier {
-
-        @Binding var isPresented: Bool
-
-        func body(content: Content) -> some View {
-                ZStack {
-                        content
-                        if isPresented {
-                                Text("Copied")
-                                        .animation(.default)
-                                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                                        .onAppear {
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                                        withAnimation {
-                                                                self.isPresented = false
-                                                        }
-                                                }
-                                }
-                        }
-                }
-        }
-        
-}
