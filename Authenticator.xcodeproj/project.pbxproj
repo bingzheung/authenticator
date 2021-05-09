@@ -17,6 +17,7 @@
 		3768D827245C662D00988ECB /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D826245C662D00988ECB /* ImagePickerView.swift */; };
 		3768D829245D7CF700988ECB /* DocumentPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D828245D7CF700988ECB /* DocumentPickerView.swift */; };
 		3768D82B245D7E5800988ECB /* ManualEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D82A245D7E5800988ECB /* ManualEntryView.swift */; };
+		3777B3712647DC9400D316E4 /* MenuViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777B3702647DC9400D316E4 /* MenuViews.swift */; };
 		378C52F6245890B600CC5A1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C52F5245890B600CC5A1E /* AppDelegate.swift */; };
 		378C52F8245890B600CC5A1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C52F7245890B600CC5A1E /* SceneDelegate.swift */; };
 		378C52FA245890B600CC5A1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C52F9245890B600CC5A1E /* ContentView.swift */; };
@@ -44,6 +45,7 @@
 		3768D826245C662D00988ECB /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		3768D828245D7CF700988ECB /* DocumentPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerView.swift; sourceTree = "<group>"; };
 		3768D82A245D7E5800988ECB /* ManualEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEntryView.swift; sourceTree = "<group>"; };
+		3777B3702647DC9400D316E4 /* MenuViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViews.swift; sourceTree = "<group>"; };
 		378C52F2245890B600CC5A1E /* Authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		378C52F5245890B600CC5A1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		378C52F7245890B600CC5A1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3777B36E2647DC0E00D316E4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				37372CEA253456FC0045F835 /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3777B36F2647DC6600D316E4 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				37BE1C68253FFAE400DBFDE4 /* ActivityView.swift */,
+				3777B3702647DC9400D316E4 /* MenuViews.swift */,
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
 		378C52E9245890B600CC5A1E = {
 			isa = PBXGroup;
 			children = (
@@ -97,7 +116,8 @@
 				378C52F5245890B600CC5A1E /* AppDelegate.swift */,
 				378C52F7245890B600CC5A1E /* SceneDelegate.swift */,
 				378C52F9245890B600CC5A1E /* ContentView.swift */,
-				37372CEA253456FC0045F835 /* StringExtensions.swift */,
+				3777B36F2647DC6600D316E4 /* ViewComponents */,
+				3777B36E2647DC0E00D316E4 /* Extensions */,
 				37F9979C2541E5E00008B5AF /* Adding */,
 				37F997A02541E6270008B5AF /* More */,
 				37BCA6452461816800778EBD /* TokenViews */,
@@ -157,7 +177,6 @@
 			children = (
 				37BCA64A2461B1BE00778EBD /* ExportView.swift */,
 				372C366D245AC1B000F3395A /* AboutView.swift */,
-				37BE1C68253FFAE400DBFDE4 /* ActivityView.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -253,6 +272,7 @@
 				378C52F8245890B600CC5A1E /* SceneDelegate.swift in Sources */,
 				3796F137245EADD600A2E9D0 /* Authenticator.xcdatamodeld in Sources */,
 				3768D829245D7CF700988ECB /* DocumentPickerView.swift in Sources */,
+				3777B3712647DC9400D316E4 /* MenuViews.swift in Sources */,
 				3768D82B245D7E5800988ECB /* ManualEntryView.swift in Sources */,
 				37BE1C69253FFAE400DBFDE4 /* ActivityView.swift in Sources */,
 				37372CEB253456FC0045F835 /* StringExtensions.swift in Sources */,
