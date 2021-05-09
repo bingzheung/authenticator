@@ -62,6 +62,7 @@ struct ContentView: View {
                                                                                 MenuLabel(text: "Delete", image: "trash")
                                                                         }
                                                                 })
+                                                                .padding(.vertical, 4)
                                                 }
                                                 .listRowInsets(EdgeInsets())
                                         }
