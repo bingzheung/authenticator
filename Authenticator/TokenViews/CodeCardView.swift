@@ -108,12 +108,11 @@ private struct BannerModifier: ViewModifier {
                                         .onAppear {
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                                                         withAnimation {
-                                                                self.isPresented = false
+                                                                isPresented = false
                                                         }
                                                 }
-                                }
+                                        }
                         }
                 }
         }
-
 }
