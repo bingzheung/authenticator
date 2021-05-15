@@ -244,7 +244,9 @@ struct ContentView: View {
                 isSheetPresented = false
                 switch result {
                 case .success(let code):
-                        guard let newToken: Token = Token(uri: code.trimmingSpaces()) else { return }
+                        let uri: String = code.trimmingSpaces()
+                        guard !uri.isEmpty else { return }
+                        guard let newToken: Token = Token(uri: uri) else { return }
                         tokens.append(newToken)
                         codes = genCodes()
                         updateTokenData()
@@ -254,15 +256,17 @@ struct ContentView: View {
                 }
         }
         private func handleImagePick(uri: String?) {
-                guard let qrCodeString: String = uri else { return }
-                guard let newToken: Token = Token(uri: qrCodeString.trimmingSpaces()) else { return }
+                guard let uriString: String = uri else { return }
+                let qrCodeUri: String = uriString.trimmingSpaces()
+                guard !qrCodeUri.isEmpty else { return }
+                guard let newToken: Token = Token(uri: qrCodeUri) else { return }
                 tokens.append(newToken)
                 codes = genCodes()
                 updateTokenData()
         }
         private func handleImportFromFile(url: URL?) {
-                guard url != nil else { return }
-                guard let content: String = try? String(contentsOf: url!) else { return }
+                guard let url: URL = url else { return }
+                guard let content: String = try? String(contentsOf: url) else { return }
                 let lines: [String] = content.components(separatedBy: .newlines)
                 var shouldUpdateTokenData: Bool = false
                 _ = lines.map {
