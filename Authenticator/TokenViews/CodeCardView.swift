@@ -11,7 +11,7 @@ struct CodeCard: View {
         var body: some View {
                 VStack {
                         HStack {
-                                issuerImage.resizable().scaledToFit().frame(width: 20, height: 20)
+                                issuerImage.resizable().scaledToFit().frame(width: 24, height: 24)
                                 Spacer().frame(width: 16)
                                 Text(token.displayIssuer).font(.headline)
                                 Spacer(minLength: 16)
@@ -25,10 +25,9 @@ struct CodeCard: View {
                                         Image(systemName: "ellipsis.circle")
                                                 .resizable()
                                                 .scaledToFit()
-                                                .frame(width: 20, height: 20)
+                                                .frame(width: 24, height: 24)
+                                                .foregroundColor(.primary)
                                 }
-                                .foregroundColor(.primary)
-                                .padding(.trailing, 4)
                         }
 
                         HStack {
