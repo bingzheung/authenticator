@@ -73,12 +73,12 @@ struct ContentView: View {
                         .listStyle(InsetGroupedListStyle())
                         .onAppear(perform: setupTokens)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                                codes = genCodes()
+                                codes = generateCodes()
                         }
                         .onReceive(timer) { _ in
                                 timeRemaining = 30 - (Int(Date().timeIntervalSince1970) % 30)
                                 if timeRemaining == 30 {
-                                        codes = genCodes()
+                                        codes = generateCodes()
                                 }
                         }
                         .alert(isPresented: $isDeletionAlertPresented) {
@@ -218,17 +218,16 @@ struct ContentView: View {
                 .navigationViewStyle(StackNavigationViewStyle())
         }
 
-        private func genCodes() -> [String] {
+        private func generateCodes() -> [String] {
                 // prevent crash while deleting
                 let placeholder: [String] = Array(repeating: "000000", count: 30)
                 
                 guard !tokens.isEmpty else { return placeholder }
-                let gens: [String?] = tokens.map {
+                let generated: [String?] = tokens.map {
                         OTPGenerator.totp(secret: $0.secret)
                 }
-                var gened: [String] = gens.compactMap { $0 }
-                gened += placeholder
-                return gened
+                let codes: [String] = generated.compactMap { $0 }
+                return codes + placeholder
         }
 
         // MARK: - Handlers
@@ -239,7 +238,7 @@ struct ContentView: View {
         }
         private func move(from source: IndexSet, to destination: Int) {
                 tokens.move(fromOffsets: source, toOffset: destination)
-                codes = genCodes()
+                codes = generateCodes()
                 updateTokenData()
         }
 
@@ -251,7 +250,7 @@ struct ContentView: View {
                         guard !uri.isEmpty else { return }
                         guard let newToken: Token = Token(uri: uri) else { return }
                         tokens.append(newToken)
-                        codes = genCodes()
+                        codes = generateCodes()
                         updateTokenData()
                 case .failure(let error):
                         debugLog("Scanning failed")
@@ -264,7 +263,7 @@ struct ContentView: View {
                 guard !qrCodeUri.isEmpty else { return }
                 guard let newToken: Token = Token(uri: qrCodeUri) else { return }
                 tokens.append(newToken)
-                codes = genCodes()
+                codes = generateCodes()
                 updateTokenData()
         }
         private func handleImportFromFile(url: URL?) {
@@ -279,13 +278,13 @@ struct ContentView: View {
                         }
                 }
                 if shouldUpdateTokenData {
-                        codes = genCodes()
+                        codes = generateCodes()
                         updateTokenData()
                 }
         }
         private func handleManualEntry(token: Token) {
                 tokens.append(token)
-                codes = genCodes()
+                codes = generateCodes()
                 updateTokenData()
         }
 
@@ -313,7 +312,7 @@ struct ContentView: View {
                 } else {
                         tokens.removeAll { $0.id == tokens[tokenIndex].id }
                 }
-                codes = genCodes()
+                codes = generateCodes()
                 updateTokenData()
                 indexSetOnDelete.removeAll()
                 selectedTokens.removeAll()
@@ -333,7 +332,7 @@ struct ContentView: View {
                                 }
                         }
                 }
-                codes = genCodes()
+                codes = generateCodes()
         }
         private func updateTokenData() {
                 let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "TokenData")
