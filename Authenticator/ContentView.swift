@@ -72,6 +72,9 @@ struct ContentView: View {
                         }
                         .listStyle(InsetGroupedListStyle())
                         .onAppear(perform: setupTokens)
+                        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                                codes = genCodes()
+                        }
                         .onReceive(timer) { _ in
                                 timeRemaining = 30 - (Int(Date().timeIntervalSince1970) % 30)
                                 if timeRemaining == 30 {
