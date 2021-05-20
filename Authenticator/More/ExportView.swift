@@ -1,23 +1,22 @@
 import SwiftUI
-import Zip
 import CoreImage.CIFilterBuiltins
 
 struct ExportView: View {
-        
+
         @Binding var isPresented: Bool
         let tokens: [Token]
-        
+
         @State private var isPlainTextActivityPresented: Bool = false
         @State private var isTXTFileActivityPresented: Bool = false
         @State private var isZIPFileActivityPresented: Bool = false
-        
+
         var body: some View {
                 NavigationView {
                         ZStack {
                                 GlobalBackgroundColor().ignoresSafeArea()
                                 ScrollView {
                                         Button(action: {
-                                                UIPasteboard.general.string = self.tokensText
+                                                UIPasteboard.general.string = tokensText
                                         }) {
                                                 HStack {
                                                         Text("Copy all Key URIs to Clipboard")
@@ -27,9 +26,9 @@ struct ExportView: View {
                                                 .fillBackground()
                                                 .padding()
                                         }
-                                        
+
                                         Button(action: {
-                                                self.isPlainTextActivityPresented = true
+                                                isPlainTextActivityPresented = true
                                         }) {
                                                 HStack {
                                                         Text("Export all Key URIs as plain ") +
@@ -39,14 +38,15 @@ struct ExportView: View {
                                                 .padding()
                                                 .fillBackground()
                                                 .padding()
-                                        }.sheet(isPresented: self.$isPlainTextActivityPresented) {
-                                                ActivityView(activityItems: [self.tokensText]) {
-                                                        self.isPlainTextActivityPresented = false
+                                        }
+                                        .sheet(isPresented: $isPlainTextActivityPresented) {
+                                                ActivityView(activityItems: [tokensText]) {
+                                                        isPlainTextActivityPresented = false
                                                 }
                                         }
-                                        
+
                                         Button(action: {
-                                                self.isTXTFileActivityPresented = true
+                                                isTXTFileActivityPresented = true
                                         }) {
                                                 HStack {
                                                         Text("Export all Key URIs as a ") +
@@ -57,14 +57,15 @@ struct ExportView: View {
                                                 .padding()
                                                 .fillBackground()
                                                 .padding()
-                                        }.sheet(isPresented: self.$isTXTFileActivityPresented) {
-                                                ActivityView(activityItems: [self.exportTXTFile()]) {
-                                                        self.isTXTFileActivityPresented = false
+                                        }
+                                        .sheet(isPresented: $isTXTFileActivityPresented) {
+                                                ActivityView(activityItems: [txtFile()]) {
+                                                        isTXTFileActivityPresented = false
                                                 }
                                         }
-                                        
+
                                         Button(action: {
-                                                self.isZIPFileActivityPresented = true
+                                                isZIPFileActivityPresented = true
                                         }) {
                                                 HStack {
                                                         Text("Export all Key URIs as QR Code images combined as a ") +
@@ -75,9 +76,10 @@ struct ExportView: View {
                                                 .padding()
                                                 .fillBackground()
                                                 .padding()
-                                        }.sheet(isPresented: self.$isZIPFileActivityPresented) {
-                                                ActivityView(activityItems: [self.exportZIPFile()]) {
-                                                        self.isZIPFileActivityPresented = false
+                                        }
+                                        .sheet(isPresented: $isZIPFileActivityPresented) {
+                                                ActivityView(activityItems: [zipFile()]) {
+                                                        isZIPFileActivityPresented = false
                                                 }
                                         }
                                 }
@@ -94,24 +96,7 @@ struct ExportView: View {
                         }
                 }
         }
-        
-        var tokensText: String {
-                tokens.reduce("") { $0 + $1.uri + "\n" }
-        }
-        
-        private func exportTXTFile() -> URL {
-                let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                
-                
-                let temporaryFileName: String = "2FAAuth-accounts-" + currentDate + ".txt"
-                let temporaryFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(temporaryFileName, isDirectory: false)
-                do {
-                        try tokensText.write(to: temporaryFileUrl, atomically: false, encoding: .utf8)
-                } catch {
-                        debugPrint(error.localizedDescription)
-                }
-                return temporaryFileUrl
-        }
+
         private var currentDate: String {
                 let now: Date = Date()
                 let calendar: Calendar = Calendar.current
@@ -122,45 +107,53 @@ struct ExportView: View {
                 let second: Int = calendar.component(.second, from: now)
                 return String(format: "%02d%02d%02d%02d%02d", month, day, hour, minute, second)
         }
-        
-        private func exportZIPFile() -> URL {
-                
+
+        private var tokensText: String {
+                return tokens.reduce("") { $0 + $1.uri + "\n" }
+        }
+
+        private func txtFile() -> URL {
                 let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                
-                var imageURLs: [URL] = []
-                _ = tokens.map { (token) -> Void in
-                        let url: URL? = saveQRCodeImages(for: token)
-                        if url != nil {
-                                imageURLs.append(url!)
-                        }
-                }
-                
-                let temporaryZipFileName: String = "2FAAuth-accounts-" + currentDate + ".zip"
-                let temporaryZipFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(temporaryZipFileName, isDirectory: false)
+                let txtFileName: String = "2FAAuth-accounts-" + currentDate + ".txt"
+                let txtFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
                 do {
-                        try Zip.zipFiles(paths: imageURLs, zipFilePath: temporaryZipFileUrl, password: nil) {_ in }
+                        try tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
                 } catch {
                         debugPrint(error.localizedDescription)
                 }
-                return temporaryZipFileUrl
+                return txtFileUrl
         }
-        
-        private func saveQRCodeImages(for token: Token) -> URL? {
-                var imageFileUrl: URL?
+
+        // https://recoursive.com/2021/02/25/create_zip_archive_using_only_foundation
+        private func zipFile() -> URL {
                 let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                let imageObject = generateQRCodeImage(from: token)
-                if imageObject.name.hasContent && imageObject.image != nil {
-                        let imageUrl: URL = temporaryDirectoryUrl.appendingPathComponent(imageObject.name!, isDirectory: false)
-                        do {
-                                try imageObject.image?.pngData()?.write(to: imageUrl)
-                                imageFileUrl = imageUrl
-                        } catch {
-                                debugPrint(error.localizedDescription)
-                        }
+                let imagesDirectoryName: String = "2FAAuth-accounts-" + currentDate
+                let imagesDirectoryUrl: URL = temporaryDirectoryUrl.appendingPathComponent(imagesDirectoryName, isDirectory: true)
+                if !(FileManager.default.fileExists(atPath: imagesDirectoryUrl.path)) {
+                        try? FileManager.default.createDirectory(at: imagesDirectoryUrl, withIntermediateDirectories: false)
                 }
-                return imageFileUrl
+                _ = tokens.map { oneToken in
+                        _ = saveQRCodeImage(for: oneToken, parent: imagesDirectoryUrl)
+                }
+                let zipFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent("\(imagesDirectoryName).zip", isDirectory: false)
+                let coordinator = NSFileCoordinator()
+                var err: NSError?
+                coordinator.coordinate(readingItemAt: imagesDirectoryUrl, options: .forUploading, error: &err) { url in
+                        try? FileManager.default.moveItem(at: url, to: zipFileUrl)
+                }
+                return zipFileUrl
         }
-        
+        private func saveQRCodeImage(for token: Token, parent parentDirectoryUrl: URL) -> URL? {
+                let imageObject = generateQRCodeImage(from: token)
+                guard let name: String = imageObject.name, !name.isEmpty, let image: UIImage = imageObject.image else { return nil }
+                let fileUrl: URL = parentDirectoryUrl.appendingPathComponent(name, isDirectory: false)
+                do {
+                        try image.pngData()?.write(to: fileUrl)
+                } catch {
+                        debugPrint(error.localizedDescription)
+                }
+                return fileUrl
+        }
         private func generateQRCodeImage(from token: Token) -> (name: String?, image: UIImage?) {
                 let filter = CIFilter.qrCodeGenerator()
                 let data: Data = Data(token.uri.utf8)
@@ -174,14 +167,14 @@ struct ExportView: View {
         private func imageName(for token: Token) -> String {
                 var imageName: String = token.id + "-" + currentDate + ".png"
                 imageName.insert("-", at: imageName.index(imageName.startIndex, offsetBy: token.secret.count))
-                
-                if token.accountName.hasContent {
-                        imageName.insert(contentsOf: "-", at: imageName.startIndex)
-                        imageName.insert(contentsOf: token.accountName!, at: imageName.startIndex)
+
+                if let accountName: String = token.accountName, !accountName.isEmpty {
+                        let prefix: String = accountName + "-"
+                        imageName.insert(contentsOf: prefix, at: imageName.startIndex)
                 }
-                if token.issuer.hasContent {
-                        imageName.insert(contentsOf: "-", at: imageName.startIndex)
-                        imageName.insert(contentsOf: token.issuer!, at: imageName.startIndex)
+                if let issuer: String = token.issuer, !issuer.isEmpty {
+                        let prefix: String = issuer + "-"
+                        imageName.insert(contentsOf: prefix, at: imageName.startIndex)
                 }
                 return imageName
         }
