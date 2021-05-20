@@ -43,8 +43,8 @@ struct TokenDetailView: View {
                                                         .scaledToFit()
                                                         .padding()
                                                         .fillBackground()
-                                                        .padding(.horizontal, 50)
-                                                        .padding(.bottom, 50)
+                                                        .padding()
+                                                        .frame(idealWidth: 250, maxWidth: 400, idealHeight: 250, maxHeight: 400)
                                                         .onLongPressGesture {
                                                                 isImageActivityViewPresented = true
                                                         }
@@ -55,6 +55,7 @@ struct TokenDetailView: View {
                                                                 }
                                                         }
                                         }
+                                        Spacer().frame(height: 1).padding(.bottom, 50)
                                 }
                         }
                         .navigationTitle("Account detail")
