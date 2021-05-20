@@ -127,6 +127,9 @@ struct ContentView: View {
                                                         }
                                                 } label: {
                                                         Image(systemName: "ellipsis.circle")
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .frame(width: 22, height: 22)
                                                 }
                                         }
                                 }
@@ -188,6 +191,9 @@ struct ContentView: View {
                                                         }
                                                 } label: {
                                                         Image(systemName: "plus")
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .frame(width: 20, height: 20)
                                                 }
                                         }
                                 }
