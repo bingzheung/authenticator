@@ -32,7 +32,6 @@
 		37BCA64B2461B1BE00778EBD /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCA64A2461B1BE00778EBD /* ExportView.swift */; };
 		37BE1C69253FFAE400DBFDE4 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BE1C68253FFAE400DBFDE4 /* ActivityView.swift */; };
 		37C8D2B62459E0540021575D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37C8D2B52459E0540021575D /* Images.xcassets */; };
-		37E3195B2461F5D40069F33F /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 37E3195A2461F5D40069F33F /* Zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37E3195B2461F5D40069F33F /* Zip in Frameworks */,
 				3768D823245BD68700988ECB /* SwiftOTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,7 +197,6 @@
 			name = Authenticator;
 			packageProductDependencies = (
 				3768D822245BD68700988ECB /* SwiftOTP */,
-				37E3195A2461F5D40069F33F /* Zip */,
 			);
 			productName = Authenticator;
 			productReference = 378C52F2245890B600CC5A1E /* Authenticator.app */;
@@ -231,7 +228,6 @@
 			mainGroup = 378C52E9245890B600CC5A1E;
 			packageReferences = (
 				3768D821245BD68700988ECB /* XCRemoteSwiftPackageReference "SwiftOTP" */,
-				37E319592461F5D40069F33F /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 378C52F3245890B600CC5A1E /* Products */;
 			projectDirPath = "";
@@ -494,14 +490,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		37E319592461F5D40069F33F /* XCRemoteSwiftPackageReference "Zip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/marmelroy/Zip.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -509,11 +497,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3768D821245BD68700988ECB /* XCRemoteSwiftPackageReference "SwiftOTP" */;
 			productName = SwiftOTP;
-		};
-		37E3195A2461F5D40069F33F /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 37E319592461F5D40069F33F /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 
