@@ -18,7 +18,6 @@ struct ContentView: View {
         @State private var isDeletionAlertPresented: Bool = false
         @State private var indexSetOnDelete: IndexSet = IndexSet()
 
-        @State private var presentingSheet: SheetSet = .moreAbout
         @State private var isSheetPresented: Bool = false
 
         var body: some View {
@@ -364,6 +363,8 @@ struct ContentView: View {
                 #endif
         }
 }
+
+private var presentingSheet: SheetSet = .moreAbout
 
 private enum SheetSet {
         case moreExport
