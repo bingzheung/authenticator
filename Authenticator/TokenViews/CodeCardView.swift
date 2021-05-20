@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CodeCard: View {
+struct CodeCardView: View {
 
         let token: Token
         @Binding var totp: String

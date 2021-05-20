@@ -25,13 +25,13 @@ struct ContentView: View {
                         List(selection: $selectedTokens) {
                                 ForEach(tokens, id: \.self) { token in
                                         if editMode == .active {
-                                                CodeCard(token: token,
+                                                CodeCardView(token: token,
                                                          totp: $codes[tokens.firstIndex(of: token) ?? 0],
                                                          timeRemaining: $timeRemaining)
                                         } else {
                                                 ZStack {
                                                         GlobalBackgroundColor()
-                                                        CodeCard(token: token,
+                                                        CodeCardView(token: token,
                                                                  totp: $codes[tokens.firstIndex(of: token) ?? 0],
                                                                  timeRemaining: $timeRemaining)
                                                                 .contextMenu(menuItems: {
