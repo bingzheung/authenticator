@@ -119,7 +119,7 @@ struct ExportView: View {
                 do {
                         try tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
                 } catch {
-                        debugPrint(error.localizedDescription)
+                        debugLog(error.localizedDescription)
                 }
                 return txtFileUrl
         }
@@ -150,7 +150,7 @@ struct ExportView: View {
                 do {
                         try image.pngData()?.write(to: fileUrl)
                 } catch {
-                        debugPrint(error.localizedDescription)
+                        debugLog(error.localizedDescription)
                 }
                 return fileUrl
         }
@@ -177,5 +177,11 @@ struct ExportView: View {
                         imageName.insert(contentsOf: prefix, at: imageName.startIndex)
                 }
                 return imageName
+        }
+
+        private func debugLog(_ text: String) {
+                #if DEBUG
+                print(text)
+                #endif
         }
 }
