@@ -73,6 +73,7 @@ struct ContentView: View {
                         .onAppear(perform: setupTokens)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 codes = generateCodes()
+                                clearTemporaryDirectory()
                         }
                         .onReceive(timer) { _ in
                                 timeRemaining = 30 - (Int(Date().timeIntervalSince1970) % 30)
@@ -361,6 +362,12 @@ struct ContentView: View {
                 } catch {
                         debugLog(error.localizedDescription)
                 }
+        }
+
+        private func clearTemporaryDirectory() {
+                let tmpDirUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                guard let urls: [URL] = try? FileManager.default.contentsOfDirectory(at: tmpDirUrl, includingPropertiesForKeys: nil) else { return }
+                _ = urls.map { try? FileManager.default.removeItem(at: $0) }
         }
 
         private func debugLog(_ text: String) {
