@@ -11,6 +11,7 @@
 		372C366E245AC1B000F3395A /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C366D245AC1B000F3395A /* AboutView.swift */; };
 		37354F3E24591CCB000553E2 /* CodeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37354F3D24591CCB000553E2 /* CodeCardView.swift */; };
 		37372CEB253456FC0045F835 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37372CEA253456FC0045F835 /* StringExtensions.swift */; };
+		3753CBA6265E024600A0DB96 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753CBA5265E024600A0DB96 /* DateExtensions.swift */; };
 		3760FEC92461F48A0018C952 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3760FEC82461F48A0018C952 /* InfoPlist.strings */; };
 		3768D823245BD68700988ECB /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = 3768D822245BD68700988ECB /* SwiftOTP */; };
 		3768D825245C07D600988ECB /* OTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D824245C07D600988ECB /* OTPGenerator.swift */; };
@@ -39,6 +40,7 @@
 		372C366D245AC1B000F3395A /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37354F3D24591CCB000553E2 /* CodeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCardView.swift; sourceTree = "<group>"; };
 		37372CEA253456FC0045F835 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		3753CBA5265E024600A0DB96 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		3760FEC82461F48A0018C952 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		3768D824245C07D600988ECB /* OTPGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPGenerator.swift; sourceTree = "<group>"; };
 		3768D826245C662D00988ECB /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				37372CEA253456FC0045F835 /* StringExtensions.swift */,
+				3753CBA5265E024600A0DB96 /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				378C52F6245890B600CC5A1E /* AppDelegate.swift in Sources */,
+				3753CBA6265E024600A0DB96 /* DateExtensions.swift in Sources */,
 				3725099E245B2D8100928726 /* Token.swift in Sources */,
 				37BCA64B2461B1BE00778EBD /* ExportView.swift in Sources */,
 				378C530A2458910700CC5A1E /* ScannerView.swift in Sources */,

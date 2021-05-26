@@ -97,24 +97,13 @@ struct ExportView: View {
                 }
         }
 
-        private var currentDate: String {
-                let now: Date = Date()
-                let calendar: Calendar = Calendar.current
-                let month: Int = calendar.component(.month, from: now)
-                let day: Int = calendar.component(.day, from: now)
-                let hour: Int = calendar.component(.hour, from: now)
-                let minute: Int = calendar.component(.minute, from: now)
-                let second: Int = calendar.component(.second, from: now)
-                return String(format: "%02d%02d%02d%02d%02d", month, day, hour, minute, second)
-        }
-
         private var tokensText: String {
                 return tokens.reduce("") { $0 + $1.uri + "\n" }
         }
 
         private func txtFile() -> URL {
                 let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                let txtFileName: String = "2FAAuth-accounts-" + currentDate + ".txt"
+                let txtFileName: String = "2FAAuth-accounts-" + Date.currentDateText + ".txt"
                 let txtFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
                 do {
                         try tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
@@ -127,7 +116,7 @@ struct ExportView: View {
         // https://recoursive.com/2021/02/25/create_zip_archive_using_only_foundation
         private func zipFile() -> URL {
                 let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                let imagesDirectoryName: String = "2FAAuth-accounts-" + currentDate
+                let imagesDirectoryName: String = "2FAAuth-accounts-" + Date.currentDateText
                 let imagesDirectoryUrl: URL = temporaryDirectoryUrl.appendingPathComponent(imagesDirectoryName, isDirectory: true)
                 if !(FileManager.default.fileExists(atPath: imagesDirectoryUrl.path)) {
                         try? FileManager.default.createDirectory(at: imagesDirectoryUrl, withIntermediateDirectories: false)
@@ -165,7 +154,7 @@ struct ExportView: View {
                 return (imageName(for: token), uiImage)
         }
         private func imageName(for token: Token) -> String {
-                var imageName: String = token.id + "-" + currentDate + ".png"
+                var imageName: String = token.id + "-" + Date.currentDateText + ".png"
                 imageName.insert("-", at: imageName.index(imageName.startIndex, offsetBy: token.secret.count))
 
                 if let accountName: String = token.accountName, !accountName.isEmpty {
