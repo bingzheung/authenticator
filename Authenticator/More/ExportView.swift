@@ -105,11 +105,7 @@ struct ExportView: View {
                 let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
                 let txtFileName: String = "2FAAuth-accounts-" + Date.currentDateText + ".txt"
                 let txtFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
-                do {
-                        try tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
-                } catch {
-                        debugLog(error.localizedDescription)
-                }
+                try? tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
                 return txtFileUrl
         }
 
@@ -133,25 +129,24 @@ struct ExportView: View {
                 return zipFileUrl
         }
         private func saveQRCodeImage(for token: Token, parent parentDirectoryUrl: URL) -> URL? {
-                let imageObject = generateQRCodeImage(from: token)
-                guard let name: String = imageObject.name, !name.isEmpty, let image: UIImage = imageObject.image else { return nil }
+                guard let image: UIImage = generateQRCodeImage(from: token) else { return nil }
+                let name: String = imageName(for: token)
                 let fileUrl: URL = parentDirectoryUrl.appendingPathComponent(name, isDirectory: false)
                 do {
                         try image.pngData()?.write(to: fileUrl)
                 } catch {
-                        debugLog(error.localizedDescription)
+                        return nil
                 }
                 return fileUrl
         }
-        private func generateQRCodeImage(from token: Token) -> (name: String?, image: UIImage?) {
+        private func generateQRCodeImage(from token: Token) -> UIImage? {
                 let filter = CIFilter.qrCodeGenerator()
                 let data: Data = Data(token.uri.utf8)
                 filter.setValue(data, forKey: "inputMessage")
                 filter.setValue("H", forKey: "inputCorrectionLevel")
                 let transform: CGAffineTransform = CGAffineTransform(scaleX: 5, y: 5)
-                guard let ciImage: CIImage = filter.outputImage?.transformed(by: transform) else { return (nil, nil) }
-                let uiImage: UIImage = UIImage(ciImage: ciImage)
-                return (imageName(for: token), uiImage)
+                guard let ciImage: CIImage = filter.outputImage?.transformed(by: transform) else { return nil }
+                return UIImage(ciImage: ciImage)
         }
         private func imageName(for token: Token) -> String {
                 var imageName: String = token.id + "-" + Date.currentDateText + ".png"
@@ -166,11 +161,5 @@ struct ExportView: View {
                         imageName.insert(contentsOf: prefix, at: imageName.startIndex)
                 }
                 return imageName
-        }
-
-        private func debugLog(_ text: String) {
-                #if DEBUG
-                print(text)
-                #endif
         }
 }
