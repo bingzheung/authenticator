@@ -274,7 +274,7 @@ struct ContentView: View {
         }
         private func handleImportFromFile(url: URL?) {
                 guard let url: URL = url else { return }
-                guard let content: String = try? String(contentsOf: url) else { return }
+                guard let content: String = url.readText() else { return }
                 let lines: [String] = content.components(separatedBy: .newlines)
                 var shouldUpdateTokenData: Bool = false
                 _ = lines.map {

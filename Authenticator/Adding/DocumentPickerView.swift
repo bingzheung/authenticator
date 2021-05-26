@@ -6,7 +6,7 @@ struct DocumentPickerView: UIViewControllerRepresentable {
         let completion: (URL?) -> Void
         
         func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-                let viewController = UIDocumentPickerViewController(forOpeningContentTypes: [.utf8PlainText, .plainText, .text], asCopy: true)
+                let viewController = UIDocumentPickerViewController(forOpeningContentTypes: [.text, .image], asCopy: true)
                 viewController.delegate = context.coordinator
                 return viewController
         }
@@ -31,9 +31,9 @@ struct DocumentPickerView: UIViewControllerRepresentable {
                                 parent.isPresented = false
                                 feedbackGenerator = nil
                         }
-                        guard !urls.isEmpty else { return }
+                        guard let url: URL = urls.first else { return }
                         feedbackGenerator?.notificationOccurred(.success)
-                        parent.completion(urls[0])
+                        parent.completion(url)
                 }
         }
 }
