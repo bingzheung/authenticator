@@ -30,7 +30,7 @@ struct TokenDetailView: View {
                                                 .padding(.horizontal)
                                                 .padding(.bottom, 30)
 
-                                        if let cgImage: CGImage = qrCodeImage {
+                                        if let uiImage = qrCodeImage {
                                                 HStack {
                                                         Spacer()
                                                         Text("Key URI as QR Code")
@@ -38,7 +38,7 @@ struct TokenDetailView: View {
                                                 }
                                                 .padding(.horizontal)
                                                 
-                                                Image(cgImage, scale: 1, label: Text("QR Code"))
+                                                Image(uiImage: uiImage)
                                                         .resizable()
                                                         .scaledToFit()
                                                         .padding()
@@ -46,11 +46,15 @@ struct TokenDetailView: View {
                                                         .padding()
                                                         .frame(idealWidth: 250, maxWidth: 400, idealHeight: 250, maxHeight: 400)
                                                         .onLongPressGesture {
-                                                                isImageActivityViewPresented = true
+                                                                imageUrl = nil
+                                                                imageUrl = saveQRCodeImage(uiImage)
+                                                                if imageUrl != nil {
+                                                                        isImageActivityViewPresented = true
+                                                                }
                                                         }
                                                         .sheet(isPresented: $isImageActivityViewPresented) {
-                                                                let image: UIImage = UIImage(cgImage: cgImage)
-                                                                ActivityView(activityItems: [image]) {
+                                                                ActivityView(activityItems: [imageUrl!]) {
+                                                                        imageUrl = nil
                                                                         isImageActivityViewPresented = false
                                                                 }
                                                         }
@@ -70,8 +74,8 @@ struct TokenDetailView: View {
                         }
                 }
         }
-        
-        private var qrCodeImage: CGImage? {
+
+        private var qrCodeImage: UIImage? {
                 let context: CIContext = CIContext()
                 let filter = CIFilter.qrCodeGenerator()
                 let data: Data = Data(token.uri.utf8)
@@ -79,9 +83,35 @@ struct TokenDetailView: View {
                 filter.setValue("H", forKey: "inputCorrectionLevel")
                 let transform: CGAffineTransform = CGAffineTransform(scaleX: 5, y: 5)
                 guard let ciImage: CIImage = filter.outputImage?.transformed(by: transform) else { return nil }
-                return context.createCGImage(ciImage, from: ciImage.extent)
+                guard let cgImage: CGImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
+                return UIImage(cgImage: cgImage)
+        }
+        private func saveQRCodeImage(_ image: UIImage) -> URL? {
+                let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                let fileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(imageName, isDirectory: false)
+                do {
+                        try image.pngData()?.write(to: fileUrl)
+                } catch {
+                        return nil
+                }
+                return fileUrl
+        }
+        private var imageName: String {
+                var name: String = Date.currentDateText + ".png"
+                if let accountName: String = token.accountName, !accountName.isEmpty {
+                        let prefix: String = accountName + "-"
+                        name.insert(contentsOf: prefix, at: name.startIndex)
+                }
+                if let issuer: String = token.issuer, !issuer.isEmpty {
+                        let prefix: String = issuer + "-"
+                        name.insert(contentsOf: prefix, at: name.startIndex)
+                }
+                return name
         }
 }
+
+private var imageUrl: URL? = nil
+
 
 private struct MessageCardView: View {
 
