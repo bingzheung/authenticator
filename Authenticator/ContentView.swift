@@ -91,7 +91,6 @@ struct ContentView: View {
                                                 Button(action: {
                                                         self.editMode = .inactive
                                                         self.selectedTokens.removeAll()
-                                                        self.updateTokenData()
                                                 }) {
                                                         Text("Done")
                                                 }
