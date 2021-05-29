@@ -129,7 +129,7 @@ struct ContentView: View {
                                                         Image(systemName: "ellipsis.circle")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 22, height: 22)
+                                                                .frame(width: 24, height: 24)
                                                 }
                                         }
                                 }
@@ -138,7 +138,7 @@ struct ContentView: View {
                                                 Button(action: {
                                                         isDeletionAlertPresented = true
                                                         self.editMode = .inactive
-                                                }){
+                                                }) {
                                                         Image(systemName: "trash").opacity(selectedTokens.isEmpty ? 0.2 : 1)
                                                 }
                                         } else {
@@ -193,7 +193,7 @@ struct ContentView: View {
                                                         Image(systemName: "plus")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 20, height: 20)
+                                                                .frame(width: 22, height: 22)
                                                 }
                                         }
                                 }
