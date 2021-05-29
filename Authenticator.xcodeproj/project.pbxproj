@@ -29,6 +29,7 @@
 		378C530A2458910700CC5A1E /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C53092458910700CC5A1E /* ScannerView.swift */; };
 		3796F137245EADD600A2E9D0 /* Authenticator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3796F135245EADD600A2E9D0 /* Authenticator.xcdatamodeld */; };
 		3796F13E245EB5E200A2E9D0 /* TokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3796F13C245EB5E200A2E9D0 /* TokenData.swift */; };
+		37AC99172661FAC7004A3B8B /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC99162661FAC7004A3B8B /* PhotoPicker.swift */; };
 		37BCA6472461818A00778EBD /* TokenDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCA6462461818A00778EBD /* TokenDetailView.swift */; };
 		37BCA6492461828600778EBD /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCA6482461828600778EBD /* EditAccountView.swift */; };
 		37BCA64B2461B1BE00778EBD /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCA64A2461B1BE00778EBD /* ExportView.swift */; };
@@ -60,6 +61,7 @@
 		378C53092458910700CC5A1E /* ScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		3796F136245EADD600A2E9D0 /* Authenticator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Authenticator.xcdatamodel; sourceTree = "<group>"; };
 		3796F13C245EB5E200A2E9D0 /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
+		37AC99162661FAC7004A3B8B /* PhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		37BCA6462461818A00778EBD /* TokenDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailView.swift; sourceTree = "<group>"; };
 		37BCA6482461828600778EBD /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 		37BCA64A2461B1BE00778EBD /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				378C53092458910700CC5A1E /* ScannerView.swift */,
 				3768D826245C662D00988ECB /* ImagePickerView.swift */,
+				37AC99162661FAC7004A3B8B /* PhotoPicker.swift */,
 				3768D828245D7CF700988ECB /* DocumentPickerView.swift */,
 				3768D82A245D7E5800988ECB /* ManualEntryView.swift */,
 			);
@@ -276,6 +279,7 @@
 				378C52F8245890B600CC5A1E /* SceneDelegate.swift in Sources */,
 				3796F137245EADD600A2E9D0 /* Authenticator.xcdatamodeld in Sources */,
 				3768D829245D7CF700988ECB /* DocumentPickerView.swift in Sources */,
+				37AC99172661FAC7004A3B8B /* PhotoPicker.swift in Sources */,
 				3777B3712647DC9400D316E4 /* MenuViews.swift in Sources */,
 				3768D82B245D7E5800988ECB /* ManualEntryView.swift in Sources */,
 				37BE1C69253FFAE400DBFDE4 /* ActivityView.swift in Sources */,

@@ -207,7 +207,7 @@ struct ContentView: View {
                                 case .addByScanner:
                                         Scanner(isPresented: $isSheetPresented, codeTypes: [.qr], completion: handleScan(result:))
                                 case .addByQRCodeImage:
-                                        ImagePickerView(isPresented: $isSheetPresented, completion: handleImagePick(uri:))
+                                        PhotoPicker(completion: handleImagePick(uri:))
                                 case .addByURIFile:
                                         DocumentPickerView(isPresented: $isSheetPresented, completion: handleImportFromFile(url:))
                                 case .addByManually:
@@ -262,9 +262,8 @@ struct ContentView: View {
                         debugLog(error.localizedDescription)
                 }
         }
-        private func handleImagePick(uri: String?) {
-                guard let uriString: String = uri else { return }
-                let qrCodeUri: String = uriString.trimmingSpaces()
+        private func handleImagePick(uri: String) {
+                let qrCodeUri: String = uri.trimmingSpaces()
                 guard !qrCodeUri.isEmpty else { return }
                 guard let newToken: Token = Token(uri: qrCodeUri) else { return }
                 tokens.append(newToken)
