@@ -22,8 +22,6 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Access Camera to scan QR Code</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Save QR Code images to Photo Library</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
