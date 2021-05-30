@@ -84,7 +84,7 @@ struct ContentView: View {
                         .alert(isPresented: $isDeletionAlertPresented) {
                                 deletionAlert
                         }
-                        .navigationTitle("2FA Auth")
+                        .navigationTitle("Authenticator")
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         if self.editMode == .active {
