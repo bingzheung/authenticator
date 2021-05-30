@@ -220,7 +220,7 @@ struct ContentView: View {
                                 case .addByQRCodeImage:
                                         PhotoPicker(completion: handleImagePick(uri:))
                                 case .addByURIFile:
-                                        DocumentPickerView(isPresented: $isSheetPresented, completion: handleImportFromFile(url:))
+                                        DocumentPicker(isPresented: $isSheetPresented, completion: handleImportFromFile(url:))
                                 case .addByManually:
                                         ManualEntryView(isPresented: $isSheetPresented, completion: handleManualEntry(token:))
                                 case .cardViewDetail:

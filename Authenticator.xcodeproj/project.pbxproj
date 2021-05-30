@@ -16,7 +16,7 @@
 		3768D823245BD68700988ECB /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = 3768D822245BD68700988ECB /* SwiftOTP */; };
 		3768D825245C07D600988ECB /* OTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D824245C07D600988ECB /* OTPGenerator.swift */; };
 		3768D827245C662D00988ECB /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D826245C662D00988ECB /* ImagePickerView.swift */; };
-		3768D829245D7CF700988ECB /* DocumentPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D828245D7CF700988ECB /* DocumentPickerView.swift */; };
+		3768D829245D7CF700988ECB /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D828245D7CF700988ECB /* DocumentPicker.swift */; };
 		3768D82B245D7E5800988ECB /* ManualEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768D82A245D7E5800988ECB /* ManualEntryView.swift */; };
 		3777B3712647DC9400D316E4 /* MenuViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777B3702647DC9400D316E4 /* MenuViews.swift */; };
 		378C52F6245890B600CC5A1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C52F5245890B600CC5A1E /* AppDelegate.swift */; };
@@ -48,7 +48,7 @@
 		3753CBA7265E0E8500A0DB96 /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		3768D824245C07D600988ECB /* OTPGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPGenerator.swift; sourceTree = "<group>"; };
 		3768D826245C662D00988ECB /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
-		3768D828245D7CF700988ECB /* DocumentPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerView.swift; sourceTree = "<group>"; };
+		3768D828245D7CF700988ECB /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		3768D82A245D7E5800988ECB /* ManualEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEntryView.swift; sourceTree = "<group>"; };
 		3777B3702647DC9400D316E4 /* MenuViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViews.swift; sourceTree = "<group>"; };
 		378C52F2245890B600CC5A1E /* Authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +183,7 @@
 				378C53092458910700CC5A1E /* ScannerView.swift */,
 				3768D826245C662D00988ECB /* ImagePickerView.swift */,
 				37AC99162661FAC7004A3B8B /* PhotoPicker.swift */,
-				3768D828245D7CF700988ECB /* DocumentPickerView.swift */,
+				3768D828245D7CF700988ECB /* DocumentPicker.swift */,
 				3768D82A245D7E5800988ECB /* ManualEntryView.swift */,
 			);
 			path = Adding;
@@ -304,7 +304,7 @@
 				3796F13E245EB5E200A2E9D0 /* TokenData.swift in Sources */,
 				378C52F8245890B600CC5A1E /* SceneDelegate.swift in Sources */,
 				3796F137245EADD600A2E9D0 /* Authenticator.xcdatamodeld in Sources */,
-				3768D829245D7CF700988ECB /* DocumentPickerView.swift in Sources */,
+				3768D829245D7CF700988ECB /* DocumentPicker.swift in Sources */,
 				37AC99172661FAC7004A3B8B /* PhotoPicker.swift in Sources */,
 				3777B3712647DC9400D316E4 /* MenuViews.swift in Sources */,
 				3768D82B245D7E5800988ECB /* ManualEntryView.swift in Sources */,
