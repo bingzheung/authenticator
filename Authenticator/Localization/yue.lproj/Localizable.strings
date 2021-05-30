@@ -2,4 +2,48 @@
 Cantonese
 */
 
-"Copy" = "Copy";
+// General
+"Copy" = "拷貝";
+"Done" = "完成";
+"Cancel" = "取消";
+"Edit" = "編輯";
+"Delete" = "刪除";
+"Back" = "返回";
+"Add" = "添加";
+
+
+// Adding accounts
+"Scan QR Code" = "掃描二維碼";
+"Read QR Code image" = "讀二維碼相片";
+"Import from file" = "由檔案導入";
+"Enter manually" = "手動輸入";
+
+"Scanning" = "掃緊二維碼";
+
+"Add account" = "添加帳號";
+"By Key URI" = "以 Key URI 方式";
+"By Secret Key" = "以 Secret Key 方式";
+"Key URI" = "Key URI";
+"Issuer" = "Issuer";
+"Service Provider (Optional)" = "服務提供商（可選）";
+"Account Name" = "Account Name";
+"email@example.com (Optional)" = "email@example.com（可選）";
+"Secret Key" = "Secret Key";
+"*SECRET* (Required)" = "*SECRET*（必填）";
+
+
+// Export
+"Export" = "導出";
+
+
+// About
+"About" = "關於";
+"Version" = "版本";
+"Source Code" = "源碼";
+"Privacy Policy" = "私隱政策";
+
+
+// Token Card View
+"Copy code" = "拷貝驗證碼";
+"View detail" = "詳情";
+"Edit account" = "編輯本項";

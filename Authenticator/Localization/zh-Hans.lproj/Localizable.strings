@@ -1,5 +1,49 @@
-/* 
+/*
 Chinese (Simplified)
 */
 
-"Copy" = "Copy";
+// General
+"Copy" = "拷贝";
+"Done" = "完成";
+"Cancel" = "取消";
+"Edit" = "编辑";
+"Delete" = "删除";
+"Back" = "返回";
+"Add" = "添加";
+
+
+// Adding accounts
+"Scan QR Code" = "扫描二维码";
+"Read QR Code image" = "读二维码图片";
+"Import from file" = "从文件导入";
+"Enter manually" = "手动输入";
+
+"Scanning" = "正在扫描";
+
+"Add account" = "添加帐号";
+"By Key URI" = "以 Key URI 方式";
+"By Secret Key" = "以 Secret Key 方式";
+"Key URI" = "Key URI";
+"Issuer" = "Issuer";
+"Service Provider (Optional)" = "服务提供商（可选）";
+"Account Name" = "Account Name";
+"email@example.com (Optional)" = "email@example.com（可选）";
+"Secret Key" = "Secret Key";
+"*SECRET* (Required)" = "*SECRET*（必填）";
+
+
+// Export
+"Export" = "导出";
+
+
+// About
+"About" = "关于";
+"Version" = "版本";
+"Source Code" = "源代码";
+"Privacy Policy" = "隐私政策";
+
+
+// Token Card View
+"Copy code" = "拷贝验证码";
+"View detail" = "详情";
+"Edit account" = "编辑本项";

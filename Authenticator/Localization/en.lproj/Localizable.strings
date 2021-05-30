@@ -2,4 +2,48 @@
 English
 */
 
+// General
 "Copy" = "Copy";
+"Done" = "Done";
+"Cancel" = "Cancel";
+"Edit" = "Edit";
+"Delete" = "Delete";
+"Back" = "Back";
+"Add" = "Add";
+
+
+// Adding accounts
+"Scan QR Code" = "Scan QR Code";
+"Read QR Code image" = "Read QR Code image";
+"Import from file" = "Import from file";
+"Enter manually" = "Enter manually";
+
+"Scanning" = "Scanning";
+
+"Add account" = "Add account";
+"By Key URI" = "By Key URI";
+"By Secret Key" = "By Secret Key";
+"Key URI" = "Key URI";
+"Issuer" = "Issuer";
+"Service Provider (Optional)" = "Service Provider (Optional)";
+"Account Name" = "Account Name";
+"email@example.com (Optional)" = "email@example.com (Optional)";
+"Secret Key" = "Secret Key";
+"*SECRET* (Required)" = "*SECRET* (Required)";
+
+
+// Export
+"Export" = "Export";
+
+
+// About
+"About" = "About";
+"Version" = "Version";
+"Source Code" = "Source Code";
+"Privacy Policy" = "Privacy Policy";
+
+
+// Token Card View
+"Copy code" = "Copy Code";
+"View detail" = "View detail";
+"Edit account" = "Edit account";
