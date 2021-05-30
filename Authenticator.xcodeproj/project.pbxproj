@@ -31,6 +31,7 @@
 		37AC99172661FAC7004A3B8B /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC99162661FAC7004A3B8B /* PhotoPicker.swift */; };
 		37AC991A266313CF004A3B8B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AC991C266313CF004A3B8B /* Localizable.strings */; };
 		37AC992A2663171D004A3B8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AC99292663171D004A3B8B /* InfoPlist.strings */; };
+		37AC992C26633E98004A3B8B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37AC992B26633E98004A3B8B /* Settings.bundle */; };
 		37BCA6472461818A00778EBD /* TokenDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCA6462461818A00778EBD /* TokenDetailView.swift */; };
 		37BCA6492461828600778EBD /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCA6482461828600778EBD /* EditAccountView.swift */; };
 		37BCA64B2461B1BE00778EBD /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCA64A2461B1BE00778EBD /* ExportView.swift */; };
@@ -68,6 +69,7 @@
 		37AC991F2663144F004A3B8B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37AC992026631471004A3B8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37AC99292663171D004A3B8B /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		37AC992B26633E98004A3B8B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37BCA6462461818A00778EBD /* TokenDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailView.swift; sourceTree = "<group>"; };
 		37BCA6482461828600778EBD /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 		37BCA64A2461B1BE00778EBD /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				378C52FB245890B700CC5A1E /* Assets.xcassets */,
 				378C5300245890B700CC5A1E /* LaunchScreen.storyboard */,
 				3796F135245EADD600A2E9D0 /* Authenticator.xcdatamodeld */,
+				37AC992B26633E98004A3B8B /* Settings.bundle */,
 				378C5303245890B700CC5A1E /* Info.plist */,
 				37AC99292663171D004A3B8B /* InfoPlist.strings */,
 				37AC992826631577004A3B8B /* Localization */,
@@ -277,6 +280,7 @@
 				37C8D2B62459E0540021575D /* Images.xcassets in Resources */,
 				378C52FF245890B700CC5A1E /* Preview Assets.xcassets in Resources */,
 				378C52FC245890B700CC5A1E /* Assets.xcassets in Resources */,
+				37AC992C26633E98004A3B8B /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
