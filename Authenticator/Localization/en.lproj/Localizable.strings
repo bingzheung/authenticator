@@ -34,6 +34,18 @@ English
 
 // Export
 "Export" = "Export";
+"Export accounts" = "Export accounts";
+"Copy all Key URIs to Clipboard" = "Copy all Key URIs to Clipboard";
+
+"Export all Key URIs as plain " = "Export all Key URIs as plain ";
+"text" = "text";
+
+"Export all Key URIs as a " = "Export all Key URIs as a ";
+".txt" = ".txt";
+" file" = " file";
+
+"Export all Key URIs as QR Code images combined as a " = "Export all Key URIs as QR Code images combined as a ";
+".zip" = ".zip";
 
 
 // About
@@ -47,3 +59,4 @@ English
 "Copy code" = "Copy Code";
 "View detail" = "View detail";
 "Edit account" = "Edit account";
+"title.edit_account" = "Edit account";

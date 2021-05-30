@@ -40,7 +40,7 @@ struct EditAccountView: View {
                                         }.padding()
                                 }
                         }
-                        .navigationTitle("Edit account")
+                        .navigationTitle("title.edit_account")
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         Button(action: {

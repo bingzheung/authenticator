@@ -34,6 +34,18 @@ Chinese (Simplified)
 
 // Export
 "Export" = "导出";
+"Export accounts" = "导出帐号";
+"Copy all Key URIs to Clipboard" = "拷贝所有 Key URI 到剪帖板";
+
+"Export all Key URIs as plain " = "导出所有 Key URI 为纯文本 ";
+"text" = "text";
+
+"Export all Key URIs as a " = "导出所有 Key URI 合为一个 ";
+".txt" = ".txt";
+" file" = " 文件";
+
+"Export all Key URIs as QR Code images combined as a " = "以二维码图片形式导出所有 Key URI 合为一个 ";
+".zip" = ".zip";
 
 
 // About
@@ -47,3 +59,4 @@ Chinese (Simplified)
 "Copy code" = "拷贝验证码";
 "View detail" = "详情";
 "Edit account" = "编辑本项";
+"title.edit_account" = "编辑帐号";

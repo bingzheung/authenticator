@@ -33,6 +33,18 @@ Chinese (Hong Kong)
 
 // Export
 "Export" = "導出";
+"Export accounts" = "導出帳號";
+"Copy all Key URIs to Clipboard" = "拷貝所有 Key URI 到剪帖板";
+
+"Export all Key URIs as plain " = "導出所有 Key URI 爲純文字 ";
+"text" = "text";
+
+"Export all Key URIs as a " = "導出所有 Key URI 合爲一個 ";
+".txt" = ".txt";
+" file" = " 檔案";
+
+"Export all Key URIs as QR Code images combined as a " = "以二維碼相片形式導出所有 Key URI 合爲一個 ";
+".zip" = ".zip";
 
 
 // About
@@ -46,3 +58,4 @@ Chinese (Hong Kong)
 "Copy code" = "拷貝驗證碼";
 "View detail" = "詳情";
 "Edit account" = "編輯本項";
+"title.edit_account" = "編輯帳號";
