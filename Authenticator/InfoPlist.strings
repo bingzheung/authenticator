@@ -1,6 +1,1 @@
-/* 
-  InfoPlist.strings
-  Authenticator
-*/
-
 "CFBundleName" = "2FA Auth";
