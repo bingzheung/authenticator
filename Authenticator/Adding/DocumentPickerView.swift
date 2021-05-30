@@ -6,7 +6,7 @@ struct DocumentPickerView: UIViewControllerRepresentable {
         let completion: (URL?) -> Void
         
         func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-                let viewController = UIDocumentPickerViewController(forOpeningContentTypes: [.text, .image], asCopy: true)
+                let viewController = UIDocumentPickerViewController(forOpeningContentTypes: [.text, .image], asCopy: false)
                 viewController.delegate = context.coordinator
                 return viewController
         }
