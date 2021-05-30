@@ -18,6 +18,7 @@ struct CodeCardView: View {
                                 Menu {
                                         Button(action: {
                                                 UIPasteboard.general.string = totp
+                                                isBannerPresented = true
                                         }) {
                                                 MenuLabel(text: "Copy code", image: "doc.on.doc")
                                         }
@@ -27,37 +28,37 @@ struct CodeCardView: View {
                                                 .scaledToFit()
                                                 .frame(width: 24, height: 24)
                                                 .foregroundColor(.primary)
+                                                .padding(.leading, 8)
+                                                .contentShape(Rectangle())
                                 }
                         }
-
-                        HStack {
-                                Text(formattedTotp).font(.largeTitle)
-                                Spacer()
+                        VStack(spacing: 8) {
+                                HStack {
+                                        Text(formattedTotp).font(.largeTitle)
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text(token.displayAccountName).font(.footnote)
+                                        Spacer()
+                                        ZStack {
+                                                Circle().stroke(Color.primary.opacity(0.2), lineWidth: 2)
+                                                        .frame(width: 24, height: 24)
+                                                Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true)
+                                                        .stroke(lineWidth: 2)
+                                                        .frame(width: 24, height: 24)
+                                                Text(timeRemaining.description).font(.footnote)
+                                        }
+                                }
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 UIPasteboard.general.string = totp
                                 isBannerPresented = true
                         }
-                        .modifier(BannerModifier(isPresented: $isBannerPresented))
-
-                        HStack {
-                                Text(token.displayAccountName).font(.footnote)
-                                Spacer()
-                                ZStack {
-                                        Circle().stroke(Color.primary.opacity(0.2), lineWidth: 2)
-                                                .frame(width: 24, height: 24)
-                                        
-                                        Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true)
-                                                .stroke(lineWidth: 2)
-                                                .frame(width: 24, height: 24)
-                                        
-                                        Text(timeRemaining.description).font(.footnote)
-                                }
-                        }
                 }
                 .padding()
                 .fillBackground()
+                .modifier(BannerModifier(isPresented: $isBannerPresented))
         }
 
         private var formattedTotp: String {
