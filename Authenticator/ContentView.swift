@@ -12,7 +12,7 @@ struct ContentView: View {
 
         private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         @State private var timeRemaining: Int = 30 - (Int(Date().timeIntervalSince1970) % 30)
-        @State var codes: [String] = ["000000"]
+        @State private var codes: [String] = ["000000"]
 
         @State private var isDeletionAlertPresented: Bool = false
         @State private var indexSetOnDelete: IndexSet = IndexSet()
