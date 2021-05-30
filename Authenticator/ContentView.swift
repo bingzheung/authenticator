@@ -9,7 +9,6 @@ struct ContentView: View {
 
         @State private var tokens: [Token] = []
         @State private var selectedTokens = Set<Token>()
-        @State private var tokenIndex: Int = 0
 
         private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         @State private var timeRemaining: Int = 30 - (Int(Date().timeIntervalSince1970) % 30)
@@ -384,6 +383,7 @@ struct ContentView: View {
 }
 
 private var presentingSheet: SheetSet = .moreAbout
+private var tokenIndex: Int = 0
 
 private enum SheetSet {
         case moreExport
