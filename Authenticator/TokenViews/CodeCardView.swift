@@ -102,11 +102,11 @@ private struct BannerModifier: ViewModifier {
                 ZStack {
                         content
                         if isPresented {
-                                Text("Copied")
+                                BannerView()
                                         .animation(.default)
                                         .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                                         .onAppear {
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                                                         withAnimation {
                                                                 isPresented = false
                                                         }
@@ -114,5 +114,24 @@ private struct BannerModifier: ViewModifier {
                                         }
                         }
                 }
+        }
+}
+
+private struct BannerView: View {
+        var body: some View {
+                Text("Copied")
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 40)
+                        .background(BlurView())
+                        .clipShape(Capsule())
+        }
+}
+
+private struct BlurView: UIViewRepresentable {
+        func makeUIView(context: Context) -> UIVisualEffectView {
+                return UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+        }
+        func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+                uiView.effect = UIBlurEffect(style: .systemUltraThinMaterial)
         }
 }
