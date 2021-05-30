@@ -144,6 +144,7 @@ struct ContentView: View {
                                                         Image(systemName: "trash").opacity(selectedTokens.isEmpty ? 0.2 : 1)
                                                 }
                                         } else {
+                                                #if !targetEnvironment(macCatalyst)
                                                 Button(action: {
                                                         presentingSheet = .addByScanner
                                                         isSheetPresented = true
@@ -154,7 +155,9 @@ struct ContentView: View {
                                                                 .frame(width: 23, height: 23)
                                                                 .contentShape(Rectangle())
                                                 }
+                                                #endif
                                                 Menu {
+                                                        #if !targetEnvironment(macCatalyst)
                                                         Button(action: {
                                                                 presentingSheet = .addByScanner
                                                                 isSheetPresented = true
@@ -165,6 +168,7 @@ struct ContentView: View {
                                                                         Image(systemName: "qrcode.viewfinder")
                                                                 }
                                                         }
+                                                        #endif
                                                         Button(action: {
                                                                 presentingSheet = .addByQRCodeImage
                                                                 isSheetPresented = true
