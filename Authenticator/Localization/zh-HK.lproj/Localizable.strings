@@ -55,7 +55,14 @@ Chinese (Hong Kong)
 
 
 // Token Card View
+"Copied" = "已拷貝";
+
 "Copy code" = "拷貝驗證碼";
 "View detail" = "詳情";
 "Edit account" = "編輯本項";
+
+"Account detail" = "帳號詳情";
 "title.edit_account" = "編輯帳號";
+
+"Delete Account?" = "刪除帳號？";
+"Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service." = "刪除帳號唔等於關閉雙重認證。\n\n務必確保你仲有其它方式認證登錄。";

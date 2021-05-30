@@ -56,7 +56,14 @@ Chinese (Simplified)
 
 
 // Token Card View
+"Copied" = "已拷贝";
+
 "Copy code" = "拷贝验证码";
 "View detail" = "详情";
 "Edit account" = "编辑本项";
+
+"Account detail" = "帐号详情";
 "title.edit_account" = "编辑帐号";
+
+"Delete Account?" = "删除帐号？";
+"Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service." = "删除帐号不等于关闭双重验证。\n\n务必确保你还有其它方式验证登录。";

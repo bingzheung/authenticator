@@ -56,7 +56,14 @@ English
 
 
 // Token Card View
+"Copied" = "Copied";
+
 "Copy code" = "Copy Code";
 "View detail" = "View detail";
 "Edit account" = "Edit account";
+
+"Account detail" = "Account detail";
 "title.edit_account" = "Edit account";
+
+"Delete Account?" = "Delete Account?";
+"Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service." = "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service.";
