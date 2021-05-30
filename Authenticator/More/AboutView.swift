@@ -61,11 +61,11 @@ private struct LinkCardView: View {
         var body: some View {
                 VStack {
                         HStack {
-                                Text(heading).font(.headline)
+                                Text(NSLocalizedString(heading, comment: "")).font(.headline)
                                 Spacer()
                         }
                         HStack {
-                                Text(message).font(.system(.footnote, design: .monospaced))
+                                Text(NSLocalizedString(message, comment: "")).font(.system(.footnote, design: .monospaced))
                                 Spacer()
                         }.padding(.top, 4)
                 }
