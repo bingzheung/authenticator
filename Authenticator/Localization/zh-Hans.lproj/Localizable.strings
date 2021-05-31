@@ -15,6 +15,7 @@ Chinese (Simplified)
 // Adding accounts
 "Scan QR Code" = "扫描二维码";
 "Read QR Code image" = "读二维码图片";
+"Read from QR Code picture" = "从二维码图片读取";
 "Import from file" = "从文件导入";
 "Enter manually" = "手动输入";
 

@@ -15,6 +15,7 @@ English
 // Adding accounts
 "Scan QR Code" = "Scan QR Code";
 "Read QR Code image" = "Read QR Code image";
+"Read from QR Code picture" = "Read from QR Code picture";
 "Import from file" = "Import from file";
 "Enter manually" = "Enter manually";
 

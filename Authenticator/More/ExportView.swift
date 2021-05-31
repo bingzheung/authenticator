@@ -59,9 +59,14 @@ struct ExportView: View {
                                                 .padding()
                                         }
                                         .sheet(isPresented: $isTXTFileActivityPresented) {
-                                                ActivityView(activityItems: [txtFile()]) {
+                                                let url = txtFile()
+                                                #if targetEnvironment(macCatalyst)
+                                                DocumentExporter(url: url)
+                                                #else
+                                                ActivityView(activityItems: [url]) {
                                                         isTXTFileActivityPresented = false
                                                 }
+                                                #endif
                                         }
 
                                         Button(action: {
@@ -78,9 +83,14 @@ struct ExportView: View {
                                                 .padding()
                                         }
                                         .sheet(isPresented: $isZIPFileActivityPresented) {
-                                                ActivityView(activityItems: [zipFile()]) {
+                                                let url: URL = zipFile()
+                                                #if targetEnvironment(macCatalyst)
+                                                DocumentExporter(url: url)
+                                                #else
+                                                ActivityView(activityItems: [url]) {
                                                         isZIPFileActivityPresented = false
                                                 }
+                                                #endif
                                         }
                                 }
                         }

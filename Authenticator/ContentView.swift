@@ -173,7 +173,7 @@ struct ContentView: View {
                                                                 isSheetPresented = true
                                                         }) {
                                                                 HStack {
-                                                                        Text("Read QR Code image")
+                                                                        Text(readQRCodeImage)
                                                                         Spacer()
                                                                         Image(systemName: "photo")
                                                                 }
@@ -375,6 +375,13 @@ struct ContentView: View {
                 _ = urls.map { try? FileManager.default.removeItem(at: $0) }
         }
 
+        private let readQRCodeImage: String = {
+                #if targetEnvironment(macCatalyst)
+                return NSLocalizedString("Read from QR Code picture", comment: "")
+                #else
+                return NSLocalizedString("Read QR Code image", comment: "")
+                #endif
+        }()
         private func debugLog(_ text: String) {
                 #if DEBUG
                 print(text)

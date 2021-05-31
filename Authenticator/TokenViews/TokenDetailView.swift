@@ -53,10 +53,15 @@ struct TokenDetailView: View {
                                                                 }
                                                         }
                                                         .sheet(isPresented: $isImageActivityViewPresented) {
-                                                                ActivityView(activityItems: [imageUrl!]) {
+                                                                let url = imageUrl!
+                                                                #if targetEnvironment(macCatalyst)
+                                                                DocumentExporter(url: url)
+                                                                #else
+                                                                ActivityView(activityItems: [url]) {
                                                                         imageUrl = nil
                                                                         isImageActivityViewPresented = false
                                                                 }
+                                                                #endif
                                                         }
                                         }
                                         Spacer().frame(height: 1).padding(.bottom, 50)

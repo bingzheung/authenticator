@@ -15,6 +15,7 @@ Chinese
 // Adding accounts
 "Scan QR Code" = "掃描二維碼";
 "Read QR Code image" = "讀二維碼圖片";
+"Read from QR Code picture" = "從二維碼圖片讀取";
 "Import from file" = "從檔案導入";
 "Enter manually" = "手動輸入";
 

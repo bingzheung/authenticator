@@ -15,7 +15,8 @@ Cantonese
 // Adding accounts
 "Scan QR Code" = "掃描二維碼";
 "Read QR Code image" = "讀二維碼相片";
-"Import from file" = "由檔案導入";
+"Read from QR Code picture" = "從二維碼相片讀取";
+"Import from file" = "從檔案導入";
 "Enter manually" = "手動輸入";
 
 "Scanning" = "掃緊二維碼";

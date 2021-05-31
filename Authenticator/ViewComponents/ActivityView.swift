@@ -18,3 +18,15 @@ struct ActivityView: UIViewControllerRepresentable {
 
         func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+
+struct DocumentExporter: UIViewControllerRepresentable {
+
+        let url: URL
+
+        func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
+                let controller = UIDocumentPickerViewController(forExporting: [url], asCopy: true)
+                return controller
+        }
+
+        func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {}
+}
