@@ -1,9 +1,21 @@
 2FA Auth
 ======
 
-Two-Factor TOTP Authenticator for iOS
+Two Factor TOTP Authenticator for iOS & macOS
 
-[Download on the App Store](https://apps.apple.com/app/id1511791282)
+## Now available on the App Store
+<a href="https://apps.apple.com/app/id1511791282">
+        <img src="images/app-store-badge.svg" alt="App Store badge" width="150"/>
+</a>
+<br>
+<br>
 
-### Third-party Libraries
+<a href="https://apps.apple.com/app/id1511791282">
+        <img src="images/app-store-link-qrcode.png" alt="App Store QR Code" width="150"/>
+</a>
+
+## Screenshots
+<img src="images/screenshot.png" alt="screenshots" width="480"/>
+
+## Third-party Libraries
 - [SwiftOTP](https://github.com/lachlanbell/SwiftOTP)
