@@ -63,10 +63,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension View {
         func fillBackground() -> some View {
-                modifier(FillBackgroundColor())
+                return modifier(BackgroundColorModifier())
         }
 }
-private struct FillBackgroundColor: ViewModifier {
+private struct BackgroundColorModifier: ViewModifier {
         @Environment (\.colorScheme) var colorScheme: ColorScheme
         func body(content: Content) -> some View {
                 let backgroundColor: Color = {
@@ -79,7 +79,7 @@ private struct FillBackgroundColor: ViewModifier {
                                 return Color(UIColor.systemBackground)
                         }
                 }()
-                return content.background(RoundedRectangle(cornerRadius: 8).fill(backgroundColor))
+                return content.background(RoundedRectangle(cornerRadius: 10).fill(backgroundColor))
         }
 }
 
