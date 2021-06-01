@@ -15,7 +15,9 @@ Two Factor TOTP Authenticator for iOS & macOS
 </a>
 
 ## Screenshots
-<img src="images/screenshot.png" alt="screenshots" width="480"/>
+<img src="images/screenshot.png" alt="iPhone screen shots" width="480"/>
+<br>
+<img src="images/screenshot-mac.png" alt="Mac scree shots" width="480"/>
 
 ## Third-party Libraries
 - [SwiftOTP](https://github.com/lachlanbell/SwiftOTP)
