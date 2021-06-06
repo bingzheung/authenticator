@@ -367,10 +367,10 @@ struct ContentView: View {
         // MARK: - Methods
 
         private func token(of tokenData: TokenData) -> Token {
-                guard let id = tokenData.id,
-                        let uri = tokenData.uri,
-                        let displayIssuer = tokenData.displayIssuer,
-                        let displayAccountName = tokenData.displayAccountName
+                guard let id: String = tokenData.id,
+                      let uri: String = tokenData.uri,
+                      let displayIssuer: String = tokenData.displayIssuer,
+                      let displayAccountName: String = tokenData.displayAccountName
                 else { return Token() }
                 guard let token = Token(id: id, uri: uri, displayIssuer: displayIssuer, displayAccountName: displayAccountName) else { return Token() }
                 return token
@@ -385,14 +385,14 @@ struct ContentView: View {
                 codes = generated + placeholder
         }
         private func code(of tokenData: TokenData) -> String {
-                guard let uri = tokenData.uri else { return "000000" }
-                guard let token = Token(uri: uri) else { return "000000" }
-                guard let code = OTPGenerator.totp(secret: token.secret, algorithm: token.algorithm, period: token.period) else { return "000000" }
+                guard let uri: String = tokenData.uri else { return "000000" }
+                guard let token: Token = Token(uri: uri) else { return "000000" }
+                guard let code: String = OTPGenerator.totp(secret: token.secret, algorithm: token.algorithm, period: token.period) else { return "000000" }
                 return code
         }
 
         private func handleAccountEditing(index: Int, issuer: String, account: String) {
-                let item = fetchedTokens[index]
+                let item: TokenData = fetchedTokens[index]
                 if item.displayIssuer != issuer {
                         fetchedTokens[index].displayIssuer = issuer
                 }
