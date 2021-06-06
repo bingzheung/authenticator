@@ -208,7 +208,7 @@ struct ContentView: View {
                                                                 .resizable()
                                                                 .scaledToFit()
                                                                 .frame(width: 22, height: 22)
-                                                                .padding(.leading, 4)
+                                                                .padding(.leading, 8)
                                                                 .contentShape(Rectangle())
                                                 }
                                         }
