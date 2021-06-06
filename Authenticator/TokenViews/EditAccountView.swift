@@ -1,11 +1,15 @@
 import SwiftUI
 
 struct EditAccountView: View {
-        
+
         @Binding var isPresented: Bool
-        @Binding var token: Token
-        let completion: () -> Void
-        
+        let token: Token
+        let tokenIndex: Int
+        let completion: (Int, String, String) -> Void
+
+        @State private var displayIssuer: String = ""
+        @State private var displayAccountName: String = ""
+
         var body: some View {
                 NavigationView {
                         ZStack {
@@ -16,7 +20,8 @@ struct EditAccountView: View {
                                                         Text("Issuer").font(.headline)
                                                         Spacer()
                                                 }
-                                                TextField("Issuer", text: $token.displayIssuer)
+                                                TextField("Issuer", text: $displayIssuer)
+                                                        .disableAutocorrection(true)
                                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         }.padding()
                                         
@@ -25,14 +30,15 @@ struct EditAccountView: View {
                                                         Text("Account Name").font(.headline)
                                                         Spacer()
                                                 }
-                                                TextField("Account Name", text: $token.displayAccountName)
-                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                TextField("Account Name", text: $displayAccountName)
                                                         .keyboardType(.emailAddress)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.none)
+                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
                                         }.padding(.horizontal)
                                         
                                         HStack {
+                                                // TODO: Localization
                                                 Text("NOTE: Changes would not apply to the Key URI")
                                                         .font(.footnote)
                                                         .foregroundColor(Color.secondary)
@@ -51,15 +57,18 @@ struct EditAccountView: View {
                                 }
                                 ToolbarItem(placement: .navigationBarTrailing) {
                                         Button(action: {
-                                                token.displayIssuer = token.displayIssuer.trimmingSpaces()
-                                                token.displayAccountName = token.displayAccountName.trimmingSpaces()
-                                                completion()
+                                                displayIssuer = displayIssuer.trimming()
+                                                displayAccountName = displayAccountName.trimming()
+                                                completion(tokenIndex, displayIssuer, displayAccountName)
                                                 isPresented = false
                                         }) {
                                                 Text("Done")
                                         }
                                 }
                         }
+                }.onAppear {
+                        displayIssuer = token.displayIssuer
+                        displayAccountName = token.displayAccountName
                 }
         }
 }

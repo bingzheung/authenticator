@@ -1,73 +1,65 @@
 ### macOS ###
 # General
-*.DS_Store
-*.AppleDouble
-*.LSOverride
+.DS_Store
+.AppleDouble
+.LSOverride
 
 # Icon must end with two \r
 Icon
 
 # Thumbnails
-*._*
+._*
 
 # Files that might appear in the root of a volume
-*.DocumentRevisions-V100
-*.fseventsd
-*.Spotlight-V100
-*.TemporaryItems
-*.Trashes
-*.VolumeIcon.icns
-*.com.apple.timemachine.donotpresent
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
 # Directories potentially created on remote AFP share
-*.AppleDB
-*.AppleDesktop
+.AppleDB
+.AppleDesktop
 Network Trash Folder
 Temporary Items
-*.apdisk
+.apdisk
 
 
 ### Xcode ###
-
-## User settings
-xcuserdata/
-
-## Xcode Patch
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
-/*.gcno
-
-### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
+xcuserdata/
 
-## Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
-
-## Obj-C/Swift specific
+# Obj-C/Swift specific
 *.hmap
 
-## App packaging
+# App packaging
 *.ipa
 *.dSYM.zip
 *.dSYM
 
-## Playgrounds
+# Gcc Patch
+/*.gcno
+
+
+### Swift Package Manager ###
+Packages/
+Package.pins
+Package.resolved
+.swiftpm/
+.build/
+
+
+### Playgrounds ###
 timeline.xctimeline
 playground.xcworkspace
 
 
-### Swift Package Manager
-Packages/
-Package.pins
-Package.resolved
-.build/
-.swiftpm/
-
-
-### IDEs and Editors
-/.idea
-/.vscode
+### IDEs and Editors ###
+.idea/
+.vscode/

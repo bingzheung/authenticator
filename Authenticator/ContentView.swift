@@ -3,81 +3,82 @@ import CoreData
 
 struct ContentView: View {
 
-        @Environment(\.managedObjectContext) var context
+        @Environment(\.managedObjectContext) private var viewContext
 
-        @State private var editMode: EditMode = .inactive
-
-        @State private var tokens: [Token] = []
-        @State private var selectedTokens = Set<Token>()
+        @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TokenData.indexNumber, ascending: true)], animation: .default)
+        private var fetchedTokens: FetchedResults<TokenData>
 
         private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         @State private var timeRemaining: Int = 30 - (Int(Date().timeIntervalSince1970) % 30)
-        @State private var codes: [String] = ["000000"]
-
-        @State private var isDeletionAlertPresented: Bool = false
-        @State private var indexSetOnDelete: IndexSet = IndexSet()
+        @State private var codes: [String] = Array(repeating: "000000", count: 50)
 
         @State private var isSheetPresented: Bool = false
+
+        @State private var editMode: EditMode = .inactive
+        @State private var selectedTokens = Set<TokenData>()
+        @State private var indexSetOnDelete: IndexSet = IndexSet()
+        @State private var isDeletionAlertPresented: Bool = false
 
         var body: some View {
                 NavigationView {
                         List(selection: $selectedTokens) {
-                                ForEach(tokens, id: \.self) { token in
+                                ForEach(fetchedTokens, id: \.self) { item in
+                                        let index: Int = Int(fetchedTokens.firstIndex(of: item) ?? 0)
                                         if editMode == .active {
-                                                CodeCardView(token: token,
-                                                         totp: $codes[tokens.firstIndex(of: token) ?? 0],
-                                                         timeRemaining: $timeRemaining)
+                                                CodeCardView(token: token(of: item),
+                                                             totp: $codes[index],
+                                                             timeRemaining: $timeRemaining)
                                         } else {
                                                 ZStack {
                                                         GlobalBackgroundColor()
-                                                        CodeCardView(token: token,
-                                                                 totp: $codes[tokens.firstIndex(of: token) ?? 0],
-                                                                 timeRemaining: $timeRemaining)
-                                                                .contextMenu(menuItems: {
+                                                        CodeCardView(token: token(of: item),
+                                                                     totp: $codes[index],
+                                                                     timeRemaining: $timeRemaining)
+                                                                .contextMenu {
                                                                         Button(action: {
-                                                                                UIPasteboard.general.string = codes[tokens.firstIndex(of: token) ?? 0]
+                                                                                UIPasteboard.general.string = codes[index]
                                                                         }) {
                                                                                 MenuLabel(text: "Copy code", image: "doc.on.doc")
                                                                         }
                                                                         Button(action: {
-                                                                                tokenIndex = tokens.firstIndex(of: token) ?? 0
-                                                                                presentingSheet = .cardViewDetail
+                                                                                tokenIndex = index
+                                                                                presentingSheet = .cardDetailView
                                                                                 isSheetPresented = true
                                                                         }) {
                                                                                 MenuLabel(text: "View detail", image: "text.justifyleft")
                                                                         }
                                                                         Button(action: {
-                                                                                tokenIndex = tokens.firstIndex(of: token) ?? 0
+                                                                                tokenIndex = index
                                                                                 presentingSheet = .cardEditing
                                                                                 isSheetPresented = true
                                                                         }) {
                                                                                 MenuLabel(text: "Edit account", image: "square.and.pencil")
                                                                         }
                                                                         Button(action: {
-                                                                                tokenIndex = tokens.firstIndex(of: token) ?? 0
+                                                                                tokenIndex = index
+                                                                                selectedTokens.removeAll()
+                                                                                indexSetOnDelete.removeAll()
                                                                                 isDeletionAlertPresented = true
                                                                         }) {
                                                                                 MenuLabel(text: "Delete", image: "trash")
                                                                         }
-                                                                })
+                                                                }
                                                                 .padding(.vertical, 4)
                                                 }
                                                 .listRowInsets(EdgeInsets())
                                         }
                                 }
-                                .onDelete(perform: delete(at:))
                                 .onMove(perform: move(from:to:))
+                                .onDelete(perform: deleteItems)
                         }
                         .listStyle(InsetGroupedListStyle())
-                        .onAppear(perform: setupTokens)
-                        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                                codes = generateCodes()
-                                clearTemporaryDirectory()
+                        .onAppear {
+                                generateCodes()
                         }
                         .onReceive(timer) { _ in
                                 timeRemaining = 30 - (Int(Date().timeIntervalSince1970) % 30)
                                 if timeRemaining == 30 {
-                                        codes = generateCodes()
+                                        generateCodes()
                                 }
                         }
                         .alert(isPresented: $isDeletionAlertPresented) {
@@ -86,17 +87,20 @@ struct ContentView: View {
                         .navigationTitle("2FA Auth")
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
-                                        if self.editMode == .active {
+                                        if editMode == .active {
                                                 Button(action: {
-                                                        self.editMode = .inactive
-                                                        self.selectedTokens.removeAll()
+                                                        editMode = .inactive
+                                                        selectedTokens.removeAll()
+                                                        indexSetOnDelete.removeAll()
                                                 }) {
                                                         Text("Done")
                                                 }
                                         } else {
                                                 Menu {
                                                         Button(action: {
-                                                                self.editMode = .active
+                                                                selectedTokens.removeAll()
+                                                                indexSetOnDelete.removeAll()
+                                                                editMode = .active
                                                         }) {
                                                                 HStack {
                                                                         Text("Edit")
@@ -135,17 +139,18 @@ struct ContentView: View {
                                         }
                                 }
                                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                                        if self.editMode == .active {
+                                        if editMode == .active {
                                                 Button(action: {
-                                                        isDeletionAlertPresented = true
-                                                        self.editMode = .inactive
+                                                        if !selectedTokens.isEmpty {
+                                                                isDeletionAlertPresented = true
+                                                        }
                                                 }) {
-                                                        Image(systemName: "trash").opacity(selectedTokens.isEmpty ? 0.2 : 1)
+                                                        Image(systemName: "trash")
                                                 }
                                         } else {
                                                 #if !targetEnvironment(macCatalyst)
                                                 Button(action: {
-                                                        presentingSheet = .addByScanner
+                                                        presentingSheet = .addByScanning
                                                         isSheetPresented = true
                                                 }) {
                                                         Image(systemName: "qrcode.viewfinder")
@@ -158,7 +163,7 @@ struct ContentView: View {
                                                 Menu {
                                                         #if !targetEnvironment(macCatalyst)
                                                         Button(action: {
-                                                                presentingSheet = .addByScanner
+                                                                presentingSheet = .addByScanning
                                                                 isSheetPresented = true
                                                         }) {
                                                                 HStack {
@@ -179,7 +184,7 @@ struct ContentView: View {
                                                                 }
                                                         }
                                                         Button(action: {
-                                                                presentingSheet = .addByURIFile
+                                                                presentingSheet = .addByPickingFile
                                                                 isSheetPresented = true
                                                         }) {
                                                                 HStack {
@@ -212,21 +217,23 @@ struct ContentView: View {
                         .sheet(isPresented: $isSheetPresented) {
                                 switch presentingSheet {
                                 case .moreExport:
-                                        ExportView(isPresented: $isSheetPresented, tokens: tokens)
+                                        ExportView(isPresented: $isSheetPresented, tokens: tokensToExport)
                                 case .moreAbout:
                                         AboutView(isPresented: $isSheetPresented)
-                                case .addByScanner:
-                                        Scanner(isPresented: $isSheetPresented, codeTypes: [.qr], completion: handleScan(result:))
+                                case .addByScanning:
+                                        Scanner(isPresented: $isSheetPresented, codeTypes: [.qr], completion: handleScanning(result:))
                                 case .addByQRCodeImage:
-                                        PhotoPicker(completion: handleImagePick(uri:))
-                                case .addByURIFile:
-                                        DocumentPicker(isPresented: $isSheetPresented, completion: handleImportFromFile(url:))
+                                        PhotoPicker(completion: handlePickedImage(uri:))
+                                case .addByPickingFile:
+                                        DocumentPicker(isPresented: $isSheetPresented, completion: handlePickedFile(url:))
                                 case .addByManually:
                                         ManualEntryView(isPresented: $isSheetPresented, completion: handleManualEntry(token:))
-                                case .cardViewDetail:
-                                        TokenDetailView(isPresented: $isSheetPresented, token: tokens[tokenIndex])
+                                case .cardDetailView:
+                                        TokenDetailView(isPresented: $isSheetPresented, token: token(of: fetchedTokens[tokenIndex]))
                                 case .cardEditing:
-                                        EditAccountView(isPresented: $isSheetPresented, token: $tokens[tokenIndex], completion: updateTokenData)
+                                        EditAccountView(isPresented: $isSheetPresented, token: token(of: fetchedTokens[tokenIndex]), tokenIndex: tokenIndex) { index, issuer, account in
+                                                handleAccountEditing(index: index, issuer: issuer, account: account)
+                                        }
                                 }
                         }
                         .environment(\.editMode, $editMode)
@@ -234,144 +241,169 @@ struct ContentView: View {
                 .navigationViewStyle(StackNavigationViewStyle())
         }
 
-        private func generateCodes() -> [String] {
-                // prevent crash while deleting
-                let placeholder: [String] = Array(repeating: "000000", count: 30)
-                
-                guard !tokens.isEmpty else { return placeholder }
-                let generated: [String?] = tokens.map {
-                        OTPGenerator.totp(secret: $0.secret)
+
+        // MARK: - Modification
+
+        private func addItem(_ token: Token) {
+                withAnimation {
+                        let newTokenData = TokenData(context: viewContext)
+                        newTokenData.id = token.id
+                        newTokenData.uri = token.uri
+                        newTokenData.displayIssuer = token.displayIssuer
+                        newTokenData.displayAccountName = token.displayAccountName
+                        let lastIndexNumber: Int64 = fetchedTokens.last?.indexNumber ?? Int64(fetchedTokens.count)
+                        newTokenData.indexNumber = lastIndexNumber + 1
+                        do {
+                                try viewContext.save()
+                        } catch {
+                                let nsError = error as NSError
+                                logger.debug("Unresolved error \(nsError), \(nsError.userInfo)")
+                        }
+                        generateCodes()
                 }
-                let codes: [String] = generated.compactMap { $0 }
-                return codes + placeholder
         }
-
-        // MARK: - Handlers
-
-        private func delete(at offsets: IndexSet) {
+        private func move(from source: IndexSet, to destination: Int) {
+                var idArray: [String] = fetchedTokens.map({ $0.id ?? Token().id })
+                idArray.move(fromOffsets: source, toOffset: destination)
+                for number in 0..<fetchedTokens.count {
+                        let item = fetchedTokens[number]
+                        if let index = idArray.firstIndex(where: { $0 == item.id }) {
+                                if Int64(index) != item.indexNumber {
+                                        fetchedTokens[number].indexNumber = Int64(index)
+                                }
+                        }
+                }
+                do {
+                        try viewContext.save()
+                } catch {
+                        let nsError = error as NSError
+                        logger.debug("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
+        }
+        private func deleteItems(offsets: IndexSet) {
+                selectedTokens.removeAll()
                 indexSetOnDelete = offsets
                 isDeletionAlertPresented = true
         }
-        private func move(from source: IndexSet, to destination: Int) {
-                tokens.move(fromOffsets: source, toOffset: destination)
-                codes = generateCodes()
-                updateTokenData()
+        private func cancelDeletion() {
+                indexSetOnDelete.removeAll()
+                selectedTokens.removeAll()
+                isDeletionAlertPresented = false
         }
-
-        private func handleScan(result: Result<String, ScannerView.ScanError>) {
-                isSheetPresented = false
-                switch result {
-                case .success(let code):
-                        let uri: String = code.trimmingSpaces()
-                        guard !uri.isEmpty else { return }
-                        guard let newToken: Token = Token(uri: uri) else { return }
-                        tokens.append(newToken)
-                        codes = generateCodes()
-                        updateTokenData()
-                case .failure(let error):
-                        debugLog("Scanning failed")
-                        debugLog(error.localizedDescription)
+        private func performDeletion() {
+                withAnimation {
+                        delete()
                 }
         }
-        private func handleImagePick(uri: String) {
-                let qrCodeUri: String = uri.trimmingSpaces()
-                guard !qrCodeUri.isEmpty else { return }
-                guard let newToken: Token = Token(uri: qrCodeUri) else { return }
-                tokens.append(newToken)
-                codes = generateCodes()
-                updateTokenData()
-        }
-        private func handleImportFromFile(url: URL?) {
-                guard let url: URL = url else { return }
-                guard let content: String = url.readText() else { return }
-                let lines: [String] = content.components(separatedBy: .newlines)
-                var shouldUpdateTokenData: Bool = false
-                _ = lines.map {
-                        if let newToken: Token = Token(uri: $0.trimmingSpaces()) {
-                                tokens.append(newToken)
-                                shouldUpdateTokenData = true
+        private func delete() {
+                if !selectedTokens.isEmpty {
+                        _ = selectedTokens.map { oneSelection in
+                                _ = fetchedTokens.filter({ $0.id == oneSelection.id }).map(viewContext.delete)
                         }
+                } else if !indexSetOnDelete.isEmpty {
+                        _ = indexSetOnDelete.map({ fetchedTokens[$0] }).map(viewContext.delete)
+                } else {
+                        viewContext.delete(fetchedTokens[tokenIndex])
                 }
-                if shouldUpdateTokenData {
-                        codes = generateCodes()
-                        updateTokenData()
+                do {
+                        try viewContext.save()
+                } catch {
+                        let nsError = error as NSError
+                        logger.debug("Unresolved error \(nsError), \(nsError.userInfo)")
                 }
+                indexSetOnDelete.removeAll()
+                selectedTokens.removeAll()
+                isDeletionAlertPresented = false
+                generateCodes()
         }
-        private func handleManualEntry(token: Token) {
-                tokens.append(token)
-                codes = generateCodes()
-                updateTokenData()
-        }
-
         private var deletionAlert: Alert {
                 let message: String = "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service."
                 return Alert(title: Text("Delete Account?"),
                              message: Text(NSLocalizedString(message, comment: "")),
                              primaryButton: .cancel(cancelDeletion),
-                             secondaryButton: .destructive(Text("Delete"), action: performDeletion)
-                )
+                             secondaryButton: .destructive(Text("Delete"), action: performDeletion))
         }
-        private func cancelDeletion() {
-                indexSetOnDelete.removeAll()
-                selectedTokens.removeAll()
-        }
-        private func performDeletion() {
-                if !indexSetOnDelete.isEmpty {
-                        tokens.remove(atOffsets: indexSetOnDelete)
-                } else if !selectedTokens.isEmpty {
-                        tokens.removeAll { selectedTokens.contains($0) }
-                } else {
-                        tokens.removeAll { $0.id == tokens[tokenIndex].id }
+
+
+        // MARK: - Account Adding
+
+        private func handleScanning(result: Result<String, ScannerView.ScanError>) {
+                isSheetPresented = false
+                switch result {
+                case .success(let code):
+                        let uri: String = code.trimming()
+                        guard !uri.isEmpty else { return }
+                        guard let newToken: Token = Token(uri: uri) else { return }
+                        addItem(newToken)
+                case .failure(let error):
+                        logger.debug("\(error.localizedDescription)")
                 }
-                codes = generateCodes()
-                updateTokenData()
-                indexSetOnDelete.removeAll()
-                selectedTokens.removeAll()
         }
-
-
-        // MARK: - Core Data
-
-        @FetchRequest(entity: TokenData.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \TokenData.indexNumber, ascending: false).reversedSortDescriptor as! NSSortDescriptor])
-        private var fetchedTokens: FetchedResults<TokenData>
-
-        private func setupTokens() {
-                if tokens.isEmpty {
-                        _ = fetchedTokens.map {
-                                if let token: Token = Token(id: $0.id, uri: $0.uri, displayIssuer: $0.displayIssuer, displayAccountName: $0.displayAccountName) {
-                                        tokens.append(token)
-                                }
+        private func handlePickedImage(uri: String) {
+                let qrCodeUri: String = uri.trimming()
+                guard !qrCodeUri.isEmpty else { return }
+                guard let newToken: Token = Token(uri: qrCodeUri) else { return }
+                addItem(newToken)
+        }
+        private func handlePickedFile(url: URL?) {
+                guard let url: URL = url else { return }
+                guard let content: String = url.readText() else { return }
+                let lines: [String] = content.components(separatedBy: .newlines)
+                _ = lines.map {
+                        if let newToken: Token = Token(uri: $0.trimming()) {
+                                addItem(newToken)
                         }
                 }
-                codes = generateCodes()
         }
-        private func updateTokenData() {
-                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "TokenData")
-                let deleteRequest: NSBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-                do {
-                        try context.execute(deleteRequest)
-                } catch {
-                        debugLog(error.localizedDescription)
-                }
-                _ = tokens.map { saveTokenData(token: $0) }
+        private func handleManualEntry(token: Token) {
+                addItem(token)
         }
-        private func saveTokenData(token: Token) {
-                let tokenData: TokenData = TokenData(context: context)
-                tokenData.id = token.id
-                tokenData.uri = token.uri
-                tokenData.displayIssuer = token.displayIssuer
-                tokenData.displayAccountName = token.displayAccountName
-                tokenData.indexNumber = Int64(tokens.firstIndex(of: token) ?? 0)
-                do {
-                        try context.save()
-                } catch {
-                        debugLog(error.localizedDescription)
+
+
+        // MARK: - Methods
+
+        private func token(of tokenData: TokenData) -> Token {
+                guard let id = tokenData.id,
+                        let uri = tokenData.uri,
+                        let displayIssuer = tokenData.displayIssuer,
+                        let displayAccountName = tokenData.displayAccountName
+                else { return Token() }
+                guard let token = Token(id: id, uri: uri, displayIssuer: displayIssuer, displayAccountName: displayAccountName) else { return Token() }
+                return token
+        }
+        private func generateCodes() {
+                let placeholder: [String] = Array(repeating: "000000", count: 30)
+                guard !fetchedTokens.isEmpty else {
+                        codes = placeholder
+                        return
                 }
+                let generated: [String] = fetchedTokens.map { code(of: $0) }
+                codes = generated + placeholder
+        }
+        private func code(of tokenData: TokenData) -> String {
+                guard let uri = tokenData.uri else { return "000000" }
+                guard let token = Token(uri: uri) else { return "000000" }
+                guard let code = OTPGenerator.totp(secret: token.secret, algorithm: token.algorithm, period: token.period) else { return "000000" }
+                return code
+        }
+
+        private func handleAccountEditing(index: Int, issuer: String, account: String) {
+                let item = fetchedTokens[index]
+                if item.displayIssuer != issuer {
+                        fetchedTokens[index].displayIssuer = issuer
+                }
+                if item.displayAccountName != account {
+                        fetchedTokens[index].displayAccountName = account
+                }
+        }
+
+        private var tokensToExport: [Token] {
+                return fetchedTokens.map({ token(of: $0) })
         }
 
         private func clearTemporaryDirectory() {
-                let tmpDirUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                guard let urls: [URL] = try? FileManager.default.contentsOfDirectory(at: tmpDirUrl, includingPropertiesForKeys: nil) else { return }
+                let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                guard let urls: [URL] = try? FileManager.default.contentsOfDirectory(at: temporaryDirectoryUrl, includingPropertiesForKeys: nil) else { return }
                 _ = urls.map { try? FileManager.default.removeItem(at: $0) }
         }
 
@@ -382,11 +414,6 @@ struct ContentView: View {
                 return NSLocalizedString("Read QR Code image", comment: "")
                 #endif
         }()
-        private func debugLog(_ text: String) {
-                #if DEBUG
-                print(text)
-                #endif
-        }
 }
 
 private var presentingSheet: SheetSet = .moreAbout
@@ -395,10 +422,10 @@ private var tokenIndex: Int = 0
 private enum SheetSet {
         case moreExport
         case moreAbout
-        case addByScanner
+        case addByScanning
         case addByQRCodeImage
-        case addByURIFile
+        case addByPickingFile
         case addByManually
-        case cardViewDetail
+        case cardDetailView
         case cardEditing
 }

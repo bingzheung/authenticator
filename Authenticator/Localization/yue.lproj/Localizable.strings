@@ -30,7 +30,7 @@ Cantonese
 "Account Name" = "Account Name";
 "email@example.com (Optional)" = "email@example.com（可選）";
 "Secret Key" = "Secret Key";
-"*SECRET* (Required)" = "*SECRET*（必填）";
+"SECRET (Required)" = "SECRET（必填）";
 
 
 // Export

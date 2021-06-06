@@ -30,7 +30,7 @@ English
 "Account Name" = "Account Name";
 "email@example.com (Optional)" = "email@example.com (Optional)";
 "Secret Key" = "Secret Key";
-"*SECRET* (Required)" = "*SECRET* (Required)";
+"SECRET (Required)" = "SECRET (Required)";
 
 
 // Export

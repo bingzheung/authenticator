@@ -32,8 +32,16 @@ struct DocumentPicker: UIViewControllerRepresentable {
                                 feedbackGenerator = nil
                         }
                         guard let url: URL = urls.first else { return }
+
+                        guard url.startAccessingSecurityScopedResource() else { return }
+                        let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                        let cacheUrl: URL = temporaryDirectoryUrl.appendingPathComponent(Date.currentDateText + url.lastPathComponent, isDirectory: false)
+                        try? FileManager.default.copyItem(at: url, to: cacheUrl)
+                        url.stopAccessingSecurityScopedResource()
+
+                        guard FileManager.default.fileExists(atPath: cacheUrl.path) else { return }
                         feedbackGenerator?.notificationOccurred(.success)
-                        parent.completion(url)
+                        parent.completion(cacheUrl)
                 }
         }
 }
