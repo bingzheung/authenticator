@@ -231,7 +231,7 @@ struct ContentView: View {
                                 case .addByPickingFile:
                                         DocumentPicker(isPresented: $isSheetPresented, completion: handlePickedFile(url:))
                                 case .addByManually:
-                                        ManualEntryView(isPresented: $isSheetPresented, completion: handleManualEntry(token:))
+                                        ManualEntryView(isPresented: $isSheetPresented, completion: addItem(_:))
                                 case .cardDetailView:
                                         TokenDetailView(isPresented: $isSheetPresented, token: token(of: fetchedTokens[tokenIndex]))
                                 case .cardEditing:
@@ -353,9 +353,6 @@ struct ContentView: View {
                                 addItem(newToken)
                         }
                 }
-        }
-        private func handleManualEntry(token: Token) {
-                addItem(token)
         }
 
 
