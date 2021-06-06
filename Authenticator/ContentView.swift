@@ -295,11 +295,6 @@ struct ContentView: View {
                 isDeletionAlertPresented = false
         }
         private func performDeletion() {
-                withAnimation {
-                        delete()
-                }
-        }
-        private func delete() {
                 if !selectedTokens.isEmpty {
                         _ = selectedTokens.map { oneSelection in
                                 _ = fetchedTokens.filter({ $0.id == oneSelection.id }).map(viewContext.delete)
