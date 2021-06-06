@@ -25,15 +25,11 @@ struct ContentView: View {
                                 ForEach(fetchedTokens, id: \.self) { item in
                                         let index: Int = Int(fetchedTokens.firstIndex(of: item) ?? 0)
                                         if editMode == .active {
-                                                CodeCardView(token: token(of: item),
-                                                             totp: $codes[index],
-                                                             timeRemaining: $timeRemaining)
+                                                CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
                                         } else {
                                                 ZStack {
                                                         GlobalBackgroundColor()
-                                                        CodeCardView(token: token(of: item),
-                                                                     totp: $codes[index],
-                                                                     timeRemaining: $timeRemaining)
+                                                        CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
                                                                 .contextMenu {
                                                                         Button(action: {
                                                                                 UIPasteboard.general.string = codes[index]
