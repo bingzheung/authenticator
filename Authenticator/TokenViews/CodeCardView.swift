@@ -38,15 +38,16 @@ struct CodeCardView: View {
                                         Spacer()
                                 }
                                 HStack {
-                                        Text(token.displayAccountName).font(.footnote)
-                                        Spacer()
-                                        ZStack {
-                                                Circle().stroke(Color.primary.opacity(0.2), lineWidth: 2)
-                                                        .frame(width: 24, height: 24)
-                                                Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true)
-                                                        .stroke(lineWidth: 2)
-                                                        .frame(width: 24, height: 24)
-                                                Text(timeRemaining.description).font(.footnote)
+                                    Text(token.displayAccountName).font(.footnote)
+                                    Spacer()
+                                    ZStack {
+                                        Circle().stroke(Color.primary.opacity(0.2), lineWidth: 2)
+                                            .frame(width: 24, height: 24)
+                                        Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true)
+                                            .stroke(lineWidth: 2)
+                                            .frame(width: 24, height: 24)
+                                            .foregroundColor(ArcColor(timeRemaining: timeRemaining))
+                                        Text(timeRemaining.description).font(.footnote)
                                         }
                                 }
                         }
@@ -81,6 +82,21 @@ struct CodeCardView: View {
         }
 
         private var endAngle: Double { Double((30 - timeRemaining) * 12 - 89) }
+    
+    private func ArcColor(timeRemaining: Int) -> Color {
+        switch timeRemaining {
+        case 22...:
+            return Color.blue
+        case 14..<22:
+            return Color.green
+        case 7..<14:
+            return Color.yellow
+        case timeRemaining ..< 7:
+            return Color.red
+        default:
+            return Color.primary
+        }
+    }
 }
 
 private struct Arc: Shape {
