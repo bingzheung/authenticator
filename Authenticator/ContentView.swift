@@ -399,6 +399,13 @@ struct ContentView: View {
                 if item.displayAccountName != account {
                         fetchedTokens[index].displayAccountName = account
                 }
+                do {
+                        try viewContext.save()
+                } catch {
+                        let nsError = error as NSError
+                        logger.debug("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
+                isSheetPresented = false
         }
 
         private var tokensToExport: [Token] {
