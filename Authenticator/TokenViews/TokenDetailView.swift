@@ -64,7 +64,7 @@ struct TokenDetailView: View {
                                                                 #endif
                                                         }
                                         }
-                                        Spacer().frame(height: 1).padding(.bottom, 50)
+                                        Spacer().frame(height: 50)
                                 }
                         }
                         .navigationTitle("Account detail")
