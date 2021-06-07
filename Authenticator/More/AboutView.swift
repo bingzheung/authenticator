@@ -3,6 +3,7 @@ import SwiftUI
 struct AboutView: View {
 
         @Binding var isPresented: Bool
+        @State private var isActivityViewPresented: Bool = false
 
         var body: some View {
                 NavigationView {
@@ -10,11 +11,28 @@ struct AboutView: View {
                                 GlobalBackgroundColor().ignoresSafeArea()
                                 ScrollView {
                                         VersionLabel()
+
                                         LinkCardView(heading: "Source Code", message: "https://github.com/ososoio/authenticator")
-                                                .padding(.horizontal)
+                                                .padding()
                                         
                                         LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy")
                                                 .padding()
+
+                                        HStack {
+                                                Text("Share this App").font(.headline)
+                                                Spacer()
+                                                Image(systemName: "square.and.arrow.up")
+                                        }
+                                        .padding()
+                                        .fillBackground()
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                                isActivityViewPresented = true
+                                        }
+                                        .onLongPressGesture {
+                                                isActivityViewPresented = true
+                                        }
+                                        .padding()
                                 }
                         }
                         .navigationTitle("About")
@@ -26,6 +44,9 @@ struct AboutView: View {
                                                 Text("Back")
                                         }
                                 }
+                        }
+                        .sheet(isPresented: $isActivityViewPresented) {
+                                ActivityView(activityItems: [URL(string: "https://apps.apple.com/app/id1511791282")!], completion: { isActivityViewPresented = false })
                         }
                 }
         }
@@ -41,7 +62,7 @@ private struct VersionLabel: View {
 
         var body: some View {
                 HStack {
-                        Text("Version")
+                        Text("Version").font(.headline)
                         Spacer()
                         Text(versionString)
                 }
