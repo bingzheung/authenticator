@@ -65,6 +65,7 @@ English
 
 "Account detail" = "Account detail";
 "title.edit_account" = "Edit account";
+"NOTE: Changes would not apply to the Key URI" = "NOTE: Changes would not apply to the Key URI";
 
 "Delete Account?" = "Delete Account?";
 "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service." = "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service.";

@@ -64,6 +64,7 @@ Chinese (Hong Kong)
 
 "Account detail" = "帳號詳情";
 "title.edit_account" = "編輯帳號";
+"NOTE: Changes would not apply to the Key URI" = "注意：呢啲修改唔會作用到 Key URI";
 
 "Delete Account?" = "刪除帳號？";
 "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service." = "刪除帳號唔等於關閉雙重認證\n\n務必確保你仲有其它方式認證登錄";
