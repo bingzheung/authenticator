@@ -23,7 +23,8 @@ struct EditAccountView: View {
                                                 TextField("Issuer", text: $displayIssuer)
                                                         .disableAutocorrection(true)
                                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        }.padding()
+                                        }
+                                        .padding()
                                         
                                         VStack {
                                                 HStack {
@@ -35,15 +36,16 @@ struct EditAccountView: View {
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.none)
                                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        }.padding(.horizontal)
+                                        }
+                                        .padding(.horizontal)
+                                        .padding(.bottom)
                                         
                                         HStack {
-                                                // TODO: Localization
                                                 Text("NOTE: Changes would not apply to the Key URI")
                                                         .font(.footnote)
-                                                        .foregroundColor(Color.secondary)
                                                 Spacer()
-                                        }.padding()
+                                        }
+                                        .padding()
                                 }
                         }
                         .navigationTitle("title.edit_account")
