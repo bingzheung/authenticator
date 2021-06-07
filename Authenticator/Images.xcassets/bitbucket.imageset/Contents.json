@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "bitbucket.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
