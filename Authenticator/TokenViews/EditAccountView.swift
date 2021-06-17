@@ -20,7 +20,7 @@ struct EditAccountView: View {
                                                         Text("Issuer").font(.headline)
                                                         Spacer()
                                                 }
-                                                EnhancedTextField(placeholder: NSLocalizedString("Issuer", comment: ""),
+                                                EnhancedTextField(placeholder: token.displayIssuer,
                                                                   text: $displayIssuer,
                                                                   autocorrection: .no,
                                                                   autocapitalization: .words)
@@ -28,13 +28,13 @@ struct EditAccountView: View {
                                                         .fillBackground()
                                         }
                                         .padding()
-                                        
+
                                         VStack {
                                                 HStack {
                                                         Text("Account Name").font(.headline)
                                                         Spacer()
                                                 }
-                                                EnhancedTextField(placeholder: NSLocalizedString("Account Name", comment: ""),
+                                                EnhancedTextField(placeholder: token.displayAccountName,
                                                                   text: $displayAccountName,
                                                                   keyboardType: .emailAddress,
                                                                   autocorrection: .no,
@@ -44,7 +44,7 @@ struct EditAccountView: View {
                                         }
                                         .padding(.horizontal)
                                         .padding(.bottom)
-                                        
+
                                         HStack {
                                                 Text("NOTE: Changes would not apply to the Key URI")
                                                         .font(.footnote)
@@ -52,6 +52,10 @@ struct EditAccountView: View {
                                         }
                                         .padding()
                                 }
+                        }
+                        .onAppear {
+                                displayIssuer = token.displayIssuer
+                                displayAccountName = token.displayAccountName
                         }
                         .navigationTitle("title.edit_account")
                         .toolbar {
@@ -64,18 +68,17 @@ struct EditAccountView: View {
                                 }
                                 ToolbarItem(placement: .navigationBarTrailing) {
                                         Button(action: {
-                                                displayIssuer = displayIssuer.trimming()
-                                                displayAccountName = displayAccountName.trimming()
-                                                completion(tokenIndex, displayIssuer, displayAccountName)
+                                                let issuer: String = displayIssuer.trimming()
+                                                let accountName: String = displayAccountName.trimming()
+                                                let checkedIssuer: String = issuer.isEmpty ? token.displayIssuer : issuer
+                                                let checkedAccountName: String = accountName.isEmpty ? token.displayAccountName : accountName
+                                                completion(tokenIndex, checkedIssuer, checkedAccountName)
                                                 isPresented = false
                                         }) {
                                                 Text("Done")
                                         }
                                 }
                         }
-                }.onAppear {
-                        displayIssuer = token.displayIssuer
-                        displayAccountName = token.displayAccountName
                 }
         }
 }
