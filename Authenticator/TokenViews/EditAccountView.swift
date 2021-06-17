@@ -20,9 +20,12 @@ struct EditAccountView: View {
                                                         Text("Issuer").font(.headline)
                                                         Spacer()
                                                 }
-                                                TextField("Issuer", text: $displayIssuer)
-                                                        .disableAutocorrection(true)
-                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                EnhancedTextField(placeholder: NSLocalizedString("Issuer", comment: ""),
+                                                                  text: $displayIssuer,
+                                                                  autocorrection: .no,
+                                                                  autocapitalization: .words)
+                                                        .padding(8)
+                                                        .fillBackground()
                                         }
                                         .padding()
                                         
@@ -31,11 +34,13 @@ struct EditAccountView: View {
                                                         Text("Account Name").font(.headline)
                                                         Spacer()
                                                 }
-                                                TextField("Account Name", text: $displayAccountName)
-                                                        .keyboardType(.emailAddress)
-                                                        .disableAutocorrection(true)
-                                                        .autocapitalization(.none)
-                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                EnhancedTextField(placeholder: NSLocalizedString("Account Name", comment: ""),
+                                                                  text: $displayAccountName,
+                                                                  keyboardType: .emailAddress,
+                                                                  autocorrection: .no,
+                                                                  autocapitalization: UITextAutocapitalizationType.none)
+                                                        .padding(8)
+                                                        .fillBackground()
                                         }
                                         .padding(.horizontal)
                                         .padding(.bottom)

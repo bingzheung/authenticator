@@ -45,33 +45,43 @@ struct ManualEntryView: View {
                                                                         Text("Issuer")
                                                                         Spacer()
                                                                 }
-                                                                TextField("Service Provider (Optional)", text: $issuer)
-                                                                        .disableAutocorrection(true)
-                                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                        }.padding()
+                                                                EnhancedTextField(placeholder: NSLocalizedString("Service Provider (Optional)", comment: ""),
+                                                                                  text: $issuer,
+                                                                                  autocorrection: .no,
+                                                                                  autocapitalization: .words)
+                                                                        .padding(8)
+                                                                        .fillBackground()
+                                                        }
+                                                        .padding()
                                                         VStack {
                                                                 HStack {
                                                                         Text("Account Name")
                                                                         Spacer()
                                                                 }
-                                                                TextField("email@example.com (Optional)", text: $accountName)
-                                                                        .keyboardType(.emailAddress)
-                                                                        .autocapitalization(.none)
-                                                                        .disableAutocorrection(true)
-                                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                        }.padding(.horizontal)
+                                                                EnhancedTextField(placeholder: NSLocalizedString("email@example.com (Optional)", comment: ""),
+                                                                                  text: $accountName,
+                                                                                  keyboardType: .emailAddress,
+                                                                                  autocorrection: .no,
+                                                                                  autocapitalization: UITextAutocapitalizationType.none)
+                                                                        .padding(8)
+                                                                        .fillBackground()
+                                                        }
+                                                        .padding(.horizontal)
                                                         VStack {
                                                                 HStack {
                                                                         Text("Secret Key")
                                                                         Spacer()
                                                                 }
-                                                                TextField("SECRET (Required)", text: $secretKey)
-                                                                        .keyboardType(.alphabet)
-                                                                        .autocapitalization(.none)
-                                                                        .disableAutocorrection(true)
-                                                                        .font(.system(.body, design: .monospaced))
-                                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                        }.padding()
+                                                                EnhancedTextField(placeholder: NSLocalizedString("SECRET (Required)", comment: ""),
+                                                                                  text: $secretKey,
+                                                                                  font: .monospacedSystemFont(ofSize: 17, weight: .regular),
+                                                                                  keyboardType: .alphabet,
+                                                                                  autocorrection: .no,
+                                                                                  autocapitalization: UITextAutocapitalizationType.none)
+                                                                        .padding(8)
+                                                                        .fillBackground()
+                                                        }
+                                                        .padding()
                                                 }
                                         }
                                 }
