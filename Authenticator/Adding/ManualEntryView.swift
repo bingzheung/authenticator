@@ -31,13 +31,17 @@ struct ManualEntryView: View {
                                                                 Text("Key URI")
                                                                 Spacer()
                                                         }
-                                                        TextField("otpauth://totp/...", text: $keyUri)
-                                                                .keyboardType(.URL)
-                                                                .autocapitalization(.none)
-                                                                .disableAutocorrection(true)
-                                                                .font(.system(.footnote, design: .monospaced))
-                                                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                }.padding()
+                                                        EnhancedTextField(placeholder: "otpauth://totp/...",
+                                                                          text: $keyUri,
+                                                                          font: .monospacedSystemFont(ofSize: 13, weight: .regular),
+                                                                          keyboardType: .URL,
+                                                                          returnKey: .done,
+                                                                          autocorrection: .no,
+                                                                          autocapitalization: UITextAutocapitalizationType.none)
+                                                                .padding(10)
+                                                                .fillBackground(cornerRadius: 8)
+                                                }
+                                                .padding()
                                         } else {
                                                 VStack {
                                                         VStack {
@@ -85,7 +89,8 @@ struct ManualEntryView: View {
                                                 }
                                         }
                                 }
-                        }.alert(isPresented: $isAlertPresented) {
+                        }
+                        .alert(isPresented: $isAlertPresented) {
                                 Alert(title: Text("Error"), message: Text("Invalid Key"), dismissButton: .cancel(Text("OK")))
                         }
                         .navigationTitle("Add account")
