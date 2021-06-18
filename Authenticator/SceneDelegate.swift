@@ -62,12 +62,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 let logger: Logger = Logger(subsystem: "io.ososo.Authenticator", category: "debug")
 
 extension View {
-        func fillBackground() -> some View {
-                return modifier(BackgroundColorModifier())
+        func fillBackground(cornerRadius: CGFloat = 10) -> some View {
+                return modifier(BackgroundColorModifier(cornerRadius: cornerRadius))
         }
 }
 private struct BackgroundColorModifier: ViewModifier {
+
         @Environment (\.colorScheme) var colorScheme: ColorScheme
+        let cornerRadius: CGFloat
+
         func body(content: Content) -> some View {
                 let backgroundColor: Color = {
                         switch colorScheme {
@@ -79,7 +82,7 @@ private struct BackgroundColorModifier: ViewModifier {
                                 return Color(UIColor.systemBackground)
                         }
                 }()
-                return content.background(RoundedRectangle(cornerRadius: 10).fill(backgroundColor))
+                return content.background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(backgroundColor))
         }
 }
 
