@@ -4,6 +4,7 @@ extension String {
 
         /// Returns a new string made by removing spaces from both ends of the String.
         /// - Returns: A new string made by removing spaces from both ends of the String.
+        @available(* , deprecated, renamed: "trimming")
         func trimmingSpaces() -> String {
                 trimmingCharacters(in: CharacterSet(charactersIn: " "))
         }
