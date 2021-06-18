@@ -50,7 +50,7 @@ struct ManualEntryView: View {
                                                                                   autocorrection: .no,
                                                                                   autocapitalization: .words)
                                                                         .padding(8)
-                                                                        .fillBackground()
+                                                                        .fillBackground(cornerRadius: 8)
                                                         }
                                                         .padding()
                                                         VStack {
@@ -64,7 +64,7 @@ struct ManualEntryView: View {
                                                                                   autocorrection: .no,
                                                                                   autocapitalization: UITextAutocapitalizationType.none)
                                                                         .padding(8)
-                                                                        .fillBackground()
+                                                                        .fillBackground(cornerRadius: 8)
                                                         }
                                                         .padding(.horizontal)
                                                         VStack {
@@ -79,7 +79,7 @@ struct ManualEntryView: View {
                                                                                   autocorrection: .no,
                                                                                   autocapitalization: UITextAutocapitalizationType.none)
                                                                         .padding(8)
-                                                                        .fillBackground()
+                                                                        .fillBackground(cornerRadius: 8)
                                                         }
                                                         .padding()
                                                 }
