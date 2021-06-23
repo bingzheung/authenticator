@@ -31,6 +31,14 @@ struct ManualEntryView: View {
                                                                 Text("Key URI")
                                                                 Spacer()
                                                         }
+                                                        #if targetEnvironment(macCatalyst)
+                                                        TextField("otpauth://totp/...", text: $keyUri)
+                                                                .keyboardType(.URL)
+                                                                .disableAutocorrection(true)
+                                                                .autocapitalization(.none)
+                                                                .font(.system(.footnote, design: .monospaced))
+                                                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                        #else
                                                         EnhancedTextField(placeholder: "otpauth://totp/...",
                                                                           text: $keyUri,
                                                                           font: .monospacedSystemFont(ofSize: 13, weight: .regular),
@@ -40,6 +48,7 @@ struct ManualEntryView: View {
                                                                           autocapitalization: UITextAutocapitalizationType.none)
                                                                 .padding(10)
                                                                 .fillBackground(cornerRadius: 8)
+                                                        #endif
                                                 }
                                                 .padding()
                                         } else {
@@ -49,12 +58,19 @@ struct ManualEntryView: View {
                                                                         Text("Issuer")
                                                                         Spacer()
                                                                 }
+                                                                #if targetEnvironment(macCatalyst)
+                                                                TextField("Service Provider (Optional)", text: $issuer)
+                                                                        .disableAutocorrection(true)
+                                                                        .autocapitalization(.words)
+                                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                                #else
                                                                 EnhancedTextField(placeholder: NSLocalizedString("Service Provider (Optional)", comment: ""),
                                                                                   text: $issuer,
                                                                                   autocorrection: .no,
                                                                                   autocapitalization: .words)
                                                                         .padding(8)
                                                                         .fillBackground(cornerRadius: 8)
+                                                                #endif
                                                         }
                                                         .padding()
                                                         VStack {
@@ -62,6 +78,13 @@ struct ManualEntryView: View {
                                                                         Text("Account Name")
                                                                         Spacer()
                                                                 }
+                                                                #if targetEnvironment(macCatalyst)
+                                                                TextField("email@example.com (Optional)", text: $accountName)
+                                                                        .keyboardType(.emailAddress)
+                                                                        .disableAutocorrection(true)
+                                                                        .autocapitalization(.none)
+                                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                                #else
                                                                 EnhancedTextField(placeholder: NSLocalizedString("email@example.com (Optional)", comment: ""),
                                                                                   text: $accountName,
                                                                                   keyboardType: .emailAddress,
@@ -69,6 +92,7 @@ struct ManualEntryView: View {
                                                                                   autocapitalization: UITextAutocapitalizationType.none)
                                                                         .padding(8)
                                                                         .fillBackground(cornerRadius: 8)
+                                                                #endif
                                                         }
                                                         .padding(.horizontal)
                                                         VStack {
@@ -76,6 +100,14 @@ struct ManualEntryView: View {
                                                                         Text("Secret Key")
                                                                         Spacer()
                                                                 }
+                                                                #if targetEnvironment(macCatalyst)
+                                                                TextField("SECRET (Required)", text: $secretKey)
+                                                                        .keyboardType(.alphabet)
+                                                                        .disableAutocorrection(true)
+                                                                        .autocapitalization(.none)
+                                                                        .font(.system(.body, design: .monospaced))
+                                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                                #else
                                                                 EnhancedTextField(placeholder: NSLocalizedString("SECRET (Required)", comment: ""),
                                                                                   text: $secretKey,
                                                                                   font: .monospacedSystemFont(ofSize: 17, weight: .regular),
@@ -84,6 +116,7 @@ struct ManualEntryView: View {
                                                                                   autocapitalization: UITextAutocapitalizationType.none)
                                                                         .padding(8)
                                                                         .fillBackground(cornerRadius: 8)
+                                                                #endif
                                                         }
                                                         .padding()
                                                 }
