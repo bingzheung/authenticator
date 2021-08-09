@@ -1,9 +1,8 @@
-/* 
-Cantonese
-*/
+// Cantonese (yue)
+
 
 // General
-"Copy" = "拷貝";
+"Copy" = "複製";
 "Done" = "完成";
 "Cancel" = "取消";
 "Edit" = "編輯";
@@ -36,7 +35,7 @@ Cantonese
 // Export
 "Export" = "導出";
 "Export accounts" = "導出帳號";
-"Copy all Key URIs to Clipboard" = "拷貝所有 Key URI 到剪帖板";
+"Copy all Key URIs to Clipboard" = "複製所有 Key URI 到剪帖板";
 
 "Export all Key URIs as plain " = "導出所有 Key URI 爲純文字 ";
 "text" = "text";
@@ -58,9 +57,9 @@ Cantonese
 
 
 // Token Card View
-"Copied" = "已拷貝";
+"Copied" = "已複製";
 
-"Copy code" = "拷貝驗證碼";
+"Copy code" = "複製驗證碼";
 "View detail" = "詳情";
 "Edit account" = "編輯本項";
 
