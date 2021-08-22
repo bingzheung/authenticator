@@ -1,3 +1,6 @@
+// Use .fileImporter() instead
+
+/*
 import SwiftUI
 
 struct DocumentPicker: UIViewControllerRepresentable {
@@ -45,3 +48,4 @@ struct DocumentPicker: UIViewControllerRepresentable {
                 }
         }
 }
+*/
