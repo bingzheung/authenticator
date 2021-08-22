@@ -13,6 +13,7 @@ struct ContentView: View {
         @State private var codes: [String] = Array(repeating: "000000", count: 50)
 
         @State private var isSheetPresented: Bool = false
+        @State private var isFileImporterPresented: Bool = false
 
         @State private var editMode: EditMode = .inactive
         @State private var selectedTokens = Set<TokenData>()
@@ -79,6 +80,14 @@ struct ContentView: View {
                                 timeRemaining = 30 - (Int(Date().timeIntervalSince1970) % 30)
                                 if timeRemaining == 30 {
                                         generateCodes()
+                                }
+                        }
+                        .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: [.text, .image], allowsMultipleSelection: false) { result in
+                                switch result {
+                                case .failure(let error):
+                                        logger.debug(".fileImporter() failure: \(error.localizedDescription)")
+                                case .success(let urls):
+                                        handlePickedFile(url: urls.first)
                                 }
                         }
                         .alert(isPresented: $isDeletionAlertPresented) {
@@ -184,8 +193,7 @@ struct ContentView: View {
                                                                 }
                                                         }
                                                         Button(action: {
-                                                                presentingSheet = .addByPickingFile
-                                                                isSheetPresented = true
+                                                                isFileImporterPresented = true
                                                         }) {
                                                                 HStack {
                                                                         Text("Import from file")
@@ -224,8 +232,6 @@ struct ContentView: View {
                                         Scanner(isPresented: $isSheetPresented, codeTypes: [.qr], completion: handleScanning(result:))
                                 case .addByQRCodeImage:
                                         PhotoPicker(completion: handlePickedImage(uri:))
-                                case .addByPickingFile:
-                                        DocumentPicker(isPresented: $isSheetPresented, completion: handlePickedFile(url:))
                                 case .addByManually:
                                         ManualEntryView(isPresented: $isSheetPresented, completion: addItem(_:))
                                 case .cardDetailView:
@@ -423,7 +429,6 @@ private enum SheetSet {
         case moreAbout
         case addByScanning
         case addByQRCodeImage
-        case addByPickingFile
         case addByManually
         case cardDetailView
         case cardEditing
