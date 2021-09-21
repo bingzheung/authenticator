@@ -12,9 +12,8 @@ struct ExportView: View {
 
         var body: some View {
                 NavigationView {
-                        ZStack {
-                                GlobalBackgroundColor().ignoresSafeArea()
-                                ScrollView {
+                        List {
+                                Section {
                                         Button(action: {
                                                 UIPasteboard.general.string = tokensText
                                         }) {
@@ -22,41 +21,35 @@ struct ExportView: View {
                                                         Text("Copy all Key URIs to Clipboard")
                                                         Spacer()
                                                 }
-                                                .padding()
-                                                .fillBackground()
-                                                .padding()
                                         }
+                                }
 
+                                Section {
                                         Button(action: {
                                                 isPlainTextActivityPresented = true
                                         }) {
                                                 HStack {
-                                                        Text("Export all Key URIs as plain ") +
-                                                                Text("text").font(.system(.body, design: .monospaced)).foregroundColor(.primary)
+                                                        Text("Export all Key URIs as plain text")
                                                         Spacer()
                                                 }
-                                                .padding()
-                                                .fillBackground()
-                                                .padding()
                                         }
                                         .sheet(isPresented: $isPlainTextActivityPresented) {
                                                 ActivityView(activityItems: [tokensText]) {
                                                         isPlainTextActivityPresented = false
                                                 }
                                         }
+                                }
 
+                                Section {
                                         Button(action: {
                                                 isTXTFileActivityPresented = true
                                         }) {
                                                 HStack {
-                                                        Text("Export all Key URIs as a ") +
-                                                                Text(".txt").font(.system(.body, design: .monospaced)).foregroundColor(.primary) +
-                                                                Text(" file")
+                                                        Text("Export all Key URIs as a")
+                                                        Text(verbatim: ".txt").font(.body.monospaced()).foregroundColor(.primary)
+                                                        Text("file")
                                                         Spacer()
                                                 }
-                                                .padding()
-                                                .fillBackground()
-                                                .padding()
                                         }
                                         .sheet(isPresented: $isTXTFileActivityPresented) {
                                                 let url = txtFile()
@@ -68,19 +61,24 @@ struct ExportView: View {
                                                 }
                                                 #endif
                                         }
+                                }
 
+                                Section {
                                         Button(action: {
                                                 isZIPFileActivityPresented = true
                                         }) {
-                                                HStack {
-                                                        Text("Export all Key URIs as QR Code images combined as a ") +
-                                                                Text(".zip").font(.system(.body, design: .monospaced)).foregroundColor(.primary) +
-                                                                Text(" file")
-                                                        Spacer()
+                                                VStack {
+                                                        HStack {
+                                                                Text("Export all Key URIs as QR Code images")
+                                                                Spacer()
+                                                        }
+                                                        HStack {
+                                                                Text("combined as a")
+                                                                Text(verbatim: ".zip").font(.body.monospaced()).foregroundColor(.primary)
+                                                                Text("file")
+                                                                Spacer()
+                                                        }
                                                 }
-                                                .padding()
-                                                .fillBackground()
-                                                .padding()
                                         }
                                         .sheet(isPresented: $isZIPFileActivityPresented) {
                                                 let url: URL = zipFile()
@@ -95,6 +93,7 @@ struct ExportView: View {
                                 }
                         }
                         .navigationTitle("Export accounts")
+                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         Button(action: {
