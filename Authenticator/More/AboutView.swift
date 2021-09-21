@@ -7,24 +7,29 @@ struct AboutView: View {
 
         var body: some View {
                 NavigationView {
-                        ZStack {
-                                GlobalBackgroundColor().ignoresSafeArea()
-                                ScrollView {
-                                        VersionLabel()
-
-                                        LinkCardView(heading: "Source Code", message: "https://github.com/ososoio/authenticator")
-                                                .padding()
-                                        
-                                        LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy")
-                                                .padding()
-
+                        List {
+                                Section {
                                         HStack {
-                                                Text("Share this App").font(.headline)
+                                                Text("Version")
+                                                Spacer()
+                                                Text(verbatim: versionString)
+                                        }
+                                        .contextMenu {
+                                                MenuCopyButton(content: versionString)
+                                        }
+                                }
+                                Section {
+                                        LinkCardView(heading: "Source Code", message: "https://github.com/ososoio/authenticator")
+                                }
+                                Section {
+                                        LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy")
+                                }
+                                Section {
+                                        HStack {
+                                                Text("Share this App")
                                                 Spacer()
                                                 Image(systemName: "square.and.arrow.up")
                                         }
-                                        .padding()
-                                        .fillBackground()
                                         .contentShape(Rectangle())
                                         .onTapGesture {
                                                 isActivityViewPresented = true
@@ -32,10 +37,10 @@ struct AboutView: View {
                                         .onLongPressGesture {
                                                 isActivityViewPresented = true
                                         }
-                                        .padding()
                                 }
                         }
                         .navigationTitle("About")
+                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         Button(action: {
@@ -50,50 +55,32 @@ struct AboutView: View {
                         }
                 }
         }
-}
-
-private struct VersionLabel: View {
 
         private let versionString: String = {
                 let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
                 let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
                 return version + " (" + build + ")"
         }()
-
-        var body: some View {
-                HStack {
-                        Text("Version").font(.headline)
-                        Spacer()
-                        Text(versionString)
-                }
-                .padding()
-                .fillBackground()
-                .contextMenu(menuItems: {
-                        MenuCopyButton(content: versionString)
-                })
-                .padding()
-        }
 }
+
 private struct LinkCardView: View {
 
-        let heading: String
+        let heading: LocalizedStringKey
         let message: String
 
         var body: some View {
-                VStack {
+                VStack(spacing: 8) {
                         HStack {
-                                Text(NSLocalizedString(heading, comment: "")).font(.headline)
+                                Text(heading)
                                 Spacer()
                         }
                         HStack {
-                                Text(NSLocalizedString(message, comment: "")).font(.system(.footnote, design: .monospaced))
+                                Text(verbatim: message).font(.caption.monospaced())
                                 Spacer()
-                        }.padding(.top, 4)
+                        }
                 }
-                .padding()
-                .fillBackground()
-                .contextMenu(menuItems: {
+                .contextMenu {
                         MenuCopyButton(content: message)
-                })
+                }
         }
 }
