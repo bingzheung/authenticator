@@ -28,47 +28,41 @@ struct ContentView: View {
                                         if editMode == .active {
                                                 CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
                                         } else {
-                                                ZStack {
-                                                        GlobalBackgroundColor()
-                                                        CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
-                                                                .contextMenu {
-                                                                        Button(action: {
-                                                                                UIPasteboard.general.string = codes[index]
-                                                                        }) {
-                                                                                MenuLabel(text: "Copy code", image: "doc.on.doc")
-                                                                        }
-                                                                        Button(action: {
-                                                                                tokenIndex = index
-                                                                                presentingSheet = .cardDetailView
-                                                                                isSheetPresented = true
-                                                                        }) {
-                                                                                MenuLabel(text: "View detail", image: "text.justifyleft")
-                                                                        }
-                                                                        Button(action: {
-                                                                                tokenIndex = index
-                                                                                presentingSheet = .cardEditing
-                                                                                isSheetPresented = true
-                                                                        }) {
-                                                                                MenuLabel(text: "Edit account", image: "square.and.pencil")
-                                                                        }
-                                                                        Button(action: {
-                                                                                tokenIndex = index
-                                                                                selectedTokens.removeAll()
-                                                                                indexSetOnDelete.removeAll()
-                                                                                isDeletionAlertPresented = true
-                                                                        }) {
-                                                                                MenuLabel(text: "Delete", image: "trash")
-                                                                        }
+                                                CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
+                                                        .contextMenu {
+                                                                Button(action: {
+                                                                        UIPasteboard.general.string = codes[index]
+                                                                }) {
+                                                                        Label("Copy Code", systemImage: "doc.on.doc")
                                                                 }
-                                                                .padding(.vertical, 4)
-                                                }
-                                                .listRowInsets(EdgeInsets())
+                                                                Button(action: {
+                                                                        tokenIndex = index
+                                                                        presentingSheet = .cardDetailView
+                                                                        isSheetPresented = true
+                                                                }) {
+                                                                        Label("View Detail", systemImage: "text.justifyleft")
+                                                                }
+                                                                Button(action: {
+                                                                        tokenIndex = index
+                                                                        presentingSheet = .cardEditing
+                                                                        isSheetPresented = true
+                                                                }) {
+                                                                        Label("Edit Account", systemImage: "square.and.pencil")
+                                                                }
+                                                                Button(action: {
+                                                                        tokenIndex = index
+                                                                        selectedTokens.removeAll()
+                                                                        indexSetOnDelete.removeAll()
+                                                                        isDeletionAlertPresented = true
+                                                                }) {
+                                                                        Label("Delete", systemImage: "trash")
+                                                                }
+                                                        }
                                         }
                                 }
                                 .onMove(perform: move(from:to:))
                                 .onDelete(perform: deleteItems)
                         }
-                        .listStyle(InsetGroupedListStyle())
                         .onAppear {
                                 generateCodes()
                         }
@@ -111,31 +105,19 @@ struct ContentView: View {
                                                                 indexSetOnDelete.removeAll()
                                                                 editMode = .active
                                                         }) {
-                                                                HStack {
-                                                                        Text("Edit")
-                                                                        Spacer()
-                                                                        Image(systemName: "list.bullet")
-                                                                }
+                                                                Label("Edit", systemImage: "list.bullet")
                                                         }
                                                         Button(action: {
                                                                 presentingSheet = .moreExport
                                                                 isSheetPresented = true
                                                         }) {
-                                                                HStack {
-                                                                        Text("Export")
-                                                                        Spacer()
-                                                                        Image(systemName: "square.and.arrow.up")
-                                                                }
+                                                                Label("Export", systemImage: "square.and.arrow.up")
                                                         }
                                                         Button(action: {
                                                                 presentingSheet = .moreAbout
                                                                 isSheetPresented = true
                                                         }) {
-                                                                HStack {
-                                                                        Text("About")
-                                                                        Spacer()
-                                                                        Image(systemName: "info.circle")
-                                                                }
+                                                                Label("About", systemImage: "info.circle")
                                                         }
                                                 } label: {
                                                         Image(systemName: "ellipsis.circle")
@@ -175,41 +157,25 @@ struct ContentView: View {
                                                                 presentingSheet = .addByScanning
                                                                 isSheetPresented = true
                                                         }) {
-                                                                HStack {
-                                                                        Text("Scan QR Code")
-                                                                        Spacer()
-                                                                        Image(systemName: "qrcode.viewfinder")
-                                                                }
+                                                                Label("Scan QR Code", systemImage: "qrcode.viewfinder")
                                                         }
                                                         #endif
                                                         Button(action: {
                                                                 presentingSheet = .addByQRCodeImage
                                                                 isSheetPresented = true
                                                         }) {
-                                                                HStack {
-                                                                        Text(readQRCodeImage)
-                                                                        Spacer()
-                                                                        Image(systemName: "photo")
-                                                                }
+                                                                Label("Import from Photos", systemImage: "photo")
                                                         }
                                                         Button(action: {
                                                                 isFileImporterPresented = true
                                                         }) {
-                                                                HStack {
-                                                                        Text("Import from file")
-                                                                        Spacer()
-                                                                        Image(systemName: "doc.badge.plus")
-                                                                }
+                                                                Label("Import from Files", systemImage: "doc.badge.plus")
                                                         }
                                                         Button(action: {
                                                                 presentingSheet = .addByManually
                                                                 isSheetPresented = true
                                                         }) {
-                                                                HStack {
-                                                                        Text("Enter manually")
-                                                                        Spacer()
-                                                                        Image(systemName: "text.cursor")
-                                                                }
+                                                                Label("Enter Manually", systemImage: "text.cursor")
                                                         }
                                                 } label: {
                                                         Image(systemName: "plus")
@@ -411,14 +377,6 @@ struct ContentView: View {
                 guard let urls: [URL] = try? FileManager.default.contentsOfDirectory(at: temporaryDirectoryUrl, includingPropertiesForKeys: nil) else { return }
                 _ = urls.map { try? FileManager.default.removeItem(at: $0) }
         }
-
-        private let readQRCodeImage: String = {
-                #if targetEnvironment(macCatalyst)
-                return NSLocalizedString("Read from QR Code picture", comment: "")
-                #else
-                return NSLocalizedString("Read QR Code image", comment: "")
-                #endif
-        }()
 }
 
 private var presentingSheet: SheetSet = .moreAbout
