@@ -10,17 +10,16 @@ struct CodeCardView: View {
 
         var body: some View {
                 VStack {
-                        HStack {
+                        HStack(spacing: 16) {
                                 issuerImage.resizable().scaledToFit().frame(width: 24, height: 24)
-                                Spacer().frame(width: 16)
-                                Text(token.displayIssuer).font(.headline)
-                                Spacer(minLength: 16)
+                                Text(verbatim: token.displayIssuer).font(.headline)
+                                Spacer()
                                 Menu {
                                         Button(action: {
                                                 UIPasteboard.general.string = totp
                                                 isBannerPresented = true
                                         }) {
-                                                MenuLabel(text: "Copy code", image: "doc.on.doc")
+                                                Label("Copy Code", systemImage: "doc.on.doc")
                                         }
                                 } label: {
                                         Image(systemName: "ellipsis.circle")
@@ -34,11 +33,11 @@ struct CodeCardView: View {
                         }
                         VStack(spacing: 8) {
                                 HStack {
-                                        Text(formattedTotp).font(.largeTitle)
+                                        Text(verbatim: formattedTotp).font(.largeTitle)
                                         Spacer()
                                 }
                                 HStack {
-                                        Text(token.displayAccountName).font(.footnote)
+                                        Text(verbatim: token.displayAccountName).font(.footnote)
                                         Spacer()
                                         ZStack {
                                                 Circle().stroke(Color.primary.opacity(0.2), lineWidth: 2)
@@ -46,7 +45,7 @@ struct CodeCardView: View {
                                                 Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true)
                                                         .stroke(lineWidth: 2)
                                                         .frame(width: 24, height: 24)
-                                                Text(timeRemaining.description).font(.footnote)
+                                                Text(verbatim: timeRemaining.description).font(.footnote)
                                         }
                                 }
                         }
@@ -56,8 +55,6 @@ struct CodeCardView: View {
                                 isBannerPresented = true
                         }
                 }
-                .padding()
-                .fillBackground()
                 .modifier(BannerModifier(isPresented: $isBannerPresented))
         }
 
@@ -68,7 +65,8 @@ struct CodeCardView: View {
                         code.insert(" ", at: code.index(code.startIndex, offsetBy: 3))
                 case 8:
                         code.insert(" ", at: code.index(code.startIndex, offsetBy: 4))
-                default: break
+                default:
+                        break
                 }
                 return code
         }
@@ -122,16 +120,7 @@ private struct BannerView: View {
                 Text("Copied")
                         .padding(.vertical, 8)
                         .padding(.horizontal, 40)
-                        .background(BlurView())
+                        .background(.ultraThinMaterial)
                         .clipShape(Capsule())
-        }
-}
-
-private struct BlurView: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIVisualEffectView {
-                return UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
-        }
-        func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-                uiView.effect = UIBlurEffect(style: .systemUltraThinMaterial)
         }
 }
