@@ -18,7 +18,7 @@
 		37AD0335266C8A930086DD10 /* AuthenticatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0334266C8A930086DD10 /* AuthenticatorUITests.swift */; };
 		37AD0362266C8CCA0086DD10 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37AD0342266C8CC90086DD10 /* Settings.bundle */; };
 		37AD0363266C8CCA0086DD10 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AD0343266C8CCA0086DD10 /* Images.xcassets */; };
-		37AD0364266C8CCA0086DD10 /* MenuViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0345266C8CCA0086DD10 /* MenuViews.swift */; };
+		37AD0364266C8CCA0086DD10 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0345266C8CCA0086DD10 /* MenuCopyButton.swift */; };
 		37AD0365266C8CCA0086DD10 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0346266C8CCA0086DD10 /* ActivityView.swift */; };
 		37AD0366266C8CCA0086DD10 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0348266C8CCA0086DD10 /* Token.swift */; };
 		37AD0367266C8CCA0086DD10 /* OTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0349266C8CCA0086DD10 /* OTPGenerator.swift */; };
@@ -74,7 +74,7 @@
 		37AD0336266C8A930086DD10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37AD0342266C8CC90086DD10 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37AD0343266C8CCA0086DD10 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		37AD0345266C8CCA0086DD10 /* MenuViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViews.swift; sourceTree = "<group>"; };
+		37AD0345266C8CCA0086DD10 /* MenuCopyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
 		37AD0346266C8CCA0086DD10 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		37AD0348266C8CCA0086DD10 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		37AD0349266C8CCA0086DD10 /* OTPGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPGenerator.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		37AD0344266C8CCA0086DD10 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
-				37AD0345266C8CCA0086DD10 /* MenuViews.swift */,
+				37AD0345266C8CCA0086DD10 /* MenuCopyButton.swift */,
 				37AD0346266C8CCA0086DD10 /* ActivityView.swift */,
 				373734E3267B7E31008391A5 /* EnhancedTextField.swift */,
 			);
@@ -418,7 +418,7 @@
 				37AD0370266C8CCA0086DD10 /* ManualEntryView.swift in Sources */,
 				37AD0312266C8A920086DD10 /* SceneDelegate.swift in Sources */,
 				37AD0314266C8A920086DD10 /* ContentView.swift in Sources */,
-				37AD0364266C8CCA0086DD10 /* MenuViews.swift in Sources */,
+				37AD0364266C8CCA0086DD10 /* MenuCopyButton.swift in Sources */,
 				37AD0375266C8CCA0086DD10 /* StringExtensions.swift in Sources */,
 				37AD036D266C8CCA0086DD10 /* ExportView.swift in Sources */,
 				37AD0372266C8CCA0086DD10 /* PhotoPicker.swift in Sources */,
