@@ -1,6 +1,8 @@
 import SwiftUI
 import CoreImage.CIFilterBuiltins
 
+private var imageUrl: URL? = nil
+
 struct TokenDetailView: View {
 
         @Binding var isPresented: Bool
@@ -10,72 +12,61 @@ struct TokenDetailView: View {
 
         var body: some View {
                 NavigationView {
-                        ZStack {
-                                GlobalBackgroundColor().ignoresSafeArea()
-                                ScrollView {
-                                        MessageCardView(heading: "Issuer", message: token.displayIssuer, messageFont: .body)
-                                                .padding()
-
-                                        MessageCardView(heading: "Account Name", message: token.displayAccountName, messageFont: .body)
-                                                .padding(.horizontal)
-
-                                        MessageCardView(heading: "Secret Key",
-                                                        message: token.secret,
-                                                        messageFont: .system(.footnote, design: .monospaced))
-                                                .padding()
-
-                                        MessageCardView(heading: "Key URI",
-                                                        message: token.uri,
-                                                        messageFont: .system(.footnote, design: .monospaced))
-                                                .padding(.horizontal)
-                                                .padding(.bottom, 30)
-
-                                        if let uiImage = qrCodeImage {
+                        List {
+                                Section {
+                                        Text(verbatim: "Issuer").font(.headline)
+                                        Text(verbatim: token.displayIssuer).textSelection(.enabled)
+                                }
+                                Section {
+                                        Text(verbatim: "Account Name").font(.headline)
+                                        Text(verbatim: token.displayAccountName).textSelection(.enabled)
+                                }
+                                Section {
+                                        Text(verbatim: "Secret Key").font(.headline)
+                                        Text(verbatim: token.secret).font(.footnote.monospaced()).textSelection(.enabled)
+                                }
+                                Section {
+                                        Text(verbatim: "Key URI").font(.headline)
+                                        Text(verbatim: token.uri).font(.footnote.monospaced()).textSelection(.enabled)
+                                }
+                                if let uiImage = qrCodeImage {
+                                        Section {
                                                 HStack {
                                                         Spacer()
-                                                        Text("Key URI as QR Code")
+                                                        Image(uiImage: uiImage)
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .frame(width: 180, height: 180)
+                                                                .onLongPressGesture {
+                                                                        imageUrl = nil
+                                                                        imageUrl = saveQRCodeImage(uiImage)
+                                                                        if imageUrl != nil {
+                                                                                isImageActivityViewPresented = true
+                                                                        }
+                                                        }
                                                         Spacer()
                                                 }
-                                                .padding(.horizontal)
-                                                
-                                                Image(uiImage: uiImage)
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding()
-                                                        .fillBackground()
-                                                        .padding()
-                                                        .frame(idealWidth: 250, maxWidth: 400, idealHeight: 250, maxHeight: 400)
-                                                        .onLongPressGesture {
-                                                                imageUrl = nil
-                                                                imageUrl = saveQRCodeImage(uiImage)
-                                                                if imageUrl != nil {
-                                                                        isImageActivityViewPresented = true
-                                                                }
-                                                        }
-                                                        .sheet(isPresented: $isImageActivityViewPresented) {
-                                                                let url = imageUrl!
-                                                                #if targetEnvironment(macCatalyst)
-                                                                DocumentExporter(url: url)
-                                                                #else
-                                                                ActivityView(activityItems: [url]) {
-                                                                        imageUrl = nil
-                                                                        isImageActivityViewPresented = false
-                                                                }
-                                                                #endif
-                                                        }
+                                        } header: {
+                                                Text(verbatim: "Key URI as QR Code").textCase(.none)
                                         }
-                                        Spacer().frame(height: 50)
                                 }
+                        }
+                        .sheet(isPresented: $isImageActivityViewPresented) {
+                                let url = imageUrl!
+                                #if targetEnvironment(macCatalyst)
+                                DocumentExporter(url: url)
+                                #else
+                                ActivityView(activityItems: [url]) {
+                                        imageUrl = nil
+                                        isImageActivityViewPresented = false
+                                }
+                                #endif
                         }
                         .navigationTitle("Account Detail")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
-                                        Button(action: {
-                                                isPresented = false
-                                        }) {
-                                                Text("Back")
-                                        }
+                                        Button("Back", action: { isPresented = false })
                                 }
                         }
                 }
@@ -113,34 +104,5 @@ struct TokenDetailView: View {
                         name.insert(contentsOf: prefix, at: name.startIndex)
                 }
                 return name
-        }
-}
-
-private var imageUrl: URL? = nil
-
-
-private struct MessageCardView: View {
-
-        let heading: String
-        let message: String
-        let messageFont: Font
-
-        var body: some View {
-                VStack {
-                        HStack {
-                                Text(heading).font(.headline)
-                                Spacer()
-                        }
-                        HStack {
-                                Text(message).font(messageFont)
-                                Spacer()
-                        }
-                        .padding(.top, 4)
-                }
-                .padding()
-                .fillBackground()
-                .contextMenu(menuItems: {
-                        MenuCopyButton(content: message)
-                })
         }
 }
