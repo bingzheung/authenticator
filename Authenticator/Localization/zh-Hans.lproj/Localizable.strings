@@ -13,14 +13,13 @@
 
 // Adding accounts
 "Scan QR Code" = "扫描二维码";
-"Read QR Code image" = "读二维码图片";
-"Read from QR Code picture" = "从二维码图片读取";
-"Import from file" = "从文件导入";
-"Enter manually" = "手动输入";
+"Import from Photos" = "读二维码照片";
+"Import from Files" = "从文件导入";
+"Enter Manually" = "手动输入";
 
 "Scanning" = "正在扫描";
 
-"Add account" = "添加帐号";
+"Add Account" = "添加帐号";
 "By Key URI" = "以 Key URI 方式";
 "By Secret Key" = "以 Secret Key 方式";
 "Key URI" = "Key URI";
@@ -34,18 +33,16 @@
 
 // Export
 "Export" = "导出";
-"Export accounts" = "导出帐号";
+"Export Accounts" = "导出帐号";
 "Copy all Key URIs to Clipboard" = "拷贝所有 Key URI 到剪帖板";
 
-"Export all Key URIs as plain " = "导出所有 Key URI 为纯文本 ";
-"text" = "text";
+"Export all Key URIs as plain text" = "导出所有 Key URI 为纯文本 text";
 
-"Export all Key URIs as a " = "导出所有 Key URI 合为一个 ";
-".txt" = ".txt";
-" file" = " 文件";
+"Export all Key URIs as a" = "导出所有 Key URI 合为一个";
+"file" = "文件";
 
-"Export all Key URIs as QR Code images combined as a " = "以二维码图片形式导出所有 Key URI 合为一个 ";
-".zip" = ".zip";
+"Export all Key URIs as QR Code images" = "以二维码图片形式导出所有 Key URI";
+"combined as a" = "合为一个";
 
 
 // About
@@ -59,11 +56,11 @@
 // Token Card View
 "Copied" = "已拷贝";
 
-"Copy code" = "拷贝验证码";
-"View detail" = "详情";
-"Edit account" = "编辑本项";
+"Copy Code" = "拷贝验证码";
+"View Detail" = "详情";
+"Edit Account" = "编辑本项";
 
-"Account detail" = "帐号详情";
+"Account Detail" = "帐号详情";
 "title.edit_account" = "编辑帐号";
 "NOTE: Changes would not apply to the Key URI" = "注意：这些修改不会作用到 Key URI";
 

@@ -14,14 +14,13 @@ English
 
 // Adding accounts
 "Scan QR Code" = "Scan QR Code";
-"Read QR Code image" = "Read QR Code image";
-"Read from QR Code picture" = "Read from QR Code picture";
-"Import from file" = "Import from file";
-"Enter manually" = "Enter manually";
+"Import from Photos" = "Import from Photos";
+"Import from Files" = "Import from Files";
+"Enter Manually" = "Enter Manually";
 
 "Scanning" = "Scanning";
 
-"Add account" = "Add account";
+"Add Account" = "Add Account";
 "By Key URI" = "By Key URI";
 "By Secret Key" = "By Secret Key";
 "Key URI" = "Key URI";
@@ -35,18 +34,16 @@ English
 
 // Export
 "Export" = "Export";
-"Export accounts" = "Export accounts";
+"Export Accounts" = "Export Accounts";
 "Copy all Key URIs to Clipboard" = "Copy all Key URIs to Clipboard";
 
-"Export all Key URIs as plain " = "Export all Key URIs as plain ";
-"text" = "text";
+"Export all Key URIs as plain text" = "Export all Key URIs as plain text";
 
-"Export all Key URIs as a " = "Export all Key URIs as a ";
-".txt" = ".txt";
-" file" = " file";
+"Export all Key URIs as a" = "Export all Key URIs as a";
+"file" = "file";
 
-"Export all Key URIs as QR Code images combined as a " = "Export all Key URIs as QR Code images combined as a ";
-".zip" = ".zip";
+"Export all Key URIs as QR Code images" = "Export all Key URIs as QR Code images";
+"combined as a" = "combined as a";
 
 
 // About
@@ -60,12 +57,12 @@ English
 // Token Card View
 "Copied" = "Copied";
 
-"Copy code" = "Copy code";
-"View detail" = "View detail";
-"Edit account" = "Edit account";
+"Copy Code" = "Copy Code";
+"View Detail" = "View Detail";
+"Edit Account" = "Edit Account";
 
-"Account detail" = "Account detail";
-"title.edit_account" = "Edit account";
+"Account Detail" = "Account Detail";
+"title.edit_account" = "Edit Account";
 "NOTE: Changes would not apply to the Key URI" = "NOTE: Changes would not apply to the Key URI";
 
 "Delete Account?" = "Delete Account?";
