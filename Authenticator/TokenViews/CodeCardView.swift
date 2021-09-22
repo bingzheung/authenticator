@@ -9,7 +9,7 @@ struct CodeCardView: View {
         @State private var isBannerPresented: Bool = false
 
         var body: some View {
-                VStack {
+                VStack(spacing: 4) {
                         HStack(spacing: 16) {
                                 issuerImage.resizable().scaledToFit().frame(width: 24, height: 24)
                                 Text(verbatim: token.displayIssuer).font(.headline)
@@ -31,7 +31,7 @@ struct CodeCardView: View {
                                                 .contentShape(Rectangle())
                                 }
                         }
-                        VStack(spacing: 8) {
+                        VStack(spacing: 4) {
                                 HStack {
                                         Text(verbatim: formattedTotp).font(.largeTitle)
                                         Spacer()
