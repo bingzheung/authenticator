@@ -73,15 +73,16 @@ struct EditAccountView: View {
                                 displayAccountName = token.displayAccountName
                         }
                         .navigationTitle("title.edit_account")
+                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
+                                ToolbarItem(placement: .cancellationAction) {
                                         Button(action: {
                                                 isPresented = false
                                         }) {
                                                 Text("Cancel")
                                         }
                                 }
-                                ToolbarItem(placement: .navigationBarTrailing) {
+                                ToolbarItem(placement: .confirmationAction) {
                                         Button(action: {
                                                 let issuer: String = displayIssuer.trimming()
                                                 let accountName: String = displayAccountName.trimming()

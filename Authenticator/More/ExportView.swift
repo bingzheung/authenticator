@@ -92,7 +92,7 @@ struct ExportView: View {
                                         }
                                 }
                         }
-                        .navigationTitle("Export accounts")
+                        .navigationTitle("Export Accounts")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {

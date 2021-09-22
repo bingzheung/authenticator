@@ -67,7 +67,8 @@ struct TokenDetailView: View {
                                         Spacer().frame(height: 50)
                                 }
                         }
-                        .navigationTitle("Account detail")
+                        .navigationTitle("Account Detail")
+                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         Button(action: {
