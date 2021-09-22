@@ -88,6 +88,7 @@ struct ContentView: View {
                                 deletionAlert
                         }
                         .navigationTitle("2FA Auth")
+                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         if editMode == .active {
@@ -210,7 +211,7 @@ struct ContentView: View {
                         }
                         .environment(\.editMode, $editMode)
                 }
-                .navigationViewStyle(StackNavigationViewStyle())
+                .navigationViewStyle(.stack)
         }
 
 
