@@ -88,7 +88,6 @@ struct ContentView: View {
                                 deletionAlert
                         }
                         .navigationTitle("2FA Auth")
-                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         if editMode == .active {

@@ -76,22 +76,16 @@ struct EditAccountView: View {
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {
-                                        Button(action: {
-                                                isPresented = false
-                                        }) {
-                                                Text("Cancel")
-                                        }
+                                        Button("Cancel", role: .cancel, action: { isPresented = false })
                                 }
                                 ToolbarItem(placement: .confirmationAction) {
-                                        Button(action: {
+                                        Button("Done") {
                                                 let issuer: String = displayIssuer.trimming()
                                                 let accountName: String = displayAccountName.trimming()
                                                 let checkedIssuer: String = issuer.isEmpty ? token.displayIssuer : issuer
                                                 let checkedAccountName: String = accountName.isEmpty ? token.displayAccountName : accountName
                                                 completion(tokenIndex, checkedIssuer, checkedAccountName)
                                                 isPresented = false
-                                        }) {
-                                                Text("Done")
                                         }
                                 }
                         }
