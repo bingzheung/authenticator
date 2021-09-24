@@ -62,7 +62,7 @@
 
 "Account Detail" = "帐号详情";
 "title.edit_account" = "编辑帐号";
-"NOTE: Changes would not apply to the Key URI" = "注意：这些修改不会作用到 Key URI";
+"**NOTE**: Changes would not apply to the Key URI" = "注意：这些修改不会作用到 Key URI";
 
 "Delete Account?" = "删除帐号？";
 "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service." = "删除帐号不等于关闭双重验证\n\n务必确保你还有其它方式验证登录";

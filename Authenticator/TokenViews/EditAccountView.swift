@@ -20,49 +20,28 @@ struct EditAccountView: View {
                                                         Text("Issuer").font(.headline)
                                                         Spacer()
                                                 }
-                                                #if targetEnvironment(macCatalyst)
                                                 TextField(token.displayIssuer, text: $displayIssuer)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.words)
                                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                #else
-                                                EnhancedTextField(placeholder: token.displayIssuer,
-                                                                  text: $displayIssuer,
-                                                                  autocorrection: .no,
-                                                                  autocapitalization: .words)
-                                                        .padding(8)
-                                                        .fillBackground(cornerRadius: 8)
-                                                #endif
                                         }
-                                        .padding()
+                                        .padding(.horizontal)
 
                                         VStack {
                                                 HStack {
                                                         Text("Account Name").font(.headline)
                                                         Spacer()
                                                 }
-                                                #if targetEnvironment(macCatalyst)
                                                 TextField(token.displayAccountName, text: $displayAccountName)
                                                         .keyboardType(.emailAddress)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.none)
                                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                #else
-                                                EnhancedTextField(placeholder: token.displayAccountName,
-                                                                  text: $displayAccountName,
-                                                                  keyboardType: .emailAddress,
-                                                                  autocorrection: .no,
-                                                                  autocapitalization: UITextAutocapitalizationType.none)
-                                                        .padding(8)
-                                                        .fillBackground(cornerRadius: 8)
-                                                #endif
                                         }
-                                        .padding(.horizontal)
-                                        .padding(.bottom)
+                                        .padding()
 
                                         HStack {
-                                                Text("NOTE: Changes would not apply to the Key URI")
-                                                        .font(.footnote)
+                                                Text("**NOTE**: Changes would not apply to the Key URI").font(.footnote)
                                                 Spacer()
                                         }
                                         .padding()
