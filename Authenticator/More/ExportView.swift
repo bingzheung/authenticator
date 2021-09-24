@@ -46,7 +46,7 @@ struct ExportView: View {
                                         }) {
                                                 HStack {
                                                         Text("Export all Key URIs as a")
-                                                        Text(verbatim: ".txt").font(.body.monospaced()).foregroundColor(.primary)
+                                                        Text(verbatim: ".txt").font(.footnote.monospaced()).foregroundColor(.primary)
                                                         Text("file")
                                                         Spacer()
                                                 }
@@ -74,7 +74,7 @@ struct ExportView: View {
                                                         }
                                                         HStack {
                                                                 Text("combined as a")
-                                                                Text(verbatim: ".zip").font(.body.monospaced()).foregroundColor(.primary)
+                                                                Text(verbatim: ".zip").font(.footnote.monospaced()).foregroundColor(.primary)
                                                                 Text("file")
                                                                 Spacer()
                                                         }
