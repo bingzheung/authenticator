@@ -3,8 +3,7 @@ import UniformTypeIdentifiers
 
 extension URL {
         func readText() -> String? {
-                guard let typeID: String = try? self.resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier else { return nil }
-                guard let type = UTType(typeID) else { return nil }
+                guard let type: UTType = try? self.resourceValues(forKeys: [.contentTypeKey]).contentType else { return nil }
                 if type.conforms(to: .text) {
                         guard let content: String = try? String(contentsOf: self) else { return nil }
                         guard !content.isEmpty else { return nil }
