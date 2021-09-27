@@ -123,8 +123,8 @@ struct ContentView: View {
                                                         Image(systemName: "ellipsis.circle")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 24, height: 24)
-                                                                .padding(.trailing, 8)
+                                                                .frame(width: 28)
+                                                                .padding(.trailing, 10)
                                                                 .contentShape(Rectangle())
                                                 }
                                         }
@@ -147,7 +147,8 @@ struct ContentView: View {
                                                         Image(systemName: "qrcode.viewfinder")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 23, height: 23)
+                                                                .frame(width: 26)
+                                                                .padding(.horizontal, 2)
                                                                 .contentShape(Rectangle())
                                                 }
                                                 #endif
@@ -181,7 +182,7 @@ struct ContentView: View {
                                                         Image(systemName: "plus")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 22, height: 22)
+                                                                .frame(width: 27)
                                                                 .padding(.leading, 8)
                                                                 .contentShape(Rectangle())
                                                 }
