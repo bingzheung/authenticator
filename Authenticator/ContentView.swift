@@ -123,8 +123,8 @@ struct ContentView: View {
                                                         Image(systemName: "ellipsis.circle")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 28)
-                                                                .padding(.trailing, 10)
+                                                                .frame(width: 26)
+                                                                .padding(.trailing, 8)
                                                                 .contentShape(Rectangle())
                                                 }
                                         }
@@ -147,7 +147,7 @@ struct ContentView: View {
                                                         Image(systemName: "qrcode.viewfinder")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 26)
+                                                                .frame(width: 24)
                                                                 .padding(.horizontal, 2)
                                                                 .contentShape(Rectangle())
                                                 }
@@ -182,7 +182,7 @@ struct ContentView: View {
                                                         Image(systemName: "plus")
                                                                 .resizable()
                                                                 .scaledToFit()
-                                                                .frame(width: 27)
+                                                                .frame(width: 25)
                                                                 .padding(.leading, 8)
                                                                 .contentShape(Rectangle())
                                                 }
