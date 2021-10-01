@@ -81,7 +81,14 @@ struct ContentView: View {
                                 case .failure(let error):
                                         logger.debug(".fileImporter() failure: \(error.localizedDescription)")
                                 case .success(let urls):
-                                        handlePickedFile(url: urls.first)
+                                        guard let pickedUrl: URL = urls.first else { return }
+                                        guard pickedUrl.startAccessingSecurityScopedResource() else { return }
+                                        let cachePathComponent = Date.currentDateText + pickedUrl.lastPathComponent
+                                        let tmpDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                                        let cacheUrl: URL = tmpDirectoryUrl.appendingPathComponent(cachePathComponent)
+                                        try? FileManager.default.copyItem(at: pickedUrl, to: cacheUrl)
+                                        pickedUrl.stopAccessingSecurityScopedResource()
+                                        handlePickedFile(url: cacheUrl)
                                 }
                         }
                         .alert(isPresented: $isDeletionAlertPresented) {
@@ -313,8 +320,7 @@ struct ContentView: View {
                 guard let newToken: Token = Token(uri: qrCodeUri) else { return }
                 addItem(newToken)
         }
-        private func handlePickedFile(url: URL?) {
-                guard let url: URL = url else { return }
+        private func handlePickedFile(url: URL) {
                 guard let content: String = url.readText() else { return }
                 let lines: [String] = content.components(separatedBy: .newlines)
                 _ = lines.map {
