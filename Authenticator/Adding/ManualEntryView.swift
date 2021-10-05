@@ -15,65 +15,53 @@ struct ManualEntryView: View {
 
         var body: some View {
                 NavigationView {
-                        ZStack {
-                                GlobalBackgroundColor().ignoresSafeArea()
-                                VStack {
+                        List {
+                                Section {
                                         Picker("Method", selection: $selection) {
                                                 Text("By Key URI").tag(0)
                                                 Text("By Secret Key").tag(1)
                                         }
                                         .pickerStyle(.segmented)
-                                        .padding(.horizontal)
-                                        ScrollView {
-                                                if selection == 0 {
-                                                        HStack {
-                                                                Text(verbatim: "Key URI")
-                                                                Spacer()
-                                                        }
-                                                        .padding(.horizontal)
-                                                        TextField("otpauth://totp/...", text: $keyUri)
-                                                                .keyboardType(.URL)
-                                                                .disableAutocorrection(true)
-                                                                .autocapitalization(.none)
-                                                                .font(.footnote.monospaced())
-                                                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                                .padding(.horizontal)
-                                                } else {
-                                                        HStack {
-                                                                Text("Issuer")
-                                                                Spacer()
-                                                        }
-                                                        .padding(.horizontal)
-                                                        TextField("Service Provider (Optional)", text: $issuer)
-                                                                .disableAutocorrection(true)
-                                                                .autocapitalization(.words)
-                                                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                                .padding(.horizontal)
-                                                        HStack {
-                                                                Text("Account Name")
-                                                                Spacer()
-                                                        }
-                                                        .padding(.horizontal)
-                                                        TextField("email@example.com (Optional)", text: $accountName)
-                                                                .keyboardType(.emailAddress)
-                                                                .disableAutocorrection(true)
-                                                                .autocapitalization(.none)
-                                                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                                .padding(.horizontal)
+                                }
+                                .listRowInsets(EdgeInsets())
+                                .listRowBackground(Color.clear)
 
-                                                        HStack {
-                                                                Text("Secret Key")
-                                                                Spacer()
-                                                        }
-                                                        .padding(.horizontal)
-                                                        TextField("SECRET (Required)", text: $secretKey)
-                                                                .keyboardType(.alphabet)
-                                                                .disableAutocorrection(true)
-                                                                .autocapitalization(.none)
-                                                                .font(.callout.monospaced())
-                                                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                                                .padding(.horizontal)
-                                                }
+                                if selection == 0 {
+                                        Section {
+                                                TextField("otpauth://totp/...", text: $keyUri)
+                                                        .keyboardType(.URL)
+                                                        .disableAutocorrection(true)
+                                                        .autocapitalization(.none)
+                                                        .font(.footnote.monospaced())
+                                        } header: {
+                                                Text(verbatim: "Key URI")
+                                        }
+                                } else {
+                                        Section {
+                                                TextField("Service Provider (Optional)", text: $issuer)
+                                                        .disableAutocorrection(true)
+                                                        .autocapitalization(.words)
+                                        } header: {
+                                                Text(verbatim: "Issuer")
+                                        }
+
+                                        Section {
+                                                TextField("email@example.com (Optional)", text: $accountName)
+                                                        .keyboardType(.emailAddress)
+                                                        .disableAutocorrection(true)
+                                                        .autocapitalization(.none)
+                                        } header: {
+                                                Text(verbatim: "Account Name")
+                                        }
+
+                                        Section {
+                                                TextField("SECRET (Required)", text: $secretKey)
+                                                        .keyboardType(.alphabet)
+                                                        .disableAutocorrection(true)
+                                                        .autocapitalization(.none)
+                                                        .font(.callout.monospaced())
+                                        } header: {
+                                                Text(verbatim: "Secret Key")
                                         }
                                 }
                         }
