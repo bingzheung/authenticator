@@ -12,40 +12,30 @@ struct EditAccountView: View {
 
         var body: some View {
                 NavigationView {
-                        ZStack {
-                                GlobalBackgroundColor().ignoresSafeArea()
-                                ScrollView {
-                                        VStack {
-                                                HStack {
-                                                        Text("Issuer").font(.headline)
-                                                        Spacer()
-                                                }
-                                                TextField(token.displayIssuer, text: $displayIssuer)
-                                                        .disableAutocorrection(true)
-                                                        .autocapitalization(.words)
-                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        }
-                                        .padding(.horizontal)
-
-                                        VStack {
-                                                HStack {
-                                                        Text("Account Name").font(.headline)
-                                                        Spacer()
-                                                }
-                                                TextField(token.displayAccountName, text: $displayAccountName)
-                                                        .keyboardType(.emailAddress)
-                                                        .disableAutocorrection(true)
-                                                        .autocapitalization(.none)
-                                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        }
-                                        .padding()
-
-                                        HStack {
-                                                Text("**NOTE**: Changes would not apply to the Key URI").font(.footnote)
-                                                Spacer()
-                                        }
-                                        .padding()
+                        List {
+                                Section {
+                                        TextField(token.displayIssuer, text: $displayIssuer)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.words)
+                                } header: {
+                                        Text("Issuer")
                                 }
+
+                                Section {
+                                        TextField(token.displayAccountName, text: $displayAccountName)
+                                                .keyboardType(.emailAddress)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.none)
+                                } header: {
+                                        Text("Account Name")
+                                }
+
+                                Section {
+                                        Text("**NOTE**: Changes would not apply to the Key URI")
+                                }
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                                .listRowBackground(Color.clear)
                         }
                         .onAppear {
                                 displayIssuer = token.displayIssuer
