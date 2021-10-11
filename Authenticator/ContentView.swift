@@ -306,7 +306,7 @@ struct ContentView: View {
                 isSheetPresented = false
                 switch result {
                 case .success(let code):
-                        let uri: String = code.trimming()
+                        let uri: String = code.trimmed()
                         guard !uri.isEmpty else { return }
                         guard let newToken: Token = Token(uri: uri) else { return }
                         addItem(newToken)
@@ -315,7 +315,7 @@ struct ContentView: View {
                 }
         }
         private func handlePickedImage(uri: String) {
-                let qrCodeUri: String = uri.trimming()
+                let qrCodeUri: String = uri.trimmed()
                 guard !qrCodeUri.isEmpty else { return }
                 guard let newToken: Token = Token(uri: qrCodeUri) else { return }
                 addItem(newToken)
@@ -324,7 +324,7 @@ struct ContentView: View {
                 guard let content: String = url.readText() else { return }
                 let lines: [String] = content.components(separatedBy: .newlines)
                 _ = lines.map {
-                        if let newToken: Token = Token(uri: $0.trimming()) {
+                        if let newToken: Token = Token(uri: $0.trimmed()) {
                                 addItem(newToken)
                         }
                 }

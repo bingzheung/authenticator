@@ -49,8 +49,8 @@ struct EditAccountView: View {
                                 }
                                 ToolbarItem(placement: .confirmationAction) {
                                         Button("Done") {
-                                                let issuer: String = displayIssuer.trimming()
-                                                let accountName: String = displayAccountName.trimming()
+                                                let issuer: String = displayIssuer.trimmed()
+                                                let accountName: String = displayAccountName.trimmed()
                                                 let checkedIssuer: String = issuer.isEmpty ? token.displayIssuer : issuer
                                                 let checkedAccountName: String = accountName.isEmpty ? token.displayAccountName : accountName
                                                 completion(tokenIndex, checkedIssuer, checkedAccountName)
