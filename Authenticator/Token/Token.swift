@@ -93,8 +93,8 @@ struct Token: Hashable, Identifiable {
                 }
                 self.uri = uri
                 self.type = .totp
-                self.displayIssuer = self.issuerPrefix ?? ""
-                self.displayAccountName = self.accountName ?? ""
+                self.displayIssuer = self.issuerPrefix ?? .empty
+                self.displayAccountName = self.accountName ?? .empty
                 self.id = self.secret + Date().timeIntervalSince1970.description
                 
                 if self.displayIssuer.isEmpty && self.issuer.hasContent {
@@ -116,24 +116,24 @@ struct Token: Hashable, Identifiable {
                 let label: String = {
                         if issuerPrefix.hasContent && accountName.hasContent {
                                 let text: String = "/" + issuerPrefix! + ":" + accountName!
-                                let path: String = text.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+                                let path: String = text.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? .empty
                                 return path
                         } else if issuerPrefix.hasContent && !accountName.hasContent {
                                 let text: String = "/" + issuerPrefix!
-                                let path: String = text.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+                                let path: String = text.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? .empty
                                 return path
                         } else if !issuerPrefix.hasContent && accountName.hasContent {
                                 let text: String = "/:" + accountName!
-                                let path: String = text.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+                                let path: String = text.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? .empty
                                 return path
                         } else {
-                                return ""
+                                return .empty
                         }
                 }()
                 let issuerParameter: String = {
-                        guard issuer.hasContent else { return "" }
+                        guard issuer.hasContent else { return .empty }
                         let query = issuer!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                        guard query.hasContent else { return "" }
+                        guard query.hasContent else { return .empty }
                         return "&issuer=\(query!)"
                 }()
                 let algorithmParameter: String = "&algorithm=\(algorithm)"
@@ -153,8 +153,8 @@ struct Token: Hashable, Identifiable {
                 self.digits = digits
                 self.period = period
                 self.id = secret + Date().timeIntervalSince1970.description
-                self.displayIssuer = issuerPrefix ?? issuer ?? ""
-                self.displayAccountName = accountName ?? ""
+                self.displayIssuer = issuerPrefix ?? issuer ?? .empty
+                self.displayAccountName = accountName ?? .empty
         }
         
         /// Create Token with TokenData

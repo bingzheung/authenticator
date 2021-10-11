@@ -7,6 +7,9 @@ extension String {
         func trimmed() -> String {
                 return trimmingCharacters(in: .whitespacesAndNewlines)
         }
+
+        /// aka. `String.init()`
+        static let empty: String = ""
 }
 
 extension Optional where Wrapped == String {

@@ -12,10 +12,11 @@ extension URL {
                         guard let pickedImage: UIImage = UIImage(contentsOfFile: self.path) else { return nil }
                         guard let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]) else { return nil }
                         guard let ciImage: CIImage = CIImage(image: pickedImage) else { return nil }
-                        var qrCodeText: String = ""
+                        var qrCodeText: String = .empty
                         let features: [CIFeature] = detector.features(in: ciImage)
                         _ = features.map {
-                                qrCodeText += ($0 as? CIQRCodeFeature)?.messageString ?? ""
+                                let newText: String = ($0 as? CIQRCodeFeature)?.messageString ?? .empty
+                                qrCodeText += newText
                         }
                         guard !qrCodeText.isEmpty else { return nil }
                         return qrCodeText

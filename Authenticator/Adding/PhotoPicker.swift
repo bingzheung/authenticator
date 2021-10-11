@@ -36,10 +36,11 @@ struct PhotoPicker: UIViewControllerRepresentable {
                                 guard let image = object as? UIImage else { return }
                                 guard let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]) else { return }
                                 guard let ciImage: CIImage = CIImage(image: image) else { return }
-                                var qrCodeText: String = ""
+                                var qrCodeText: String = .empty
                                 let features: [CIFeature] = detector.features(in: ciImage)
                                 _ = features.map {
-                                        qrCodeText += ($0 as? CIQRCodeFeature)?.messageString ?? ""
+                                        let newText: String = ($0 as? CIQRCodeFeature)?.messageString ?? .empty
+                                        qrCodeText += newText
                                 }
                                 guard !qrCodeText.isEmpty else { return }
                                 self.parent.completion(qrCodeText)
