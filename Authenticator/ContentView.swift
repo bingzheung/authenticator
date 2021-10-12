@@ -20,14 +20,16 @@ struct ContentView: View {
         @State private var indexSetOnDelete: IndexSet = IndexSet()
         @State private var isDeletionAlertPresented: Bool = false
 
+        init() {
+                UITableView.appearance().sectionFooterHeight = 0
+        }
+
         var body: some View {
                 NavigationView {
                         List(selection: $selectedTokens) {
                                 ForEach(fetchedTokens, id: \.self) { item in
                                         let index: Int = Int(fetchedTokens.firstIndex(of: item) ?? 0)
-                                        if editMode == .active {
-                                                CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
-                                        } else {
+                                        Section {
                                                 CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
                                                         .contextMenu {
                                                                 Button(action: {
