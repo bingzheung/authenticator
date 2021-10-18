@@ -84,8 +84,7 @@ struct TokenDetailView: View {
                 return UIImage(cgImage: cgImage)
         }
         private func saveQRCodeImage(_ image: UIImage) -> URL? {
-                let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                let fileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(imageName, isDirectory: false)
+                let fileUrl: URL = .tmpDirectoryUrl.appendingPathComponent(imageName, isDirectory: false)
                 do {
                         try image.pngData()?.write(to: fileUrl)
                 } catch {

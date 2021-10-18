@@ -83,8 +83,7 @@ struct ContentView: View {
                                         guard let pickedUrl: URL = urls.first else { return }
                                         guard pickedUrl.startAccessingSecurityScopedResource() else { return }
                                         let cachePathComponent = Date.currentDateText + pickedUrl.lastPathComponent
-                                        let tmpDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                                        let cacheUrl: URL = tmpDirectoryUrl.appendingPathComponent(cachePathComponent)
+                                        let cacheUrl: URL = .tmpDirectoryUrl.appendingPathComponent(cachePathComponent)
                                         try? FileManager.default.copyItem(at: pickedUrl, to: cacheUrl)
                                         pickedUrl.stopAccessingSecurityScopedResource()
                                         handlePickedFile(url: cacheUrl)
@@ -379,8 +378,7 @@ struct ContentView: View {
         }
 
         private func clearTemporaryDirectory() {
-                let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                guard let urls: [URL] = try? FileManager.default.contentsOfDirectory(at: temporaryDirectoryUrl, includingPropertiesForKeys: nil) else { return }
+                guard let urls: [URL] = try? FileManager.default.contentsOfDirectory(at: .tmpDirectoryUrl, includingPropertiesForKeys: nil) else { return }
                 _ = urls.map { try? FileManager.default.removeItem(at: $0) }
         }
 }

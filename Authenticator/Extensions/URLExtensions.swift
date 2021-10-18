@@ -24,4 +24,7 @@ extension URL {
                         return nil
                 }
         }
+
+        /// tmp/
+        static let tmpDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 }

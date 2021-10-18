@@ -111,25 +111,23 @@ struct ExportView: View {
         }
 
         private func txtFile() -> URL {
-                let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
                 let txtFileName: String = "2FAAuth-accounts-" + Date.currentDateText + ".txt"
-                let txtFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
+                let txtFileUrl: URL = .tmpDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
                 try? tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
                 return txtFileUrl
         }
 
         // https://recoursive.com/2021/02/25/create_zip_archive_using_only_foundation
         private func zipFile() -> URL {
-                let temporaryDirectoryUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
                 let imagesDirectoryName: String = "2FAAuth-accounts-" + Date.currentDateText
-                let imagesDirectoryUrl: URL = temporaryDirectoryUrl.appendingPathComponent(imagesDirectoryName, isDirectory: true)
+                let imagesDirectoryUrl: URL = .tmpDirectoryUrl.appendingPathComponent(imagesDirectoryName, isDirectory: true)
                 if !(FileManager.default.fileExists(atPath: imagesDirectoryUrl.path)) {
                         try? FileManager.default.createDirectory(at: imagesDirectoryUrl, withIntermediateDirectories: false)
                 }
                 _ = tokens.map { oneToken in
                         _ = saveQRCodeImage(for: oneToken, parent: imagesDirectoryUrl)
                 }
-                let zipFileUrl: URL = temporaryDirectoryUrl.appendingPathComponent("\(imagesDirectoryName).zip", isDirectory: false)
+                let zipFileUrl: URL = .tmpDirectoryUrl.appendingPathComponent("\(imagesDirectoryName).zip", isDirectory: false)
                 let coordinator = NSFileCoordinator()
                 var err: NSError?
                 coordinator.coordinate(readingItemAt: imagesDirectoryUrl, options: .forUploading, error: &err) { url in
