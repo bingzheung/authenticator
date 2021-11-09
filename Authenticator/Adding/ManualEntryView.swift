@@ -30,6 +30,7 @@ struct ManualEntryView: View {
                                         Section {
                                                 TextField("otpauth://totp/...", text: $keyUri)
                                                         .keyboardType(.URL)
+                                                        .submitLabel(.done)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.none)
                                                         .font(.footnote.monospaced())
@@ -39,6 +40,7 @@ struct ManualEntryView: View {
                                 } else {
                                         Section {
                                                 TextField("Service Provider (Optional)", text: $issuer)
+                                                        .submitLabel(.done)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.words)
                                         } header: {
@@ -48,6 +50,7 @@ struct ManualEntryView: View {
                                         Section {
                                                 TextField("email@example.com (Optional)", text: $accountName)
                                                         .keyboardType(.emailAddress)
+                                                        .submitLabel(.done)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.none)
                                         } header: {
@@ -57,6 +60,7 @@ struct ManualEntryView: View {
                                         Section {
                                                 TextField("SECRET (Required)", text: $secretKey)
                                                         .keyboardType(.alphabet)
+                                                        .submitLabel(.done)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.none)
                                                         .font(.callout.monospaced())

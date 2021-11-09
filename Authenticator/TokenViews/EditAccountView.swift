@@ -15,6 +15,7 @@ struct EditAccountView: View {
                         List {
                                 Section {
                                         TextField(token.displayIssuer, text: $displayIssuer)
+                                                .submitLabel(.done)
                                                 .disableAutocorrection(true)
                                                 .autocapitalization(.words)
                                 } header: {
@@ -24,6 +25,7 @@ struct EditAccountView: View {
                                 Section {
                                         TextField(token.displayAccountName, text: $displayAccountName)
                                                 .keyboardType(.emailAddress)
+                                                .submitLabel(.done)
                                                 .disableAutocorrection(true)
                                                 .autocapitalization(.none)
                                 } header: {
