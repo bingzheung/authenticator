@@ -72,7 +72,15 @@ struct CodeCardView: View {
         }
 
         private var issuerImage: Image {
-                let imageName: String = token.displayIssuer.lowercased()
+                let imageName: String = {
+                        let issuer: String = token.displayIssuer.lowercased()
+                        switch issuer {
+                        case "jetbrains account", "jetbrains+account":
+                                return "jetbrains"
+                        default:
+                                return issuer
+                        }
+                }()
                 guard !imageName.isEmpty else { return Image(systemName: "person.circle") }
                 guard let uiImage: UIImage = UIImage(named: imageName) else { return Image(systemName: "person.circle") }
                 return Image(uiImage: uiImage)
