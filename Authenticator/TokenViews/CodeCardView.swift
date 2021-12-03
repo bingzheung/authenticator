@@ -77,6 +77,8 @@ struct CodeCardView: View {
                         switch issuer {
                         case "jetbrains account", "jetbrains+account":
                                 return "jetbrains"
+                        case "wordpress.com":
+                                return "wordpress"
                         default:
                                 return issuer
                         }
