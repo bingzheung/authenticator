@@ -290,9 +290,8 @@ struct ContentView: View {
                 generateCodes()
         }
         private var deletionAlert: Alert {
-                let message: String = "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service."
                 return Alert(title: Text("Delete Account?"),
-                             message: Text(NSLocalizedString(message, comment: .empty)),
+                             message: Text("Removing account will NOT turn off Two-Factor Authentication. Make sure you have alternate ways to sign into your service."),
                              primaryButton: .cancel(cancelDeletion),
                              secondaryButton: .destructive(Text("Delete"), action: performDeletion))
         }
