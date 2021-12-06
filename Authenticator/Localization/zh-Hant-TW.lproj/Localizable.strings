@@ -1,8 +1,8 @@
-// Chinese, Hong Kong (zh-HK)
+// Traditional Chinese, Taiwan (zh-Hant-TW)
 
 
 // General
-"Copy" = "複製";
+"Copy" = "拷貝";
 "Done" = "完成";
 "Cancel" = "取消";
 "Edit" = "編輯";
@@ -13,11 +13,11 @@
 
 // Adding accounts
 "Scan QR Code" = "掃描二維碼";
-"Import from Photos" = "讀二維碼相片";
+"Import from Photos" = "讀二維碼照片";
 "Import from Files" = "從檔案導入";
 "Enter Manually" = "手動輸入";
 
-"Scanning" = "掃緊二維碼";
+"Scanning" = "正在掃描";
 
 "Add Account" = "添加帳號";
 "By Key URI" = "以 Key URI 方式";
@@ -34,14 +34,14 @@
 // Export
 "Export" = "導出";
 "Export Accounts" = "導出帳號";
-"Copy all Key URIs to Clipboard" = "複製所有 Key URI 到剪帖板";
+"Copy all Key URIs to Clipboard" = "拷貝所有 Key URI 到剪帖板";
 
-"Export all Key URIs as plain text" = "導出所有 Key URI 爲純文字 text";
+"Export all Key URIs as plain text" = "導出所有 Key URI 爲純文本 text";
 
 "Export all Key URIs as a" = "導出所有 Key URI 合爲一個";
 "file" = "檔案";
 
-"Export all Key URIs as QR Code images" = "以二維碼相片形式導出所有 Key URI";
+"Export all Key URIs as QR Code images" = "以二維碼圖片形式導出所有 Key URI";
 "combined as a" = "合爲一個";
 
 
@@ -49,20 +49,20 @@
 "About" = "關於";
 "Version" = "版本";
 "Source Code" = "源碼";
-"Privacy Policy" = "私隱政策";
+"Privacy Policy" = "隱私政策";
 "Share this App" = "分享本應用程式";
 
 
 // Token Card View
-"Copied" = "已複製";
+"Copied" = "已拷貝";
 
-"Copy Code" = "複製驗證碼";
+"Copy Code" = "拷貝驗證碼";
 "View Detail" = "詳情";
 "Edit Account" = "編輯本項";
 
 "Account Detail" = "帳號詳情";
 "title.edit_account" = "編輯帳號";
-"**NOTE**: Changes would not apply to the Key URI" = "注意：呢啲修改毋會作用到 Key URI";
+"**NOTE**: Changes would not apply to the Key URI" = "注意：這些修改不會作用到 Key URI";
 
 "Delete Account?" = "刪除帳號？";
-"Removing account will NOT turn off Two-Factor Authentication. Make sure you have alternate ways to sign into your service." = "刪除帳號毋等於關閉雙重認證\n\n務必確保你仲有其他方式認證登錄";
+"Removing account will NOT turn off Two-Factor Authentication. Make sure you have alternate ways to sign into your service." = "刪除帳號不等於關閉雙重認證\n\n務必確保你還有其他方式認證登錄";

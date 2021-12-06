@@ -98,6 +98,9 @@
 		37AD0376266C8E0E0086DD10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37AD037B266C93D40086DD10 /* Authenticator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Authenticator.entitlements; sourceTree = "<group>"; };
 		37FFCD6B275DE69D004F9D97 /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37FFCD6C275DE864004F9D97 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37FFCD6D275DE8B4004F9D97 /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37FFCD6E275DE8E5004F9D97 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +360,9 @@
 				"zh-HK",
 				yue,
 				"zh-Hant-CN",
+				"zh-Hant-HK",
+				"zh-Hant-MO",
+				"zh-Hant-TW",
 			);
 			mainGroup = 37AD0303266C8A920086DD10;
 			packageReferences = (
@@ -481,6 +487,9 @@
 				37AD0350266C8CCA0086DD10 /* zh-HK */,
 				37AD0351266C8CCA0086DD10 /* yue */,
 				37FFCD6B275DE69D004F9D97 /* zh-Hant-CN */,
+				37FFCD6C275DE864004F9D97 /* zh-Hant-HK */,
+				37FFCD6D275DE8B4004F9D97 /* zh-Hant-MO */,
+				37FFCD6E275DE8E5004F9D97 /* zh-Hant-TW */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
