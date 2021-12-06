@@ -223,20 +223,19 @@ struct ContentView: View {
         // MARK: - Modification
 
         private func addItem(_ token: Token) {
+                let newTokenData = TokenData(context: viewContext)
+                newTokenData.id = token.id
+                newTokenData.uri = token.uri
+                newTokenData.displayIssuer = token.displayIssuer
+                newTokenData.displayAccountName = token.displayAccountName
+                let lastIndexNumber: Int64 = fetchedTokens.last?.indexNumber ?? Int64(fetchedTokens.count)
+                newTokenData.indexNumber = lastIndexNumber + 1
+                do {
+                        try viewContext.save()
+                } catch {
+                        let nsError = error as NSError
+                }
                 withAnimation {
-                        let newTokenData = TokenData(context: viewContext)
-                        newTokenData.id = token.id
-                        newTokenData.uri = token.uri
-                        newTokenData.displayIssuer = token.displayIssuer
-                        newTokenData.displayAccountName = token.displayAccountName
-                        let lastIndexNumber: Int64 = fetchedTokens.last?.indexNumber ?? Int64(fetchedTokens.count)
-                        newTokenData.indexNumber = lastIndexNumber + 1
-                        do {
-                                try viewContext.save()
-                        } catch {
-                                let nsError = error as NSError
-                                logger.debug("Unresolved error \(nsError), \(nsError.userInfo)")
-                        }
                         generateCodes()
                 }
         }
