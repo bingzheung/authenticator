@@ -97,6 +97,7 @@
 		37AD0361266C8CCA0086DD10 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		37AD0376266C8E0E0086DD10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37AD037B266C93D40086DD10 /* Authenticator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Authenticator.entitlements; sourceTree = "<group>"; };
+		37FFCD6B275DE69D004F9D97 /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +356,7 @@
 				"zh-Hans",
 				"zh-HK",
 				yue,
+				"zh-Hant-CN",
 			);
 			mainGroup = 37AD0303266C8A920086DD10;
 			packageReferences = (
@@ -478,6 +480,7 @@
 				37AD034F266C8CCA0086DD10 /* zh-Hans */,
 				37AD0350266C8CCA0086DD10 /* zh-HK */,
 				37AD0351266C8CCA0086DD10 /* yue */,
+				37FFCD6B275DE69D004F9D97 /* zh-Hant-CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
