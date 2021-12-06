@@ -22,6 +22,7 @@ struct ContentView: View {
 
         init() {
                 UITableView.appearance().sectionFooterHeight = 0
+                UITextField.appearance().clearButtonMode = .always
         }
 
         var body: some View {
