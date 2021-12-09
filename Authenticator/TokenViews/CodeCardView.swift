@@ -52,10 +52,15 @@ struct CodeCardView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 UIPasteboard.general.string = totp
+                                guard !isBannerPresented else { return }
                                 isBannerPresented = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        isBannerPresented = false
+                                }
                         }
                 }
                 .modifier(BannerModifier(isPresented: $isBannerPresented))
+                .animation(.default, value: isBannerPresented)
         }
 
         private var formattedTotp: String {
@@ -112,27 +117,13 @@ private struct BannerModifier: ViewModifier {
                 ZStack {
                         content
                         if isPresented {
-                                BannerView()
-                                        .animation(.default)
+                                Text("Copied")
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 40)
+                                        .background(.ultraThinMaterial)
+                                        .clipShape(Capsule())
                                         .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                                        .onAppear {
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                                        withAnimation {
-                                                                isPresented = false
-                                                        }
-                                                }
-                                        }
                         }
                 }
-        }
-}
-
-private struct BannerView: View {
-        var body: some View {
-                Text("Copied")
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 40)
-                        .background(.ultraThinMaterial)
-                        .clipShape(Capsule())
         }
 }
