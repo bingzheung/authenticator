@@ -236,9 +236,7 @@ struct ContentView: View {
                 } catch {
                         let nsError = error as NSError
                 }
-                withAnimation {
-                        generateCodes()
-                }
+                generateCodes()
         }
         private func move(from source: IndexSet, to destination: Int) {
                 var idArray: [String] = fetchedTokens.map({ $0.id ?? Token().id })
