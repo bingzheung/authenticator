@@ -237,6 +237,7 @@ struct ContentView: View {
                         try viewContext.save()
                 } catch {
                         let nsError = error as NSError
+                        logger.debug("\(nsError)")
                 }
                 generateCodes()
         }
