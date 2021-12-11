@@ -16,18 +16,38 @@ struct TokenDetailView: View {
                                 Section {
                                         Text(verbatim: "Issuer").font(.headline)
                                         Text(verbatim: token.displayIssuer).textSelection(.enabled)
+                                        #if targetEnvironment(macCatalyst)
+                                                .contextMenu {
+                                                        MenuCopyButton(content: token.displayIssuer)
+                                                }
+                                        #endif
                                 }
                                 Section {
                                         Text(verbatim: "Account Name").font(.headline)
                                         Text(verbatim: token.displayAccountName).textSelection(.enabled)
+                                        #if targetEnvironment(macCatalyst)
+                                                .contextMenu {
+                                                        MenuCopyButton(content: token.displayAccountName)
+                                                }
+                                        #endif
                                 }
                                 Section {
                                         Text(verbatim: "Secret Key").font(.headline)
                                         Text(verbatim: token.secret).font(.footnote.monospaced()).textSelection(.enabled)
+                                        #if targetEnvironment(macCatalyst)
+                                                .contextMenu {
+                                                        MenuCopyButton(content: token.secret)
+                                                }
+                                        #endif
                                 }
                                 Section {
                                         Text(verbatim: "Key URI").font(.headline)
                                         Text(verbatim: token.uri).font(.footnote.monospaced()).textSelection(.enabled)
+                                        #if targetEnvironment(macCatalyst)
+                                                .contextMenu {
+                                                        MenuCopyButton(content: token.uri)
+                                                }
+                                        #endif
                                 }
                                 if let uiImage = qrCodeImage {
                                         Section {
