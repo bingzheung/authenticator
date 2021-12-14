@@ -15,10 +15,14 @@ struct CodeCardView: View {
                                 Text(verbatim: token.displayIssuer).font(.headline)
                                 Spacer()
                                 Menu {
-                                        Button(action: {
+                                        Button {
                                                 UIPasteboard.general.string = totp
+                                                guard !isBannerPresented else { return }
                                                 isBannerPresented = true
-                                        }) {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                        isBannerPresented = false
+                                                }
+                                        } label: {
                                                 Label("Copy Code", systemImage: "doc.on.doc")
                                         }
                                 } label: {
