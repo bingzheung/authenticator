@@ -63,7 +63,7 @@ struct CodeCardView: View {
                                 }
                         }
                 }
-                .modifier(BannerModifier(isPresented: $isBannerPresented))
+                .copiedBanner(isPresented: $isBannerPresented)
                 .animation(.default, value: isBannerPresented)
         }
 
@@ -110,24 +110,5 @@ private struct Arc: Shape {
                 var path = Path()
                 path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2.0, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
                 return path
-        }
-}
-
-private struct BannerModifier: ViewModifier {
-
-        @Binding var isPresented: Bool
-
-        func body(content: Content) -> some View {
-                ZStack {
-                        content
-                        if isPresented {
-                                Text("Copied")
-                                        .padding(.vertical, 8)
-                                        .padding(.horizontal, 40)
-                                        .background(.ultraThinMaterial)
-                                        .clipShape(Capsule())
-                                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                        }
-                }
         }
 }
