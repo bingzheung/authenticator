@@ -34,14 +34,9 @@
 "Export" = "Export";
 "Export Accounts" = "Export Accounts";
 "Copy all Key URIs to Clipboard" = "Copy all Key URIs to Clipboard";
-
 "Export all Key URIs as plain text" = "Export all Key URIs as plain text";
-
-"Export all Key URIs as a" = "Export all Key URIs as a";
-"file" = "file";
-
-"Export all Key URIs as QR Code images" = "Export all Key URIs as QR Code images";
-"combined as a" = "combined as a";
+"Export all Key URIs as a %@ file" = "Export all Key URIs as a %@ file";
+"Export all Key URIs as QR Code images combined as a %@ file" = "Export all Key URIs as QR Code images combined as a %@ file";
 
 
 // About

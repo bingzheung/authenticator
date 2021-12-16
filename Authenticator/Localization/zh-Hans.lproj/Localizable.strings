@@ -35,14 +35,9 @@
 "Export" = "导出";
 "Export Accounts" = "导出帐号";
 "Copy all Key URIs to Clipboard" = "拷贝所有 Key URI 到剪帖板";
-
-"Export all Key URIs as plain text" = "导出所有 Key URI 为纯文本 text";
-
-"Export all Key URIs as a" = "导出所有 Key URI 合为一个";
-"file" = "文件";
-
-"Export all Key URIs as QR Code images" = "以二维码图片形式导出所有 Key URI";
-"combined as a" = "合为一个";
+"Export all Key URIs as plain text" = "以纯文本格式导出所有 Key URI";
+"Export all Key URIs as a %@ file" = "导出所有 Key URI 合为一个 %@ 文件";
+"Export all Key URIs as QR Code images combined as a %@ file" = "以二维码图片形式导出所有 Key URI 合为一个 %@ 文件";
 
 
 // About

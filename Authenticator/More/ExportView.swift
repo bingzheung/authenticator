@@ -14,23 +14,25 @@ struct ExportView: View {
                 NavigationView {
                         List {
                                 Section {
-                                        Button(action: {
+                                        Button {
                                                 UIPasteboard.general.string = tokensText
-                                        }) {
-                                                HStack {
+                                        } label: {
+                                                Label {
                                                         Text("Copy all Key URIs to Clipboard")
-                                                        Spacer()
+                                                } icon: {
+                                                        Image(systemName: "doc.on.doc").foregroundColor(.primary)
                                                 }
                                         }
                                 }
 
                                 Section {
-                                        Button(action: {
+                                        Button {
                                                 isPlainTextActivityPresented = true
-                                        }) {
-                                                HStack {
+                                        } label: {
+                                                Label {
                                                         Text("Export all Key URIs as plain text")
-                                                        Spacer()
+                                                } icon: {
+                                                        Image(systemName: "text.alignleft").foregroundColor(.primary)
                                                 }
                                         }
                                         .sheet(isPresented: $isPlainTextActivityPresented) {
@@ -41,13 +43,12 @@ struct ExportView: View {
                                 }
 
                                 Section {
-                                        Button(action: {
+                                        Button {
                                                 isTXTFileActivityPresented = true
-                                        }) {
-                                                HStack {
-                                                        Text("Export all Key URIs as a")
-                                                        Text(verbatim: ".txt").font(.footnote.monospaced()).foregroundColor(.primary)
-                                                        Text("file")
+                                        } label: {
+                                                HStack(spacing: 16) {
+                                                        Image(systemName: "doc.text").foregroundColor(.primary).padding(.leading, 4)
+                                                        Text("Export all Key URIs as a \(Text(verbatim: ".txt").font(.footnote.monospaced()).foregroundColor(.primary)) file")
                                                         Spacer()
                                                 }
                                         }
@@ -64,20 +65,13 @@ struct ExportView: View {
                                 }
 
                                 Section {
-                                        Button(action: {
+                                        Button {
                                                 isZIPFileActivityPresented = true
-                                        }) {
-                                                VStack {
-                                                        HStack {
-                                                                Text("Export all Key URIs as QR Code images")
-                                                                Spacer()
-                                                        }
-                                                        HStack {
-                                                                Text("combined as a")
-                                                                Text(verbatim: ".zip").font(.footnote.monospaced()).foregroundColor(.primary)
-                                                                Text("file")
-                                                                Spacer()
-                                                        }
+                                        } label: {
+                                                HStack(spacing: 16) {
+                                                        Image(systemName: "doc.zipper").foregroundColor(.primary).padding(.leading, 4)
+                                                        Text("Export all Key URIs as QR Code images combined as a \(Text(verbatim: ".zip").font(.footnote.monospaced()).foregroundColor(.primary)) file")
+                                                        Spacer()
                                                 }
                                         }
                                         .sheet(isPresented: $isZIPFileActivityPresented) {
