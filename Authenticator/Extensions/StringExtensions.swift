@@ -10,6 +10,9 @@ extension String {
 
         /// aka. `String.init()`
         static let empty: String = ""
+
+        /// Six zeros
+        static let zeros: String = "000000"
 }
 
 extension Optional where Wrapped == String {

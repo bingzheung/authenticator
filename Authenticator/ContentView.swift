@@ -10,7 +10,7 @@ struct ContentView: View {
 
         private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         @State private var timeRemaining: Int = 30 - (Int(Date().timeIntervalSince1970) % 30)
-        @State private var codes: [String] = Array(repeating: "000000", count: 50)
+        @State private var codes: [String] = Array(repeating: String.zeros, count: 50)
         @State private var animationTrigger: Bool = false
 
         @State private var isSheetPresented: Bool = false
@@ -74,7 +74,7 @@ struct ContentView: View {
                         }
                         .onReceive(timer) { _ in
                                 timeRemaining = 30 - (Int(Date().timeIntervalSince1970) % 30)
-                                if timeRemaining == 30 || codes.first == "000000" {
+                                if timeRemaining == 30 || codes.first == String.zeros {
                                         generateCodes()
                                 }
                         }
@@ -341,7 +341,7 @@ struct ContentView: View {
                 return token
         }
         private func generateCodes() {
-                let placeholder: [String] = Array(repeating: "000000", count: 30)
+                let placeholder: [String] = Array(repeating: String.zeros, count: 30)
                 guard !fetchedTokens.isEmpty else {
                         codes = placeholder
                         return
@@ -351,9 +351,9 @@ struct ContentView: View {
                 animationTrigger.toggle()
         }
         private func code(of tokenData: TokenData) -> String {
-                guard let uri: String = tokenData.uri else { return "000000" }
-                guard let token: Token = Token(uri: uri) else { return "000000" }
-                guard let code: String = OTPGenerator.totp(secret: token.secret, algorithm: token.algorithm, period: token.period) else { return "000000" }
+                guard let uri: String = tokenData.uri else { return String.zeros }
+                guard let token: Token = Token(uri: uri) else { return String.zeros }
+                guard let code: String = OTPGenerator.totp(secret: token.secret, algorithm: token.algorithm, period: token.period) else { return String.zeros }
                 return code
         }
 
