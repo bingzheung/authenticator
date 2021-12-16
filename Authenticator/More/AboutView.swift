@@ -3,7 +3,6 @@ import SwiftUI
 struct AboutView: View {
 
         @Binding var isPresented: Bool
-        @State private var isActivityViewPresented: Bool = false
 
         var body: some View {
                 NavigationView {
@@ -12,10 +11,10 @@ struct AboutView: View {
                                         HStack {
                                                 Text("Version")
                                                 Spacer()
-                                                Text(verbatim: versionString)
+                                                Text(verbatim: version)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton(content: versionString)
+                                                MenuCopyButton(content: version)
                                         }
                                 }
                                 Section {
@@ -25,43 +24,30 @@ struct AboutView: View {
                                         LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy")
                                 }
                                 Section {
-                                        HStack {
-                                                Text("Share this App")
-                                                Spacer()
-                                                Image(systemName: "square.and.arrow.up")
-                                        }
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                isActivityViewPresented = true
-                                        }
-                                        .onLongPressGesture {
-                                                isActivityViewPresented = true
-                                        }
+                                        LinkCardView(heading: "Share this App", message: "https://apps.apple.com/app/id1511791282")
                                 }
                         }
                         .navigationTitle("About")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
-                                        Button(action: {
+                                        Button("Back") {
                                                 isPresented = false
-                                        }) {
-                                                Text("Back")
                                         }
                                 }
-                        }
-                        .sheet(isPresented: $isActivityViewPresented) {
-                                ActivityView(activityItems: [URL(string: "https://apps.apple.com/app/id1511791282")!], completion: { isActivityViewPresented = false })
                         }
                 }
         }
 
-        private let versionString: String = {
-                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
-                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
-                return version + " (" + build + ")"
+        private let version: String = {
+                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
+                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
+                return versionString + " (" + buildString + ")"
         }()
 }
+
+
+// TODO: - Add copied banner
 
 private struct LinkCardView: View {
 
@@ -79,6 +65,9 @@ private struct LinkCardView: View {
                                 Spacer()
                         }
                 }
+                #if targetEnvironment(macCatalyst)
+                .textSelection(.enabled)
+                #endif
                 .contextMenu {
                         MenuCopyButton(content: message)
                 }
