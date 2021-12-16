@@ -12,6 +12,9 @@ struct AboutView: View {
                                                 Text("Version")
                                                 Spacer()
                                                 Text(verbatim: version)
+                                                        #if targetEnvironment(macCatalyst)
+                                                        .textSelection(.enabled)
+                                                        #endif
                                         }
                                         .contextMenu {
                                                 MenuCopyButton(content: version)
@@ -64,10 +67,11 @@ private struct LinkCardView: View {
                                 Text(verbatim: message).font(.caption.monospaced())
                                 Spacer()
                         }
+                        .padding(.bottom, 4)
+                        #if targetEnvironment(macCatalyst)
+                        .textSelection(.enabled)
+                        #endif
                 }
-                #if targetEnvironment(macCatalyst)
-                .textSelection(.enabled)
-                #endif
                 .contextMenu {
                         MenuCopyButton(content: message)
                 }
