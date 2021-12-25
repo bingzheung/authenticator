@@ -59,7 +59,7 @@ struct ManualEntryView: View {
 
                                         Section {
                                                 TextField("SECRET (Required)", text: $secretKey)
-                                                        .keyboardType(.alphabet)
+                                                        .keyboardType(.asciiCapable)
                                                         .submitLabel(.done)
                                                         .disableAutocorrection(true)
                                                         .autocapitalization(.none)
