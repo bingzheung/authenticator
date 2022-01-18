@@ -90,6 +90,8 @@ struct CodeCardView: View {
                                 return "wordpress"
                         case "gab.com":
                                 return "gab"
+                        case "crowdin.com":
+                                return "crowdin"
                         default:
                                 return issuer
                         }
