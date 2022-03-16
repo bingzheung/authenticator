@@ -92,6 +92,8 @@ struct CodeCardView: View {
                                 return "gab"
                         case "crowdin.com":
                                 return "crowdin"
+                        case "truthsocial.com":
+                                return "truthsocial"
                         default:
                                 return issuer
                         }
