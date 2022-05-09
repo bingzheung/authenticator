@@ -1,4 +1,4 @@
-2FA Auth
+Authenticator
 ======
 
 Two Factor TOTP Authenticator for iOS & macOS
