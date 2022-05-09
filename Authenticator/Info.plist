@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Access Camera to scan QR Code</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2022 Bing Zheung</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
