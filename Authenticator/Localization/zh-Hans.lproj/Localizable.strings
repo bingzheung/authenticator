@@ -15,6 +15,7 @@
 "Scan QR Code" = "扫描二维码";
 "Import from Photos" = "读二维码照片";
 "Import from Files" = "从文件导入";
+"Import from Finder" = "从 Finder 导入";
 "Enter Manually" = "手动输入";
 
 "Scanning" = "正在扫描";
