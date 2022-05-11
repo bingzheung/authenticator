@@ -8,17 +8,7 @@ struct AboutView: View {
                 NavigationView {
                         List {
                                 Section {
-                                        HStack {
-                                                Text("Version")
-                                                Spacer()
-                                                Text(verbatim: version)
-                                                        #if targetEnvironment(macCatalyst)
-                                                        .textSelection(.enabled)
-                                                        #endif
-                                        }
-                                        .contextMenu {
-                                                MenuCopyButton(version)
-                                        }
+                                        VersionLabel()
                                 }
                                 Section {
                                         LinkCardView(heading: "Source Code", message: "https://github.com/ososoio/authenticator")
@@ -41,6 +31,38 @@ struct AboutView: View {
                         }
                 }
         }
+}
+
+
+private struct VersionLabel: View {
+
+        @State private var isBannerPresented: Bool = false
+
+        var body: some View {
+                HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(verbatim: version)
+                                #if targetEnvironment(macCatalyst)
+                                .textSelection(.enabled)
+                                #endif
+                }
+                .padding(.vertical)
+                .contextMenu {
+                        MenuCopyButton(version)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                        UIPasteboard.general.string = version
+                        guard !isBannerPresented else { return }
+                        isBannerPresented = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                isBannerPresented = false
+                        }
+                }
+                .copiedBanner(isPresented: $isBannerPresented)
+                .animation(.default, value: isBannerPresented)
+        }
 
         private let version: String = {
                 let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
@@ -50,21 +72,21 @@ struct AboutView: View {
 }
 
 
-// TODO: - Add copied banner
-
 private struct LinkCardView: View {
 
         let heading: LocalizedStringKey
         let message: String
 
+        @State private var isBannerPresented: Bool = false
+
         var body: some View {
-                VStack(spacing: 8) {
+                VStack(spacing: 16) {
                         HStack {
                                 Text(heading)
                                 Spacer()
                         }
                         HStack {
-                                Text(verbatim: message).font(.caption.monospaced())
+                                Text(verbatim: message).font(.footnote.monospaced()).lineLimit(1).minimumScaleFactor(0.5)
                                 Spacer()
                         }
                         .padding(.bottom, 4)
@@ -72,8 +94,20 @@ private struct LinkCardView: View {
                         .textSelection(.enabled)
                         #endif
                 }
+                .padding(.vertical, 8)
                 .contextMenu {
                         MenuCopyButton(message)
                 }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                        UIPasteboard.general.string = message
+                        guard !isBannerPresented else { return }
+                        isBannerPresented = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                isBannerPresented = false
+                        }
+                }
+                .copiedBanner(isPresented: $isBannerPresented)
+                .animation(.default, value: isBannerPresented)
         }
 }
