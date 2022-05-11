@@ -18,7 +18,7 @@ struct TokenDetailView: View {
                                         Text(verbatim: token.displayIssuer).textSelection(.enabled)
                                         #if targetEnvironment(macCatalyst)
                                                 .contextMenu {
-                                                        MenuCopyButton(content: token.displayIssuer)
+                                                        MenuCopyButton(token.displayIssuer)
                                                 }
                                         #endif
                                 }
@@ -27,7 +27,7 @@ struct TokenDetailView: View {
                                         Text(verbatim: token.displayAccountName).textSelection(.enabled)
                                         #if targetEnvironment(macCatalyst)
                                                 .contextMenu {
-                                                        MenuCopyButton(content: token.displayAccountName)
+                                                        MenuCopyButton(token.displayAccountName)
                                                 }
                                         #endif
                                 }
@@ -36,7 +36,7 @@ struct TokenDetailView: View {
                                         Text(verbatim: token.secret).font(.footnote.monospaced()).textSelection(.enabled)
                                         #if targetEnvironment(macCatalyst)
                                                 .contextMenu {
-                                                        MenuCopyButton(content: token.secret)
+                                                        MenuCopyButton(token.secret)
                                                 }
                                         #endif
                                 }
@@ -45,7 +45,7 @@ struct TokenDetailView: View {
                                         Text(verbatim: token.uri).font(.footnote.monospaced()).textSelection(.enabled)
                                         #if targetEnvironment(macCatalyst)
                                                 .contextMenu {
-                                                        MenuCopyButton(content: token.uri)
+                                                        MenuCopyButton(token.uri)
                                                 }
                                         #endif
                                 }

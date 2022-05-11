@@ -17,7 +17,7 @@ struct AboutView: View {
                                                         #endif
                                         }
                                         .contextMenu {
-                                                MenuCopyButton(content: version)
+                                                MenuCopyButton(version)
                                         }
                                 }
                                 Section {
@@ -33,7 +33,7 @@ struct AboutView: View {
                         .navigationTitle("About")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
+                                ToolbarItem(placement: .cancellationAction) {
                                         Button("Back") {
                                                 isPresented = false
                                         }
@@ -73,7 +73,7 @@ private struct LinkCardView: View {
                         #endif
                 }
                 .contextMenu {
-                        MenuCopyButton(content: message)
+                        MenuCopyButton(message)
                 }
         }
 }

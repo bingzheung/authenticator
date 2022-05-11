@@ -60,4 +60,4 @@
 "**NOTE**: Changes would not apply to the Key URI" = "注意：這些修改不會作用到 Key URI";
 
 "Delete Account?" = "刪除帳號？";
-"Removing account will NOT turn off Two-Factor Authentication. Make sure you have alternate ways to sign into your service." = "刪除帳號不等於關閉雙重認證\n\n務必確保你還有其他方式認證登錄";
+"Account Deletion Warning" = "刪除帳號不等於關閉雙重認證\n\n務必確保你還有其他方式認證登錄";

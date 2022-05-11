@@ -89,11 +89,9 @@ struct ExportView: View {
                         .navigationTitle("Export Accounts")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
-                                        Button(action: {
-                                                isPresented  = false
-                                        }) {
-                                                Text("Back")
+                                ToolbarItem(placement: .cancellationAction) {
+                                        Button("Back") {
+                                                isPresented = false
                                         }
                                 }
                         }

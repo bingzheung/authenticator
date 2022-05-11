@@ -292,7 +292,7 @@ struct ContentView: View {
         }
         private var deletionAlert: Alert {
                 return Alert(title: Text("Delete Account?"),
-                             message: Text("Removing account will NOT turn off Two-Factor Authentication. Make sure you have alternate ways to sign into your service."),
+                             message: Text("Account Deletion Warning"),
                              primaryButton: .cancel(cancelDeletion),
                              secondaryButton: .destructive(Text("Delete"), action: performDeletion))
         }
