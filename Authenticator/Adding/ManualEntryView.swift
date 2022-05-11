@@ -76,10 +76,14 @@ struct ManualEntryView: View {
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {
-                                        Button("Cancel", action: { isPresented = false })
+                                        Button("Cancel") {
+                                                isPresented = false
+                                        }
                                 }
                                 ToolbarItem(placement: .confirmationAction) {
-                                        Button("Add", action: handleAdding)
+                                        Button("Add") {
+                                                handleAdding()
+                                        }
                                 }
                         }
                 }

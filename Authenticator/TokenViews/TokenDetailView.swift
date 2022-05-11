@@ -85,8 +85,10 @@ struct TokenDetailView: View {
                         .navigationTitle("Account Detail")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
-                                        Button("Back", action: { isPresented = false })
+                                ToolbarItem(placement: .cancellationAction) {
+                                        Button("Back") {
+                                                isPresented = false
+                                        }
                                 }
                         }
                 }

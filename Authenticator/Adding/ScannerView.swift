@@ -124,10 +124,8 @@ struct Scanner: View {
                                 .navigationBarTitleDisplayMode(.inline)
                                 .toolbar {
                                         ToolbarItem(placement: .cancellationAction) {
-                                                Button(action: {
+                                                Button("Cancel") {
                                                         isPresented = false
-                                                }) {
-                                                        Text("Cancel")
                                                 }
                                         }
                                 }
