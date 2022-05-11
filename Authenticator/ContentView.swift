@@ -29,8 +29,8 @@ struct ContentView: View {
         var body: some View {
                 NavigationView {
                         List(selection: $selectedTokens) {
-                                ForEach(fetchedTokens, id: \.self) { item in
-                                        let index: Int = Int(fetchedTokens.firstIndex(of: item) ?? 0)
+                                ForEach(0..<fetchedTokens.count, id: \.self) { index in
+                                        let item = fetchedTokens[index]
                                         Section {
                                                 CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
                                                         .contextMenu {
