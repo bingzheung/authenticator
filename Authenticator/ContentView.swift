@@ -357,7 +357,7 @@ struct ContentView: View {
         private func code(of tokenData: TokenData) -> String {
                 guard let uri: String = tokenData.uri else { return String.zeros }
                 guard let token: Token = Token(uri: uri) else { return String.zeros }
-                guard let code: String = OTPGenerator.totp(secret: token.secret, algorithm: token.algorithm, period: token.period) else { return String.zeros }
+                guard let code: String = OTPGenerator.totp(secret: token.secret, algorithm: token.algorithm, digits: token.digits, period: token.period) else { return String.zeros }
                 return code
         }
 
