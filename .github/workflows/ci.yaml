@@ -1,0 +1,11 @@
+name: CI
+on: [push, pull_request, release]
+
+jobs:
+  buildapp:
+    name: BuildApp
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: BuildApp
+        run: set -o pipefail && xcodebuild clean build -project Authenticator.xcodeproj -scheme Authenticator -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
