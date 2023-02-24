@@ -2,15 +2,15 @@ import SwiftUI
 
 struct MenuCopyButton: View {
 
-        init(_ content: String) {
-                self.content = content
+        init(_ text: String) {
+                self.text = text
         }
 
-        private let content: String
+        private let text: String
 
         var body: some View {
                 Button {
-                        UIPasteboard.general.string = content
+                        UIPasteboard.general.string = text
                 } label: {
                         Label("Copy", systemImage: "doc.on.doc")
                 }

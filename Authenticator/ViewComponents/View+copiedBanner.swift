@@ -11,7 +11,7 @@ struct CopiedBannerModifier: ViewModifier {
                                 Text("Copied")
                                         .padding(.vertical, 8)
                                         .padding(.horizontal, 40)
-                                        .background(.ultraThinMaterial)
+                                        .background(.thinMaterial)
                                         .clipShape(Capsule())
                                         .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         }
