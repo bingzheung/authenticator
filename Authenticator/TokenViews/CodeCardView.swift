@@ -8,10 +8,12 @@ struct CodeCardView: View {
 
         @State private var isBannerPresented: Bool = false
 
+        private let diameter: CGFloat = 24
+
         var body: some View {
                 VStack(spacing: 4) {
                         HStack(spacing: 16) {
-                                issuerImage.resizable().scaledToFit().frame(width: 24, height: 24)
+                                issuerImage.resizable().scaledToFit().frame(width: diameter, height: diameter)
                                 Text(verbatim: token.displayIssuer).font(.headline)
                                 Spacer()
                                 Menu {
@@ -29,7 +31,7 @@ struct CodeCardView: View {
                                         Image(systemName: "ellipsis.circle")
                                                 .resizable()
                                                 .scaledToFit()
-                                                .frame(width: 24, height: 24)
+                                                .frame(width: diameter, height: diameter)
                                                 .foregroundColor(.primary)
                                                 .padding(.leading, 8)
                                                 .contentShape(Rectangle())
@@ -37,7 +39,7 @@ struct CodeCardView: View {
                         }
                         VStack(spacing: 4) {
                                 HStack {
-                                        Text(verbatim: formattedTotp).font(.largeTitle)
+                                        Text(verbatim: formattedTotp).font(.largeTitle.monospacedDigit())
                                         Spacer()
                                 }
                                 HStack {
@@ -45,11 +47,11 @@ struct CodeCardView: View {
                                         Spacer()
                                         ZStack {
                                                 Circle().stroke(Color.primary.opacity(0.2), lineWidth: 2)
-                                                        .frame(width: 24, height: 24)
+                                                        .frame(width: diameter, height: diameter)
                                                 Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true)
                                                         .stroke(lineWidth: 2)
-                                                        .frame(width: 24, height: 24)
-                                                Text(verbatim: timeRemaining.description).font(.footnote)
+                                                        .frame(width: diameter, height: diameter)
+                                                Text(verbatim: timeRemaining.description).font(.footnote.monospacedDigit())
                                         }
                                 }
                         }
@@ -103,7 +105,9 @@ struct CodeCardView: View {
                 return Image(uiImage: uiImage)
         }
 
-        private var endAngle: Double { Double((30 - timeRemaining) * 12 - 89) }
+        private var endAngle: Double {
+                return Double((30 - timeRemaining) * 12 - 89)
+        }
 }
 
 private struct Arc: Shape {
