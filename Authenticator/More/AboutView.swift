@@ -1,9 +1,7 @@
 import SwiftUI
 
 struct AboutView: View {
-
         @Binding var isPresented: Bool
-
         var body: some View {
                 NavigationView {
                         List {
@@ -11,13 +9,13 @@ struct AboutView: View {
                                         VersionLabel()
                                 }
                                 Section {
-                                        LinkCardView(heading: "Source Code", message: "https://github.com/ososoio/authenticator")
+                                        LinkCardView(heading: "Source Code", message: "https://github.com/bingzheung/authenticator")
                                 }
                                 Section {
                                         LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy")
                                 }
                                 Section {
-                                        LinkCardView(heading: "Share this App", message: "https://apps.apple.com/app/id1511791282")
+                                        LinkCardView(heading: "Share this App", message: "https://apps.apple.com/us/app/id1511791282")
                                 }
                         }
                         .navigationTitle("About")
@@ -33,11 +31,8 @@ struct AboutView: View {
         }
 }
 
-
 private struct VersionLabel: View {
-
         @State private var isBannerPresented: Bool = false
-
         var body: some View {
                 HStack {
                         Text("Version")
@@ -47,7 +42,7 @@ private struct VersionLabel: View {
                                 .textSelection(.enabled)
                                 #endif
                 }
-                .padding(.vertical)
+                .padding(.vertical, 8)
                 .contextMenu {
                         MenuCopyButton(version)
                 }
@@ -63,38 +58,30 @@ private struct VersionLabel: View {
                 .copiedBanner(isPresented: $isBannerPresented)
                 .animation(.default, value: isBannerPresented)
         }
-
         private let version: String = {
-                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
-                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
+                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
+                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
                 return versionString + " (" + buildString + ")"
         }()
 }
 
-
 private struct LinkCardView: View {
-
         let heading: LocalizedStringKey
         let message: String
-
         @State private var isBannerPresented: Bool = false
-
         var body: some View {
-                VStack(spacing: 16) {
-                        HStack {
-                                Text(heading)
-                                Spacer()
-                        }
-                        HStack {
-                                Text(verbatim: message).font(.footnote.monospaced()).lineLimit(1).minimumScaleFactor(0.5)
-                                Spacer()
-                        }
-                        .padding(.bottom, 4)
-                        #if targetEnvironment(macCatalyst)
-                        .textSelection(.enabled)
-                        #endif
+                VStack(alignment: .leading, spacing: 8) {
+                        Text(heading)
+                        Text(verbatim: message)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                                .font(.footnote.monospaced())
+                                .padding(.bottom, 4)
+                                #if targetEnvironment(macCatalyst)
+                                .textSelection(.enabled)
+                                #endif
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, 4)
                 .contextMenu {
                         MenuCopyButton(message)
                 }
