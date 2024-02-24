@@ -26,7 +26,7 @@
 "Issuer" = "Issuer";
 "Service Provider (Optional)" = "Service Provider (Optional)";
 "Account Name" = "Account Name";
-"email@example.com (Optional)" = "email@example.com (Optional)";
+"Email or Username (Optional)" = "Email or Username (Optional)";
 "Secret Key" = "Secret Key";
 "SECRET (Required)" = "SECRET (Required)";
 

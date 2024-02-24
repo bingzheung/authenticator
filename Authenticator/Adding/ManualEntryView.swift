@@ -48,7 +48,7 @@ struct ManualEntryView: View {
                                         }
 
                                         Section {
-                                                TextField("email@example.com (Optional)", text: $accountName)
+                                                TextField("Email or Username (Optional)", text: $accountName)
                                                         .keyboardType(.emailAddress)
                                                         .submitLabel(.done)
                                                         .disableAutocorrection(true)

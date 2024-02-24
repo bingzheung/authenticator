@@ -27,7 +27,7 @@
 "Issuer" = "Issuer";
 "Service Provider (Optional)" = "服務提供商（可選）";
 "Account Name" = "Account Name";
-"email@example.com (Optional)" = "email@example.com（可選）";
+"Email or Username (Optional)" = "Email or Username（可選）";
 "Secret Key" = "Secret Key";
 "SECRET (Required)" = "SECRET（必填）";
 
@@ -35,7 +35,7 @@
 // Export
 "Export" = "導出";
 "Export Accounts" = "導出帳號";
-"Copy all Key URIs to Clipboard" = "拷貝所有 Key URI 到剪帖板";
+"Copy all Key URIs to Clipboard" = "拷貝所有 Key URI 到剪貼板";
 "Export all Key URIs as plain text" = "以純文本格式導出所有 Key URI";
 "Export all Key URIs as a %@ file" = "導出所有 Key URI 合爲一個 %@ 檔案";
 "Export all Key URIs as QR Code images combined as a %@ file" = "以二維碼圖片形式導出所有 Key URI 合爲一個 %@ 檔案";
