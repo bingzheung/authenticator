@@ -17,22 +17,21 @@ struct ExportView: View {
                                         Button {
                                                 UIPasteboard.general.string = tokensText
                                         } label: {
-                                                Label {
+                                                HStack(spacing: 12) {
+                                                        Image(systemName: "doc.on.doc").foregroundStyle(Color.primary)
                                                         Text("Copy all Key URIs to Clipboard")
-                                                } icon: {
-                                                        Image(systemName: "doc.on.doc").foregroundColor(.primary)
+                                                        Spacer()
                                                 }
                                         }
                                 }
-
                                 Section {
                                         Button {
                                                 isPlainTextActivityPresented = true
                                         } label: {
-                                                Label {
+                                                HStack(spacing: 12) {
+                                                        Image(systemName: "text.alignleft").foregroundStyle(Color.primary)
                                                         Text("Export all Key URIs as plain text")
-                                                } icon: {
-                                                        Image(systemName: "text.alignleft").foregroundColor(.primary)
+                                                        Spacer()
                                                 }
                                         }
                                         .sheet(isPresented: $isPlainTextActivityPresented) {
@@ -41,13 +40,12 @@ struct ExportView: View {
                                                 }
                                         }
                                 }
-
                                 Section {
                                         Button {
                                                 isTXTFileActivityPresented = true
                                         } label: {
-                                                HStack(spacing: 16) {
-                                                        Image(systemName: "doc.text").foregroundColor(.primary).padding(.leading, 4)
+                                                HStack(spacing: 12) {
+                                                        Image(systemName: "doc.text").foregroundStyle(Color.primary)
                                                         Text("Export all Key URIs as a \(Text(verbatim: ".txt").font(.footnote.monospaced()).foregroundColor(.primary)) file")
                                                         Spacer()
                                                 }
@@ -63,13 +61,12 @@ struct ExportView: View {
                                                 #endif
                                         }
                                 }
-
                                 Section {
                                         Button {
                                                 isZIPFileActivityPresented = true
                                         } label: {
-                                                HStack(spacing: 16) {
-                                                        Image(systemName: "doc.zipper").foregroundColor(.primary).padding(.leading, 4)
+                                                HStack(spacing: 12) {
+                                                        Image(systemName: "doc.zipper").foregroundStyle(Color.primary)
                                                         Text("Export all Key URIs as QR Code images combined as a \(Text(verbatim: ".zip").font(.footnote.monospaced()).foregroundColor(.primary)) file")
                                                         Spacer()
                                                 }
@@ -104,7 +101,7 @@ struct ExportView: View {
 
         private func txtFile() -> URL {
                 let txtFileName: String = "2FA-accounts-" + Date.currentDateText + ".txt"
-                let txtFileUrl: URL = .tmpDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
+                let txtFileUrl: URL = URL.tmpDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
                 try? tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
                 return txtFileUrl
         }
@@ -112,14 +109,13 @@ struct ExportView: View {
         // https://recoursive.com/2021/02/25/create_zip_archive_using_only_foundation
         private func zipFile() -> URL {
                 let imagesDirectoryName: String = "2FA-accounts-" + Date.currentDateText
-                let imagesDirectoryUrl: URL = .tmpDirectoryUrl.appendingPathComponent(imagesDirectoryName, isDirectory: true)
+                let imagesDirectoryUrl: URL = URL.tmpDirectoryUrl.appendingPathComponent(imagesDirectoryName, isDirectory: true)
                 if !(FileManager.default.fileExists(atPath: imagesDirectoryUrl.path)) {
                         try? FileManager.default.createDirectory(at: imagesDirectoryUrl, withIntermediateDirectories: false)
                 }
-                _ = tokens.map { oneToken in
-                        _ = saveQRCodeImage(for: oneToken, parent: imagesDirectoryUrl)
-                }
-                let zipFileUrl: URL = .tmpDirectoryUrl.appendingPathComponent("\(imagesDirectoryName).zip", isDirectory: false)
+                _ = tokens.map({ saveQRCodeImage(for: $0, parent: imagesDirectoryUrl) })
+                let zipFileName: String = imagesDirectoryName + ".zip"
+                let zipFileUrl: URL = URL.tmpDirectoryUrl.appendingPathComponent(zipFileName, isDirectory: false)
                 let coordinator = NSFileCoordinator()
                 var err: NSError?
                 coordinator.coordinate(readingItemAt: imagesDirectoryUrl, options: .forUploading, error: &err) { url in
