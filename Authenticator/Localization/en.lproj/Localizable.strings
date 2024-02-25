@@ -58,7 +58,7 @@
 "Edit Account" = "Edit Account";
 
 "Account Detail" = "Account Detail";
-"title.edit_account" = "Edit Account";
+"NavigationTitle.EditAccount" = "Edit Account";
 "**NOTE**: Changes would not apply to the Key URI" = "**NOTE**: Changes would not apply to the Key URI";
 
 "Delete Account?" = "Delete Account?";

@@ -16,18 +16,18 @@ struct EditAccountView: View {
                                 Section {
                                         TextField(token.displayIssuer, text: $displayIssuer)
                                                 .submitLabel(.done)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.words)
+                                                .autocorrectionDisabled()
+                                                .textInputAutocapitalization(.words)
                                 } header: {
                                         Text("Issuer")
                                 }
 
                                 Section {
                                         TextField(token.displayAccountName, text: $displayAccountName)
-                                                .keyboardType(.emailAddress)
+                                                .keyboardType(.asciiCapable)
                                                 .submitLabel(.done)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.none)
+                                                .autocorrectionDisabled()
+                                                .textInputAutocapitalization(.never)
                                 } header: {
                                         Text("Account Name")
                                 }
@@ -43,7 +43,7 @@ struct EditAccountView: View {
                                 displayIssuer = token.displayIssuer
                                 displayAccountName = token.displayAccountName
                         }
-                        .navigationTitle("title.edit_account")
+                        .navigationTitle("NavigationTitle.EditAccount")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {

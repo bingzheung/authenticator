@@ -58,8 +58,8 @@
 "Edit Account" = "編輯本項";
 
 "Account Detail" = "帳號詳情";
-"title.edit_account" = "編輯帳號";
-"**NOTE**: Changes would not apply to the Key URI" = "注意：呢啲修改毋會作用到 Key URI";
+"NavigationTitle.EditAccount" = "編輯帳號";
+"**NOTE**: Changes would not apply to the Key URI" = "注意：本䈎修改毋會作用到 Key URI";
 
 "Delete Account?" = "刪除帳號？";
 "Account Deletion Warning" = "刪除帳號毋等於關閉雙重認證\n\n務必確保你仲有其他方式認證登錄";
