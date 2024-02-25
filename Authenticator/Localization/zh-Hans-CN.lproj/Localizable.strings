@@ -6,6 +6,8 @@
 "Delete" = "删除";
 "Back" = "返回";
 "Add" = "添加";
+"OK" = "好";
+"Error" = "错误";
 
 
 // Adding accounts
@@ -18,6 +20,7 @@
 "Scanning" = "正在扫描";
 
 "Add Account" = "添加帐号";
+"Method" = "方式";
 "By Key URI" = "以 Key URI 方式";
 "By Secret Key" = "以 Secret Key 方式";
 "Key URI" = "Key URI";
@@ -27,6 +30,7 @@
 "Email or Username (Optional)" = "Email or Username（可选）";
 "Secret Key" = "Secret Key";
 "SECRET (Required)" = "SECRET（必填）";
+"Invalid Key" = "无效 Key";
 
 
 // Export

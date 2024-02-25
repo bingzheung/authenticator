@@ -1,11 +1,16 @@
 import SwiftUI
 
+private enum EntryMethod: Int {
+        case keyURI
+        case secretKey
+}
+
 struct ManualEntryView: View {
 
         @Binding var isPresented: Bool
         let completion: (Token) -> Void
 
-        @State private var selection: Int = 0
+        @State private var entryMethod: EntryMethod = .keyURI
         @State private var keyUri: String = .empty
         @State private var issuer: String = .empty
         @State private var accountName: String = .empty
@@ -17,22 +22,22 @@ struct ManualEntryView: View {
                 NavigationView {
                         List {
                                 Section {
-                                        Picker("Method", selection: $selection) {
-                                                Text("By Key URI").tag(0)
-                                                Text("By Secret Key").tag(1)
+                                        Picker("Method", selection: $entryMethod) {
+                                                Text("By Key URI").tag(EntryMethod.keyURI)
+                                                Text("By Secret Key").tag(EntryMethod.secretKey)
                                         }
                                         .pickerStyle(.segmented)
                                 }
                                 .listRowInsets(EdgeInsets())
                                 .listRowBackground(Color.clear)
 
-                                if selection == 0 {
+                                if entryMethod == EntryMethod.keyURI {
                                         Section {
                                                 TextField("otpauth://totp/...", text: $keyUri)
                                                         .keyboardType(.URL)
                                                         .submitLabel(.done)
-                                                        .disableAutocorrection(true)
-                                                        .autocapitalization(.none)
+                                                        .autocorrectionDisabled()
+                                                        .textInputAutocapitalization(.never)
                                                         .font(.footnote.monospaced())
                                         } header: {
                                                 Text(verbatim: "Key URI")
@@ -41,18 +46,18 @@ struct ManualEntryView: View {
                                         Section {
                                                 TextField("Service Provider (Optional)", text: $issuer)
                                                         .submitLabel(.done)
-                                                        .disableAutocorrection(true)
-                                                        .autocapitalization(.words)
+                                                        .autocorrectionDisabled()
+                                                        .textInputAutocapitalization(.words)
                                         } header: {
                                                 Text(verbatim: "Issuer")
                                         }
 
                                         Section {
                                                 TextField("Email or Username (Optional)", text: $accountName)
-                                                        .keyboardType(.emailAddress)
+                                                        .keyboardType(.asciiCapable)
                                                         .submitLabel(.done)
-                                                        .disableAutocorrection(true)
-                                                        .autocapitalization(.none)
+                                                        .autocorrectionDisabled()
+                                                        .textInputAutocapitalization(.never)
                                         } header: {
                                                 Text(verbatim: "Account Name")
                                         }
@@ -61,16 +66,18 @@ struct ManualEntryView: View {
                                                 TextField("SECRET (Required)", text: $secretKey)
                                                         .keyboardType(.asciiCapable)
                                                         .submitLabel(.done)
-                                                        .disableAutocorrection(true)
-                                                        .autocapitalization(.none)
+                                                        .autocorrectionDisabled()
+                                                        .textInputAutocapitalization(.never)
                                                         .font(.callout.monospaced())
                                         } header: {
                                                 Text(verbatim: "Secret Key")
                                         }
                                 }
                         }
-                        .alert(isPresented: $isAlertPresented) {
-                                Alert(title: Text("Error"), message: Text("Invalid Key"), dismissButton: .cancel(Text("OK")))
+                        .alert("Error", isPresented: $isAlertPresented) {
+                                Button("OK", role: .cancel, action: { isAlertPresented.toggle() })
+                        } message: {
+                                Text("Invalid Key")
                         }
                         .navigationTitle("Add Account")
                         .navigationBarTitleDisplayMode(.inline)
@@ -104,16 +111,18 @@ struct ManualEntryView: View {
         }
 
         private var newToken: Token? {
-                if selection == 0 {
-                        guard !keyUri.isEmpty else { return nil }
-                        guard let token: Token = Token(uri: keyUri.trimmed()) else { return nil }
+                switch entryMethod {
+                case .keyURI:
+                        let uri = keyUri.trimmed()
+                        guard !(uri.isEmpty) else { return nil }
+                        guard let token: Token = Token(uri: uri) else { return nil }
                         return token
-                } else {
-                        guard !secretKey.isEmpty else { return nil }
-                        guard let token: Token = Token(issuerPrefix: issuer.trimmed(),
-                                                       accountName: accountName.trimmed(),
-                                                       secret: secretKey.trimmed(),
-                                                       issuer: issuer.trimmed()) else { return nil }
+                case .secretKey:
+                        let secret = secretKey.trimmed()
+                        guard !(secret.isEmpty) else { return nil }
+                        let issuerText = issuer.trimmed()
+                        let account = accountName.trimmed()
+                        guard let token: Token = Token(issuerPrefix: issuerText, accountName: account, secret: secret, issuer: issuerText) else { return nil }
                         return token
                 }
         }

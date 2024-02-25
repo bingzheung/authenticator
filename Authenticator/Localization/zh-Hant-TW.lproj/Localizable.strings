@@ -1,6 +1,3 @@
-// Traditional Chinese, Taiwan (zh-Hant-TW)
-
-
 // General
 "Copy" = "拷貝";
 "Done" = "完成";
@@ -9,6 +6,8 @@
 "Delete" = "刪除";
 "Back" = "返回";
 "Add" = "添加";
+"OK" = "好";
+"Error" = "錯誤";
 
 
 // Adding accounts
@@ -21,6 +20,7 @@
 "Scanning" = "正在掃描";
 
 "Add Account" = "添加帳號";
+"Method" = "方式";
 "By Key URI" = "以 Key URI 方式";
 "By Secret Key" = "以 Secret Key 方式";
 "Key URI" = "Key URI";
@@ -30,6 +30,7 @@
 "Email or Username (Optional)" = "Email or Username（可選）";
 "Secret Key" = "Secret Key";
 "SECRET (Required)" = "SECRET（必填）";
+"Invalid Key" = "無效 Key";
 
 
 // Export

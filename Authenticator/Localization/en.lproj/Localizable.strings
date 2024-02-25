@@ -1,5 +1,3 @@
-// English (en)
-
 // General
 "Copy" = "Copy";
 "Done" = "Done";
@@ -8,6 +6,8 @@
 "Delete" = "Delete";
 "Back" = "Back";
 "Add" = "Add";
+"OK" = "OK";
+"Error" = "Error";
 
 
 // Adding accounts
@@ -20,6 +20,7 @@
 "Scanning" = "Scanning";
 
 "Add Account" = "Add Account";
+"Method" = "Method";
 "By Key URI" = "By Key URI";
 "By Secret Key" = "By Secret Key";
 "Key URI" = "Key URI";
@@ -29,6 +30,7 @@
 "Email or Username (Optional)" = "Email or Username (Optional)";
 "Secret Key" = "Secret Key";
 "SECRET (Required)" = "SECRET (Required)";
+"Invalid Key" = "Invalid Key";
 
 
 // Export
