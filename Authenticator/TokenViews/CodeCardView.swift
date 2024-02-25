@@ -32,27 +32,22 @@ struct CodeCardView: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: diameter, height: diameter)
-                                                .foregroundColor(.primary)
+                                                .foregroundStyle(Color.primary)
                                                 .padding(.leading, 8)
                                                 .contentShape(Rectangle())
                                 }
                         }
-                        VStack(spacing: 4) {
-                                HStack {
-                                        Text(verbatim: formattedTotp).font(.largeTitle.monospacedDigit())
-                                        Spacer()
-                                }
+                        VStack(alignment: .leading, spacing: 4) {
+                                Text(verbatim: formattedTotp).font(.largeTitle.monospacedDigit())
                                 HStack {
                                         Text(verbatim: token.displayAccountName).font(.footnote)
                                         Spacer()
                                         ZStack {
                                                 Circle().stroke(Color.primary.opacity(0.2), lineWidth: 2)
-                                                        .frame(width: diameter, height: diameter)
-                                                Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true)
-                                                        .stroke(lineWidth: 2)
-                                                        .frame(width: diameter, height: diameter)
+                                                Arc(startAngle: .degrees(-90), endAngle: .degrees(endAngle), clockwise: true).stroke(lineWidth: 2)
                                                 Text(verbatim: timeRemaining.description).font(.footnote.monospacedDigit())
                                         }
+                                        .frame(width: diameter, height: diameter)
                                 }
                         }
                         .contentShape(Rectangle())
@@ -100,7 +95,7 @@ struct CodeCardView: View {
                                 return issuer
                         }
                 }()
-                guard !imageName.isEmpty else { return Image(systemName: "person.circle") }
+                guard !(imageName.isEmpty) else { return Image(systemName: "person.circle") }
                 guard let uiImage: UIImage = UIImage(named: imageName) else { return Image(systemName: "person.circle") }
                 return Image(uiImage: uiImage)
         }
