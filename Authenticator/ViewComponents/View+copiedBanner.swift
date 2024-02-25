@@ -1,9 +1,7 @@
 import SwiftUI
 
-struct CopiedBannerModifier: ViewModifier {
-
+private struct CopiedBannerModifier: ViewModifier {
         @Binding var isPresented: Bool
-
         func body(content: Content) -> some View {
                 ZStack {
                         content
@@ -11,9 +9,9 @@ struct CopiedBannerModifier: ViewModifier {
                                 Text("Copied")
                                         .padding(.vertical, 8)
                                         .padding(.horizontal, 40)
-                                        .background(.thinMaterial)
-                                        .clipShape(Capsule())
-                                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                                        .background(.ultraThinMaterial)
+                                        .clipShape(.capsule)
+                                        .transition(.move(edge: .top).combined(with: .opacity))
                         }
                 }
         }
