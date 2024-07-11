@@ -57,7 +57,7 @@
 "View Detail" = "View Detail";
 "Edit Account" = "Edit Account";
 
-"Account Detail" = "Account Detail";
+"NavigationTitle.AccountDetail" = "Account Detail";
 "NavigationTitle.EditAccount" = "Edit Account";
 "**NOTE**: Changes would not apply to the Key URI" = "**NOTE**: Changes would not apply to the Key URI";
 

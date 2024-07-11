@@ -53,12 +53,12 @@ struct ContentView: View {
                                                                 }) {
                                                                         Label("Edit Account", systemImage: "square.and.pencil")
                                                                 }
-                                                                Button(action: {
+                                                                Button(role: .destructive) {
                                                                         tokenIndex = index
                                                                         selectedTokens.removeAll()
                                                                         indexSetOnDelete.removeAll()
                                                                         isDeletionAlertPresented = true
-                                                                }) {
+                                                                } label: {
                                                                         Label("Delete", systemImage: "trash")
                                                                 }
                                                         }
@@ -139,11 +139,11 @@ struct ContentView: View {
                                 }
                                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                                         if editMode == .active {
-                                                Button(action: {
-                                                        if !selectedTokens.isEmpty {
+                                                Button(role: .destructive) {
+                                                        if !(selectedTokens.isEmpty) {
                                                                 isDeletionAlertPresented = true
                                                         }
-                                                }) {
+                                                } label: {
                                                         Image(systemName: "trash")
                                                 }
                                         } else {

@@ -57,7 +57,7 @@
 "View Detail" = "詳情";
 "Edit Account" = "編輯本項";
 
-"Account Detail" = "帳號詳情";
+"NavigationTitle.AccountDetail" = "帳號詳情";
 "NavigationTitle.EditAccount" = "編輯帳號";
 "**NOTE**: Changes would not apply to the Key URI" = "注意：本䈎修改不會作用到 Key URI";
 

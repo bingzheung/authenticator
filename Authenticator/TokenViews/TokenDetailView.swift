@@ -1,8 +1,6 @@
 import SwiftUI
 import CoreImage.CIFilterBuiltins
 
-private var imageUrl: URL? = nil
-
 struct TokenDetailView: View {
 
         @Binding var isPresented: Bool
@@ -51,42 +49,35 @@ struct TokenDetailView: View {
                                 }
                                 if let uiImage = qrCodeImage {
                                         Section {
-                                                HStack {
-                                                        Spacer()
-                                                        Image(uiImage: uiImage)
-                                                                .resizable()
-                                                                .scaledToFit()
-                                                                .frame(width: 180, height: 180)
-                                                                .onLongPressGesture {
-                                                                        imageUrl = nil
-                                                                        imageUrl = saveQRCodeImage(uiImage)
-                                                                        if imageUrl != nil {
-                                                                                isImageActivityViewPresented = true
-                                                                        }
+                                                Image(uiImage: uiImage)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 180, height: 180)
+                                                        .onLongPressGesture {
+                                                                isImageActivityViewPresented = true
                                                         }
-                                                        Spacer()
-                                                }
                                         } header: {
-                                                Text(verbatim: "Key URI as QR Code").textCase(.none)
+                                                Text(verbatim: "Key URI as QR Code").textCase(nil)
                                         }
+                                        .listRowBackground(Color.clear)
                                 }
                         }
                         .sheet(isPresented: $isImageActivityViewPresented) {
-                                let url = imageUrl!
-                                #if targetEnvironment(macCatalyst)
-                                DocumentExporter(url: url)
-                                #else
-                                ActivityView(activityItems: [url]) {
-                                        imageUrl = nil
-                                        isImageActivityViewPresented = false
+                                if let url = saveQRCodeImage() {
+                                        #if targetEnvironment(macCatalyst)
+                                        DocumentExporter(url: url)
+                                        #else
+                                        ActivityView(activityItems: [url]) {
+                                                isImageActivityViewPresented = false
+                                        }
+                                        #endif
                                 }
-                                #endif
                         }
-                        .navigationTitle("Account Detail")
+                        .navigationTitle("NavigationTitle.AccountDetail")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {
-                                        Button("Back") {
+                                        Button("Back", role: .cancel) {
                                                 isPresented = false
                                         }
                                 }
@@ -105,14 +96,23 @@ struct TokenDetailView: View {
                 guard let cgImage: CGImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
                 return UIImage(cgImage: cgImage)
         }
-        private func saveQRCodeImage(_ image: UIImage) -> URL? {
-                let fileUrl: URL = .tmpDirectoryUrl.appendingPathComponent(imageName, isDirectory: false)
+        private func saveQRCodeImage() -> URL? {
+                let context: CIContext = CIContext()
+                let filter = CIFilter.qrCodeGenerator()
+                let data: Data = Data(token.uri.utf8)
+                filter.setValue(data, forKey: "inputMessage")
+                filter.setValue("H", forKey: "inputCorrectionLevel")
+                let transform: CGAffineTransform = CGAffineTransform(scaleX: 5, y: 5)
+                guard let ciImage: CIImage = filter.outputImage?.transformed(by: transform) else { return nil }
+                guard let cgImage: CGImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
+                let image = UIImage(cgImage: cgImage)
+                let url: URL = URL.tmpDirectoryUrl.appendingPathComponent(imageName, isDirectory: false)
                 do {
-                        try image.pngData()?.write(to: fileUrl)
+                        try image.pngData()?.write(to: url)
                 } catch {
                         return nil
                 }
-                return fileUrl
+                return url
         }
         private var imageName: String {
                 var name: String = Date.currentDateText + ".png"
