@@ -58,8 +58,3 @@ Package.resolved
 ### Playgrounds ###
 timeline.xctimeline
 playground.xcworkspace
-
-
-### IDEs and Editors ###
-.idea/
-.vscode/
