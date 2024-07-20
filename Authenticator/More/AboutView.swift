@@ -12,7 +12,7 @@ struct AboutView: View {
                                         LinkCardView(heading: "Source Code", message: "https://github.com/bingzheung/authenticator")
                                 }
                                 Section {
-                                        LinkCardView(heading: "Privacy Policy", message: "https://ososo.io/authenticator/privacy")
+                                        LinkCardView(heading: "Privacy Policy", message: "https://zheung.org/authenticator/privacy")
                                 }
                                 Section {
                                         LinkCardView(heading: "Share this App", message: "https://apps.apple.com/us/app/id1511791282")

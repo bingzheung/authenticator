@@ -91,6 +91,8 @@ struct CodeCardView: View {
                                 return "crowdin"
                         case "truthsocial.com":
                                 return "truthsocial"
+                        case "open collective":
+                                return "opencollective"
                         default:
                                 return issuer
                         }

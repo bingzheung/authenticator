@@ -96,7 +96,7 @@ struct ExportView: View {
         }
 
         private var tokensText: String {
-                return tokens.map(\.uri).joined(separator: "\n")
+                return tokens.map(\.uri).joined(separator: "\n") + "\n"
         }
 
         private func txtFile() -> URL {
