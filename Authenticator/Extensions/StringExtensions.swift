@@ -23,7 +23,7 @@ extension Optional where Wrapped == String {
                 case .none:
                         return false
                 case .some(let value):
-                        return !value.isEmpty
+                        return !(value.isEmpty)
                 }
         }
 }

@@ -49,7 +49,7 @@ private struct VersionLabel: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                         UIPasteboard.general.string = version
-                        guard !isBannerPresented else { return }
+                        guard isBannerPresented.negative else { return }
                         isBannerPresented = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 isBannerPresented = false
@@ -88,7 +88,7 @@ private struct LinkCardView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                         UIPasteboard.general.string = message
-                        guard !isBannerPresented else { return }
+                        guard isBannerPresented.negative else { return }
                         isBannerPresented = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 isBannerPresented = false

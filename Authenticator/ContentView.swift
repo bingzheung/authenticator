@@ -140,7 +140,7 @@ struct ContentView: View {
                                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                                         if editMode == .active {
                                                 Button(role: .destructive) {
-                                                        if !(selectedTokens.isEmpty) {
+                                                        if selectedTokens.isNotEmpty {
                                                                 isDeletionAlertPresented = true
                                                         }
                                                 } label: {
@@ -274,11 +274,11 @@ struct ContentView: View {
                 isDeletionAlertPresented = false
         }
         private func performDeletion() {
-                if !selectedTokens.isEmpty {
+                if selectedTokens.isNotEmpty {
                         _ = selectedTokens.map { oneSelection in
                                 _ = fetchedTokens.filter({ $0.id == oneSelection.id }).map(viewContext.delete)
                         }
-                } else if !indexSetOnDelete.isEmpty {
+                } else if indexSetOnDelete.isNotEmpty {
                         _ = indexSetOnDelete.map({ fetchedTokens[$0] }).map(viewContext.delete)
                 } else {
                         viewContext.delete(fetchedTokens[tokenIndex])
@@ -309,7 +309,7 @@ struct ContentView: View {
                 switch result {
                 case .success(let code):
                         let uri: String = code.trimmed()
-                        guard !uri.isEmpty else { return }
+                        guard uri.isNotEmpty else { return }
                         guard let newToken: Token = Token(uri: uri) else { return }
                         addItem(newToken)
                 case .failure(let error):
@@ -318,7 +318,7 @@ struct ContentView: View {
         }
         private func handlePickedImage(uri: String) {
                 let qrCodeUri: String = uri.trimmed()
-                guard !qrCodeUri.isEmpty else { return }
+                guard qrCodeUri.isNotEmpty else { return }
                 guard let newToken: Token = Token(uri: qrCodeUri) else { return }
                 addItem(newToken)
         }
@@ -346,7 +346,7 @@ struct ContentView: View {
         }
         private func generateCodes() {
                 let placeholder: [String] = Array(repeating: String.zeros, count: 30)
-                guard !fetchedTokens.isEmpty else {
+                guard fetchedTokens.isNotEmpty else {
                         codes = placeholder
                         return
                 }

@@ -19,7 +19,7 @@ struct CodeCardView: View {
                                 Menu {
                                         Button {
                                                 UIPasteboard.general.string = totp
-                                                guard !isBannerPresented else { return }
+                                                guard isBannerPresented.negative else { return }
                                                 isBannerPresented = true
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                                         isBannerPresented = false
@@ -53,7 +53,7 @@ struct CodeCardView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 UIPasteboard.general.string = totp
-                                guard !isBannerPresented else { return }
+                                guard isBannerPresented.negative else { return }
                                 isBannerPresented = true
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                         isBannerPresented = false
@@ -93,11 +93,13 @@ struct CodeCardView: View {
                                 return "truthsocial"
                         case "open collective":
                                 return "opencollective"
+                        case "name.com":
+                                return "name"
                         default:
                                 return issuer
                         }
                 }()
-                guard !(imageName.isEmpty) else { return Image(systemName: "person.circle") }
+                guard imageName.isNotEmpty else { return Image(systemName: "person.circle") }
                 guard let uiImage: UIImage = UIImage(named: imageName) else { return Image(systemName: "person.circle") }
                 return Image(uiImage: uiImage)
         }

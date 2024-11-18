@@ -21,7 +21,7 @@ struct ScannerView: UIViewControllerRepresentable {
                                 feedbackGenerator = nil
                         }
                         feedbackGenerator?.prepare()
-                        guard !codeFound else { return }
+                        guard codeFound.negative else { return }
                         guard let metadataObject: AVMetadataObject = metadataObjects.first else { return }
                         guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
                         guard let stringValue: String = readableObject.stringValue else { return }
@@ -74,14 +74,14 @@ struct ScannerView: UIViewControllerRepresentable {
                         previewLayer.frame = view.layer.bounds
                         previewLayer.videoGravity = .resizeAspectFill
                         view.layer.addSublayer(previewLayer)
-                        if !captureSession.isRunning {
+                        if captureSession.isRunning.negative {
                                 captureSession.startRunning()
                         }
                 }
                 
                 override func viewWillAppear(_ animated: Bool) {
                         super.viewWillAppear(animated)
-                        if !captureSession.isRunning {
+                        if captureSession.isRunning.negative {
                                 captureSession.startRunning()
                         }
                 }

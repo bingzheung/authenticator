@@ -114,12 +114,12 @@ struct ManualEntryView: View {
                 switch entryMethod {
                 case .keyURI:
                         let uri = keyUri.trimmed()
-                        guard !(uri.isEmpty) else { return nil }
+                        guard uri.isNotEmpty else { return nil }
                         guard let token: Token = Token(uri: uri) else { return nil }
                         return token
                 case .secretKey:
                         let secret = secretKey.trimmed()
-                        guard !(secret.isEmpty) else { return nil }
+                        guard secret.isNotEmpty else { return nil }
                         let issuerText = issuer.trimmed()
                         let account = accountName.trimmed()
                         guard let token: Token = Token(issuerPrefix: issuerText, accountName: account, secret: secret, issuer: issuerText) else { return nil }

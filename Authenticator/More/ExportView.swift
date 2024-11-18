@@ -100,7 +100,7 @@ struct ExportView: View {
         }
 
         private func txtFile() -> URL {
-                let txtFileName: String = "2FA-accounts-" + Date.currentDateText + ".txt"
+                let txtFileName: String = "2FA-" + Date.currentDateText + ".txt"
                 let txtFileUrl: URL = URL.tmpDirectoryUrl.appendingPathComponent(txtFileName, isDirectory: false)
                 try? tokensText.write(to: txtFileUrl, atomically: true, encoding: .utf8)
                 return txtFileUrl
@@ -108,9 +108,9 @@ struct ExportView: View {
 
         // https://recoursive.com/2021/02/25/create_zip_archive_using_only_foundation
         private func zipFile() -> URL {
-                let imagesDirectoryName: String = "2FA-accounts-" + Date.currentDateText
+                let imagesDirectoryName: String = "2FA-" + Date.currentDateText
                 let imagesDirectoryUrl: URL = URL.tmpDirectoryUrl.appendingPathComponent(imagesDirectoryName, isDirectory: true)
-                if !(FileManager.default.fileExists(atPath: imagesDirectoryUrl.path)) {
+                if FileManager.default.fileExists(atPath: imagesDirectoryUrl.path).negative {
                         try? FileManager.default.createDirectory(at: imagesDirectoryUrl, withIntermediateDirectories: false)
                 }
                 _ = tokens.map({ saveQRCodeImage(for: $0, parent: imagesDirectoryUrl) })
@@ -147,11 +147,11 @@ struct ExportView: View {
                 var imageName: String = token.id + "-" + Date.currentDateText + ".png"
                 imageName.insert("-", at: imageName.index(imageName.startIndex, offsetBy: token.secret.count))
 
-                if let accountName: String = token.accountName, !accountName.isEmpty {
+                if let accountName: String = token.accountName, accountName.isNotEmpty {
                         let prefix: String = accountName + "-"
                         imageName.insert(contentsOf: prefix, at: imageName.startIndex)
                 }
-                if let issuer: String = token.issuer, !issuer.isEmpty {
+                if let issuer: String = token.issuer, issuer.isNotEmpty {
                         let prefix: String = issuer + "-"
                         imageName.insert(contentsOf: prefix, at: imageName.startIndex)
                 }

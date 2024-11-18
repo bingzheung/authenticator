@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3785223A2CEAB9DE00EBCDBA /* BoolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378522392CEAB9DD00EBCDBA /* BoolExtensions.swift */; };
+		3785223C2CEABA2D00EBCDBA /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785223B2CEABA2C00EBCDBA /* CollectionExtensions.swift */; };
 		37AD0310266C8A920086DD10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD030F266C8A920086DD10 /* AppDelegate.swift */; };
 		37AD0312266C8A920086DD10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0311266C8A920086DD10 /* SceneDelegate.swift */; };
 		37AD0314266C8A920086DD10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0313266C8A920086DD10 /* ContentView.swift */; };
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		378522392CEAB9DD00EBCDBA /* BoolExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensions.swift; sourceTree = "<group>"; };
+		3785223B2CEABA2C00EBCDBA /* CollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
 		37AD030C266C8A920086DD10 /* Authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AD030F266C8A920086DD10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37AD0311266C8A920086DD10 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -266,6 +270,8 @@
 		37AD035E266C8CCA0086DD10 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3785223B2CEABA2C00EBCDBA /* CollectionExtensions.swift */,
+				378522392CEAB9DD00EBCDBA /* BoolExtensions.swift */,
 				37AD035F266C8CCA0086DD10 /* DateExtensions.swift */,
 				37AD0360266C8CCA0086DD10 /* URLExtensions.swift */,
 				37AD0361266C8CCA0086DD10 /* StringExtensions.swift */,
@@ -340,7 +346,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					37AD030B266C8A920086DD10 = {
 						CreatedOnToolsVersion = 12.5;
@@ -433,6 +439,7 @@
 				37AD0373266C8CCA0086DD10 /* DateExtensions.swift in Sources */,
 				37AD036F266C8CCA0086DD10 /* ScannerView.swift in Sources */,
 				37AD036A266C8CCA0086DD10 /* EditAccountView.swift in Sources */,
+				3785223A2CEAB9DE00EBCDBA /* BoolExtensions.swift in Sources */,
 				37AD0370266C8CCA0086DD10 /* ManualEntryView.swift in Sources */,
 				37AD0312266C8A920086DD10 /* SceneDelegate.swift in Sources */,
 				37AD0314266C8A920086DD10 /* ContentView.swift in Sources */,
@@ -441,6 +448,7 @@
 				37AD036D266C8CCA0086DD10 /* ExportView.swift in Sources */,
 				37AD0372266C8CCA0086DD10 /* PhotoPicker.swift in Sources */,
 				37AD0365266C8CCA0086DD10 /* ActivityView.swift in Sources */,
+				3785223C2CEABA2D00EBCDBA /* CollectionExtensions.swift in Sources */,
 				37AD0374266C8CCA0086DD10 /* URLExtensions.swift in Sources */,
 				37AD0367266C8CCA0086DD10 /* OTPGenerator.swift in Sources */,
 				37AD036B266C8CCA0086DD10 /* CodeCardView.swift in Sources */,
@@ -702,7 +710,6 @@
 		37AD033D266C8A930086DD10 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AuthenticatorTests/Info.plist;
@@ -723,7 +730,6 @@
 		37AD033E266C8A930086DD10 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AuthenticatorTests/Info.plist;
@@ -744,7 +750,6 @@
 		37AD0340266C8A930086DD10 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AuthenticatorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -763,7 +768,6 @@
 		37AD0341266C8A930086DD10 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AuthenticatorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

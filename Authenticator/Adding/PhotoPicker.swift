@@ -42,7 +42,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
                                         let newText: String = ($0 as? CIQRCodeFeature)?.messageString ?? .empty
                                         qrCodeText += newText
                                 }
-                                guard !qrCodeText.isEmpty else { return }
+                                guard qrCodeText.isNotEmpty else { return }
                                 self.parent.completion(qrCodeText)
                         }
                 }

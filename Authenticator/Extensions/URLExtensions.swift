@@ -6,7 +6,7 @@ extension URL {
                 guard let type: UTType = try? self.resourceValues(forKeys: [.contentTypeKey]).contentType else { return nil }
                 if type.conforms(to: .text) {
                         guard let content: String = try? String(contentsOf: self) else { return nil }
-                        guard !content.isEmpty else { return nil }
+                        guard content.isNotEmpty else { return nil }
                         return content
                 } else if type.conforms(to: .image) {
                         guard let pickedImage: UIImage = UIImage(contentsOfFile: self.path) else { return nil }
@@ -18,7 +18,7 @@ extension URL {
                                 let newText: String = ($0 as? CIQRCodeFeature)?.messageString ?? .empty
                                 qrCodeText += newText
                         }
-                        guard !qrCodeText.isEmpty else { return nil }
+                        guard qrCodeText.isNotEmpty else { return nil }
                         return qrCodeText
                 } else {
                         return nil

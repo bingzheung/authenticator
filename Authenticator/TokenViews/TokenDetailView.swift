@@ -116,11 +116,11 @@ struct TokenDetailView: View {
         }
         private var imageName: String {
                 var name: String = Date.currentDateText + ".png"
-                if let accountName: String = token.accountName, !accountName.isEmpty {
+                if let accountName: String = token.accountName, accountName.isNotEmpty {
                         let prefix: String = accountName + "-"
                         name.insert(contentsOf: prefix, at: name.startIndex)
                 }
-                if let issuer: String = token.issuer, !issuer.isEmpty {
+                if let issuer: String = token.issuer, issuer.isNotEmpty {
                         let prefix: String = issuer + "-"
                         name.insert(contentsOf: prefix, at: name.startIndex)
                 }
