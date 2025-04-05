@@ -7,7 +7,6 @@ extension Date {
                 return formatter
         }()
         static var currentDateText: String {
-                let text: String = Date.formatter.string(from: Date())
-                return text
+                return Date.formatter.string(from: Date())
         }
 }
