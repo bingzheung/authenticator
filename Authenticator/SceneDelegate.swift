@@ -61,3 +61,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 let logger: Logger = Logger(subsystem: "io.ososo.Authenticator", category: "debug")
 
+
+extension Notification.Name {
+        static let viewCardAccountDetail = Notification.Name("io.ososo.Autenticator.Notification.viewCardAccountDetail")
+        static let editCardAccount = Notification.Name("io.ososo.Autenticator.Notification.editCardAccount")
+        static let deleteCardAccount = Notification.Name("io.ososo.Autenticator.Notification.deleteCardAccount")
+}
+struct NotificationKey {
+        static let viewCardAccountDetail: String = "NotificationKey.viewCardAccountDetail"
+        static let editCardAccount: String = "NotificationKey.editCardAccount"
+        static let deleteCardAccount: String = "NotificationKey.deleteCardAccount"
+}

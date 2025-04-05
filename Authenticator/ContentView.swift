@@ -32,7 +32,7 @@ struct ContentView: View {
                                 ForEach(0..<fetchedTokens.count, id: \.self) { index in
                                         let item = fetchedTokens[index]
                                         Section {
-                                                CodeCardView(token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
+                                                CodeCardView(index: index, token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
                                                         .contextMenu {
                                                                 Button(action: {
                                                                         UIPasteboard.general.string = codes[index]
@@ -77,6 +77,28 @@ struct ContentView: View {
                                 if timeRemaining == 30 || codes.first == String.zeros {
                                         generateCodes()
                                 }
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: .viewCardAccountDetail)) { notification in
+                                guard let dict = notification.userInfo as? [String : Int] else { return }
+                                guard let index = dict[NotificationKey.viewCardAccountDetail] else { return }
+                                tokenIndex = index
+                                presentingSheet = .cardDetailView
+                                isSheetPresented = true
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: .editCardAccount)) { notification in
+                                guard let dict = notification.userInfo as? [String : Int] else { return }
+                                guard let index = dict[NotificationKey.editCardAccount] else { return }
+                                tokenIndex = index
+                                presentingSheet = .cardEditing
+                                isSheetPresented = true
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: .deleteCardAccount)) { notification in
+                                guard let dict = notification.userInfo as? [String : Int] else { return }
+                                guard let index = dict[NotificationKey.deleteCardAccount] else { return }
+                                tokenIndex = index
+                                selectedTokens.removeAll()
+                                indexSetOnDelete.removeAll()
+                                isDeletionAlertPresented = true
                         }
                         .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: [.text, .image], allowsMultipleSelection: false) { result in
                                 switch result {

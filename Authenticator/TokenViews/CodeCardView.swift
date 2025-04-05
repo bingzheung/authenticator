@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CodeCardView: View {
 
+        let index: Int
         let token: Token
         @Binding var totp: String
         @Binding var timeRemaining: Int
@@ -17,15 +18,22 @@ struct CodeCardView: View {
                                 Text(verbatim: token.displayIssuer).font(.headline)
                                 Spacer()
                                 Menu {
-                                        Button {
+                                        Button("Copy Code", systemImage: "doc.on.doc") {
                                                 UIPasteboard.general.string = totp
                                                 guard isBannerPresented.negative else { return }
                                                 isBannerPresented = true
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                                         isBannerPresented = false
                                                 }
-                                        } label: {
-                                                Label("Copy Code", systemImage: "doc.on.doc")
+                                        }
+                                        Button("View Detail", systemImage: "text.justifyleft") {
+                                                NotificationCenter.default.post(name: .viewCardAccountDetail, object: nil, userInfo: [NotificationKey.viewCardAccountDetail : index])
+                                        }
+                                        Button("Edit Account", systemImage: "square.and.pencil") {
+                                                NotificationCenter.default.post(name: .editCardAccount, object: nil, userInfo: [NotificationKey.editCardAccount : index])
+                                        }
+                                        Button("Delete", systemImage: "trash", role: .destructive) {
+                                                NotificationCenter.default.post(name: .deleteCardAccount, object: nil, userInfo: [NotificationKey.deleteCardAccount : index])
                                         }
                                 } label: {
                                         Image(systemName: "ellipsis.circle")
