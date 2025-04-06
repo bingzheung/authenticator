@@ -34,32 +34,24 @@ struct ContentView: View {
                                         Section {
                                                 CodeCardView(index: index, token: token(of: item), totp: $codes[index], timeRemaining: $timeRemaining)
                                                         .contextMenu {
-                                                                Button(action: {
+                                                                Button("Copy Code", systemImage: "doc.on.doc") {
                                                                         UIPasteboard.general.string = codes[index]
-                                                                }) {
-                                                                        Label("Copy Code", systemImage: "doc.on.doc")
                                                                 }
-                                                                Button(action: {
+                                                                Button("View Detail", systemImage: "text.justifyleft") {
                                                                         tokenIndex = index
-                                                                        presentingSheet = .cardDetailView
+                                                                        presentingSheet = .viewAccountDetail
                                                                         isSheetPresented = true
-                                                                }) {
-                                                                        Label("View Detail", systemImage: "text.justifyleft")
                                                                 }
-                                                                Button(action: {
+                                                                Button("Edit Account", systemImage: "square.and.pencil") {
                                                                         tokenIndex = index
-                                                                        presentingSheet = .cardEditing
+                                                                        presentingSheet = .editAccount
                                                                         isSheetPresented = true
-                                                                }) {
-                                                                        Label("Edit Account", systemImage: "square.and.pencil")
                                                                 }
-                                                                Button(role: .destructive) {
+                                                                Button("Delete", systemImage: "trash", role: .destructive) {
                                                                         tokenIndex = index
                                                                         selectedTokens.removeAll()
                                                                         indexSetOnDelete.removeAll()
                                                                         isDeletionAlertPresented = true
-                                                                } label: {
-                                                                        Label("Delete", systemImage: "trash")
                                                                 }
                                                         }
                                         }
@@ -82,14 +74,14 @@ struct ContentView: View {
                                 guard let dict = notification.userInfo as? [String : Int] else { return }
                                 guard let index = dict[NotificationKey.viewCardAccountDetail] else { return }
                                 tokenIndex = index
-                                presentingSheet = .cardDetailView
+                                presentingSheet = .viewAccountDetail
                                 isSheetPresented = true
                         }
                         .onReceive(NotificationCenter.default.publisher(for: .editCardAccount)) { notification in
                                 guard let dict = notification.userInfo as? [String : Int] else { return }
                                 guard let index = dict[NotificationKey.editCardAccount] else { return }
                                 tokenIndex = index
-                                presentingSheet = .cardEditing
+                                presentingSheet = .editAccount
                                 isSheetPresented = true
                         }
                         .onReceive(NotificationCenter.default.publisher(for: .deleteCardAccount)) { notification in
@@ -121,33 +113,25 @@ struct ContentView: View {
                         .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                         if editMode == .active {
-                                                Button(action: {
-                                                        editMode = .inactive
+                                                Button("Done") {
                                                         selectedTokens.removeAll()
                                                         indexSetOnDelete.removeAll()
-                                                }) {
-                                                        Text("Done")
+                                                        editMode = .inactive
                                                 }
                                         } else {
                                                 Menu {
-                                                        Button(action: {
+                                                        Button("Edit", systemImage: "list.bullet") {
                                                                 selectedTokens.removeAll()
                                                                 indexSetOnDelete.removeAll()
                                                                 editMode = .active
-                                                        }) {
-                                                                Label("Edit", systemImage: "list.bullet")
                                                         }
-                                                        Button(action: {
-                                                                presentingSheet = .moreExport
+                                                        Button("Export", systemImage: "square.and.arrow.up") {
+                                                                presentingSheet = .export
                                                                 isSheetPresented = true
-                                                        }) {
-                                                                Label("Export", systemImage: "square.and.arrow.up")
                                                         }
-                                                        Button(action: {
-                                                                presentingSheet = .moreAbout
+                                                        Button("About", systemImage: "info.circle") {
+                                                                presentingSheet = .about
                                                                 isSheetPresented = true
-                                                        }) {
-                                                                Label("About", systemImage: "info.circle")
                                                         }
                                                 } label: {
                                                         Image(systemName: "ellipsis.circle")
@@ -170,10 +154,10 @@ struct ContentView: View {
                                                 }
                                         } else {
                                                 #if !targetEnvironment(macCatalyst)
-                                                Button(action: {
-                                                        presentingSheet = .addByScanning
+                                                Button {
+                                                        presentingSheet = .scanQRCode
                                                         isSheetPresented = true
-                                                }) {
+                                                } label: {
                                                         Image(systemName: "qrcode.viewfinder")
                                                                 .resizable()
                                                                 .scaledToFit()
@@ -184,18 +168,14 @@ struct ContentView: View {
                                                 #endif
                                                 Menu {
                                                         #if !targetEnvironment(macCatalyst)
-                                                        Button(action: {
-                                                                presentingSheet = .addByScanning
+                                                        Button("Scan QR Code", systemImage: "qrcode.viewfinder") {
+                                                                presentingSheet = .scanQRCode
                                                                 isSheetPresented = true
-                                                        }) {
-                                                                Label("Scan QR Code", systemImage: "qrcode.viewfinder")
                                                         }
                                                         #endif
-                                                        Button(action: {
-                                                                presentingSheet = .addByQRCodeImage
+                                                        Button("Import from Photos", systemImage: "photo") {
+                                                                presentingSheet = .readQRCodeImage
                                                                 isSheetPresented = true
-                                                        }) {
-                                                                Label("Import from Photos", systemImage: "photo")
                                                         }
                                                         Button {
                                                                 isFileImporterPresented = true
@@ -206,11 +186,9 @@ struct ContentView: View {
                                                                 Label("Import from Files", systemImage: "doc.badge.plus")
                                                                 #endif
                                                         }
-                                                        Button(action: {
-                                                                presentingSheet = .addByManually
+                                                        Button("Enter Manually", systemImage: "text.cursor") {
+                                                                presentingSheet = .enterManually
                                                                 isSheetPresented = true
-                                                        }) {
-                                                                Label("Enter Manually", systemImage: "text.cursor")
                                                         }
                                                 } label: {
                                                         Image(systemName: "plus")
@@ -225,19 +203,19 @@ struct ContentView: View {
                         }
                         .sheet(isPresented: $isSheetPresented) {
                                 switch presentingSheet {
-                                case .moreExport:
-                                        ExportView(isPresented: $isSheetPresented, tokens: tokensToExport)
-                                case .moreAbout:
+                                case .about:
                                         AboutView(isPresented: $isSheetPresented)
-                                case .addByScanning:
-                                        Scanner(isPresented: $isSheetPresented, codeTypes: [.qr], completion: handleScanning(result:))
-                                case .addByQRCodeImage:
+                                case .export:
+                                        ExportView(isPresented: $isSheetPresented, tokens: tokensToExport)
+                                case .scanQRCode:
+                                        Scanner(isPresented: $isSheetPresented, codeTypes: [.qr], completion: handleScanned(_:))
+                                case .readQRCodeImage:
                                         PhotoPicker(completion: handlePickedImage(uri:))
-                                case .addByManually:
+                                case .enterManually:
                                         ManualEntryView(isPresented: $isSheetPresented, completion: addItem(_:))
-                                case .cardDetailView:
+                                case .viewAccountDetail:
                                         TokenDetailView(isPresented: $isSheetPresented, token: token(of: fetchedTokens[tokenIndex]))
-                                case .cardEditing:
+                                case .editAccount:
                                         EditAccountView(isPresented: $isSheetPresented, token: token(of: fetchedTokens[tokenIndex]), tokenIndex: tokenIndex) { index, issuer, account in
                                                 handleAccountEditing(index: index, issuer: issuer, account: account)
                                         }
@@ -326,7 +304,7 @@ struct ContentView: View {
 
         // MARK: - Account Adding
 
-        private func handleScanning(result: Result<String, ScannerView.ScanError>) {
+        private func handleScanned(_ result: Result<String, ScannerView.ScanError>) {
                 isSheetPresented = false
                 switch result {
                 case .success(let code):
@@ -410,15 +388,17 @@ struct ContentView: View {
         }
 }
 
-private var presentingSheet: SheetSet = .moreAbout
+private var presentingSheet: SheetSet = .about
 private var tokenIndex: Int = 0
 
-private enum SheetSet {
-        case moreExport
-        case moreAbout
-        case addByScanning
-        case addByQRCodeImage
-        case addByManually
-        case cardDetailView
-        case cardEditing
+private enum SheetSet: Int {
+        case about
+        case export
+
+        case scanQRCode
+        case readQRCodeImage
+        case enterManually
+
+        case viewAccountDetail
+        case editAccount
 }
