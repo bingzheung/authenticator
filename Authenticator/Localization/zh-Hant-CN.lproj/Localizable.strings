@@ -60,6 +60,7 @@
 "NavigationTitle.AccountDetail" = "帳號詳情";
 "NavigationTitle.EditAccount" = "編輯帳號";
 "**NOTE**: Changes would not apply to the Key URI" = "注意：本䈎修改不會作用到 Key URI";
+"Save…" = "保存…";
 
 "Delete Account?" = "刪除帳號？";
 "Account Deletion Warning" = "刪除帳號不等於關閉雙重驗證\n\n務必確保你還有其他方式驗證登錄";

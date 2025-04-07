@@ -60,6 +60,7 @@
 "NavigationTitle.AccountDetail" = "Account Detail";
 "NavigationTitle.EditAccount" = "Edit Account";
 "**NOTE**: Changes would not apply to the Key URI" = "**NOTE**: Changes would not apply to the Key URI";
+"Save…" = "Save…";
 
 "Delete Account?" = "Delete Account?";
 "Account Deletion Warning" = "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service.";

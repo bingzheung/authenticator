@@ -49,17 +49,27 @@ struct TokenDetailView: View {
                                 }
                                 if let uiImage = qrCodeImage {
                                         Section {
-                                                Image(uiImage: uiImage)
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 180, height: 180)
-                                                        .onLongPressGesture {
-                                                                isImageActivityViewPresented = true
+                                                HStack {
+                                                        Spacer()
+                                                        VStack {
+                                                                Text(verbatim: "Key URI as QR Code").font(.footnote)
+                                                                Image(uiImage: uiImage)
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .frame(width: 180, height: 180)
+                                                                Label("Save…", systemImage: "photo.badge.arrow.down")
+                                                                        .font(.callout)
+                                                                        .foregroundStyle(Color.accentColor)
+                                                                        .padding()
+                                                                        .contentShape(Rectangle())
+                                                                        .onTapGesture {
+                                                                                isImageActivityViewPresented = true
+                                                                        }
                                                         }
-                                        } header: {
-                                                Text(verbatim: "Key URI as QR Code").textCase(nil)
+                                                        .padding(.vertical, 8)
+                                                        Spacer()
+                                                }
                                         }
-                                        .listRowBackground(Color.clear)
                                 }
                         }
                         .sheet(isPresented: $isImageActivityViewPresented) {
