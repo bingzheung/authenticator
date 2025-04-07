@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Authenticator";
+"NSCameraUsageDescription" = "使用相机扫描二维码";
+"NSPhotoLibraryAddUsageDescription" = "往相册保存二维码图片";

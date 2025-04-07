@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Authenticator";
+"NSCameraUsageDescription" = "Access Camera to scan QR Code";
+"NSPhotoLibraryAddUsageDescription" = "Save QR Code images to the Photos";

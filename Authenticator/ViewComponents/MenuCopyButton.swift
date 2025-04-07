@@ -9,10 +9,8 @@ struct MenuCopyButton: View {
         private let text: String
 
         var body: some View {
-                Button {
+                Button("Copy", systemImage: "doc.on.doc") {
                         UIPasteboard.general.string = text
-                } label: {
-                        Label("Copy", systemImage: "doc.on.doc")
                 }
         }
 }

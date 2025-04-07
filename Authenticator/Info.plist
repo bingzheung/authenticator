@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Access Camera to scan QR Code</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save QR Code images to the Photos</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>CC0 1.0 Public Domain</string>
 	<key>UIApplicationSceneManifest</key>

@@ -11,7 +11,6 @@ struct ActivityView: UIViewControllerRepresentable {
 
         func makeUIViewController(context: Context) -> UIActivityViewController {
                 let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-                controller.excludedActivityTypes = [.saveToCameraRoll]
                 controller.completionWithItemsHandler = completionHandler
                 return controller
         }
