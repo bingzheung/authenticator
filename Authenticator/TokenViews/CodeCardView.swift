@@ -8,6 +8,7 @@ struct CodeCardView: View {
         @Binding var timeRemaining: Int
 
         @State private var isBannerPresented: Bool = false
+        @State private var hapticTrigger: Int = 0
 
         private let diameter: CGFloat = 24
 
@@ -15,11 +16,17 @@ struct CodeCardView: View {
                 VStack(spacing: 4) {
                         HStack(spacing: 16) {
                                 issuerImage.resizable().scaledToFit().frame(width: diameter, height: diameter)
-                                Text(verbatim: token.displayIssuer).font(.headline)
+                                if #available(iOS 17.0, *) {
+                                        Text(verbatim: token.displayIssuer).font(.headline)
+                                                .sensoryFeedback(.selection, trigger: hapticTrigger)
+                                } else {
+                                        Text(verbatim: token.displayIssuer).font(.headline)
+                                }
                                 Spacer()
                                 Menu {
                                         Button("Copy Code", systemImage: "doc.on.doc") {
                                                 UIPasteboard.general.string = totp
+                                                hapticTrigger += 1
                                                 guard isBannerPresented.negative else { return }
                                                 isBannerPresented = true
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -61,6 +68,7 @@ struct CodeCardView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 UIPasteboard.general.string = totp
+                                hapticTrigger += 1
                                 guard isBannerPresented.negative else { return }
                                 isBannerPresented = true
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
