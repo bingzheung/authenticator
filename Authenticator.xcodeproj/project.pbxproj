@@ -7,37 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3785223A2CEAB9DE00EBCDBA /* BoolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378522392CEAB9DD00EBCDBA /* BoolExtensions.swift */; };
-		3785223C2CEABA2D00EBCDBA /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785223B2CEABA2C00EBCDBA /* CollectionExtensions.swift */; };
-		37AD0310266C8A920086DD10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD030F266C8A920086DD10 /* AppDelegate.swift */; };
-		37AD0312266C8A920086DD10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0311266C8A920086DD10 /* SceneDelegate.swift */; };
-		37AD0314266C8A920086DD10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0313266C8A920086DD10 /* ContentView.swift */; };
-		37AD0317266C8A920086DD10 /* Authenticator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0315266C8A920086DD10 /* Authenticator.xcdatamodeld */; };
-		37AD031C266C8A930086DD10 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AD031B266C8A930086DD10 /* Preview Assets.xcassets */; };
-		37AD031F266C8A930086DD10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37AD031D266C8A930086DD10 /* LaunchScreen.storyboard */; };
-		37AD032A266C8A930086DD10 /* AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0329266C8A930086DD10 /* AuthenticatorTests.swift */; };
-		37AD0335266C8A930086DD10 /* AuthenticatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0334266C8A930086DD10 /* AuthenticatorUITests.swift */; };
-		37AD0362266C8CCA0086DD10 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37AD0342266C8CC90086DD10 /* Settings.bundle */; };
-		37AD0363266C8CCA0086DD10 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AD0343266C8CCA0086DD10 /* Images.xcassets */; };
-		37AD0364266C8CCA0086DD10 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0345266C8CCA0086DD10 /* MenuCopyButton.swift */; };
-		37AD0365266C8CCA0086DD10 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0346266C8CCA0086DD10 /* ActivityView.swift */; };
-		37AD0366266C8CCA0086DD10 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0348266C8CCA0086DD10 /* Token.swift */; };
-		37AD0367266C8CCA0086DD10 /* OTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0349266C8CCA0086DD10 /* OTPGenerator.swift */; };
-		37AD036A266C8CCA0086DD10 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0353266C8CCA0086DD10 /* EditAccountView.swift */; };
-		37AD036B266C8CCA0086DD10 /* CodeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0354266C8CCA0086DD10 /* CodeCardView.swift */; };
-		37AD036C266C8CCA0086DD10 /* TokenDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0355266C8CCA0086DD10 /* TokenDetailView.swift */; };
-		37AD036D266C8CCA0086DD10 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0357266C8CCA0086DD10 /* ExportView.swift */; };
-		37AD036E266C8CCA0086DD10 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0358266C8CCA0086DD10 /* AboutView.swift */; };
-		37AD036F266C8CCA0086DD10 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD035A266C8CCA0086DD10 /* ScannerView.swift */; };
-		37AD0370266C8CCA0086DD10 /* ManualEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD035B266C8CCA0086DD10 /* ManualEntryView.swift */; };
-		37AD0372266C8CCA0086DD10 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD035D266C8CCA0086DD10 /* PhotoPicker.swift */; };
-		37AD0373266C8CCA0086DD10 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD035F266C8CCA0086DD10 /* DateExtensions.swift */; };
-		37AD0374266C8CCA0086DD10 /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0360266C8CCA0086DD10 /* URLExtensions.swift */; };
-		37AD0375266C8CCA0086DD10 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD0361266C8CCA0086DD10 /* StringExtensions.swift */; };
-		37AD0377266C8E0E0086DD10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AD0376266C8E0E0086DD10 /* Assets.xcassets */; };
 		37AD037A266C90610086DD10 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = 37AD0379266C90610086DD10 /* SwiftOTP */; };
-		37D98D8E276AE53E00DF37EF /* View+copiedBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D8D276AE53E00DF37EF /* View+copiedBanner.swift */; };
-		37E1061D2C4BF7A900EFAED5 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37E1061C2C4BF7A900EFAED5 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,49 +28,58 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		378522392CEAB9DD00EBCDBA /* BoolExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensions.swift; sourceTree = "<group>"; };
-		3785223B2CEABA2C00EBCDBA /* CollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
 		37AD030C266C8A920086DD10 /* Authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		37AD030F266C8A920086DD10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37AD0311266C8A920086DD10 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		37AD0313266C8A920086DD10 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		37AD0316266C8A920086DD10 /* Authenticator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Authenticator.xcdatamodel; sourceTree = "<group>"; };
-		37AD031B266C8A930086DD10 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		37AD031E266C8A930086DD10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		37AD0320266C8A930086DD10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37AD0325266C8A930086DD10 /* AuthenticatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37AD0329266C8A930086DD10 /* AuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorTests.swift; sourceTree = "<group>"; };
-		37AD032B266C8A930086DD10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37AD0330266C8A930086DD10 /* AuthenticatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37AD0334266C8A930086DD10 /* AuthenticatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorUITests.swift; sourceTree = "<group>"; };
-		37AD0336266C8A930086DD10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		37AD0342266C8CC90086DD10 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		37AD0343266C8CCA0086DD10 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		37AD0345266C8CCA0086DD10 /* MenuCopyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
-		37AD0346266C8CCA0086DD10 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		37AD0348266C8CCA0086DD10 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		37AD0349266C8CCA0086DD10 /* OTPGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPGenerator.swift; sourceTree = "<group>"; };
-		37AD0353266C8CCA0086DD10 /* EditAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
-		37AD0354266C8CCA0086DD10 /* CodeCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeCardView.swift; sourceTree = "<group>"; };
-		37AD0355266C8CCA0086DD10 /* TokenDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDetailView.swift; sourceTree = "<group>"; };
-		37AD0357266C8CCA0086DD10 /* ExportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
-		37AD0358266C8CCA0086DD10 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		37AD035A266C8CCA0086DD10 /* ScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
-		37AD035B266C8CCA0086DD10 /* ManualEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualEntryView.swift; sourceTree = "<group>"; };
-		37AD035D266C8CCA0086DD10 /* PhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
-		37AD035F266C8CCA0086DD10 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		37AD0360266C8CCA0086DD10 /* URLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
-		37AD0361266C8CCA0086DD10 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		37AD0376266C8E0E0086DD10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		37AD037B266C93D40086DD10 /* Authenticator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Authenticator.entitlements; sourceTree = "<group>"; };
-		37D98D8D276AE53E00DF37EF /* View+copiedBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+copiedBanner.swift"; sourceTree = "<group>"; };
-		37E1061C2C4BF7A900EFAED5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		37416F852DA3F52E006DDD0D /* Exceptions for "Authenticator" folder in "Authenticator" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 37AD030B266C8A920086DD10 /* Authenticator */;
+		};
+		37416F8A2DA3F57B006DDD0D /* Exceptions for "AuthenticatorTests" folder in "AuthenticatorTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AuthenticatorTests.swift,
+			);
+			target = 37AD0324266C8A930086DD10 /* AuthenticatorTests */;
+		};
+		37416F8F2DA3F582006DDD0D /* Exceptions for "AuthenticatorUITests" folder in "AuthenticatorUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AuthenticatorUITests.swift,
+			);
+			target = 37AD032F266C8A930086DD10 /* AuthenticatorUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		37416EDE2DA3CFEB006DDD0D /* Localization */ = {
+		37416F642DA3F52E006DDD0D /* Authenticator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Localization;
+			exceptions = (
+				37416F852DA3F52E006DDD0D /* Exceptions for "Authenticator" folder in "Authenticator" target */,
+			);
+			path = Authenticator;
+			sourceTree = "<group>";
+		};
+		37416F882DA3F57B006DDD0D /* AuthenticatorTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				37416F8A2DA3F57B006DDD0D /* Exceptions for "AuthenticatorTests" folder in "AuthenticatorTests" target */,
+			);
+			path = AuthenticatorTests;
+			sourceTree = "<group>";
+		};
+		37416F8D2DA3F582006DDD0D /* AuthenticatorUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				37416F8F2DA3F582006DDD0D /* Exceptions for "AuthenticatorUITests" folder in "AuthenticatorUITests" target */,
+			);
+			path = AuthenticatorUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -134,9 +113,9 @@
 		37AD0303266C8A920086DD10 = {
 			isa = PBXGroup;
 			children = (
-				37AD030E266C8A920086DD10 /* Authenticator */,
-				37AD0328266C8A930086DD10 /* AuthenticatorTests */,
-				37AD0333266C8A930086DD10 /* AuthenticatorUITests */,
+				37416F642DA3F52E006DDD0D /* Authenticator */,
+				37416F882DA3F57B006DDD0D /* AuthenticatorTests */,
+				37416F8D2DA3F582006DDD0D /* AuthenticatorUITests */,
 				37AD030D266C8A920086DD10 /* Products */,
 			);
 			indentWidth = 8;
@@ -151,118 +130,6 @@
 				37AD0330266C8A930086DD10 /* AuthenticatorUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		37AD030E266C8A920086DD10 /* Authenticator */ = {
-			isa = PBXGroup;
-			children = (
-				37AD030F266C8A920086DD10 /* AppDelegate.swift */,
-				37AD0311266C8A920086DD10 /* SceneDelegate.swift */,
-				37AD0313266C8A920086DD10 /* ContentView.swift */,
-				37AD0359266C8CCA0086DD10 /* Adding */,
-				37AD0356266C8CCA0086DD10 /* More */,
-				37AD0347266C8CCA0086DD10 /* Token */,
-				37AD0352266C8CCA0086DD10 /* TokenViews */,
-				37AD0344266C8CCA0086DD10 /* ViewComponents */,
-				37AD035E266C8CCA0086DD10 /* Extensions */,
-				37AD031D266C8A930086DD10 /* LaunchScreen.storyboard */,
-				37AD0315266C8A920086DD10 /* Authenticator.xcdatamodeld */,
-				37AD037B266C93D40086DD10 /* Authenticator.entitlements */,
-				37E1061C2C4BF7A900EFAED5 /* PrivacyInfo.xcprivacy */,
-				37AD0320266C8A930086DD10 /* Info.plist */,
-				37416EDE2DA3CFEB006DDD0D /* Localization */,
-				37AD0342266C8CC90086DD10 /* Settings.bundle */,
-				37AD0343266C8CCA0086DD10 /* Images.xcassets */,
-				37AD0376266C8E0E0086DD10 /* Assets.xcassets */,
-				37AD031A266C8A930086DD10 /* Preview Content */,
-			);
-			path = Authenticator;
-			sourceTree = "<group>";
-		};
-		37AD031A266C8A930086DD10 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				37AD031B266C8A930086DD10 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		37AD0328266C8A930086DD10 /* AuthenticatorTests */ = {
-			isa = PBXGroup;
-			children = (
-				37AD0329266C8A930086DD10 /* AuthenticatorTests.swift */,
-				37AD032B266C8A930086DD10 /* Info.plist */,
-			);
-			path = AuthenticatorTests;
-			sourceTree = "<group>";
-		};
-		37AD0333266C8A930086DD10 /* AuthenticatorUITests */ = {
-			isa = PBXGroup;
-			children = (
-				37AD0334266C8A930086DD10 /* AuthenticatorUITests.swift */,
-				37AD0336266C8A930086DD10 /* Info.plist */,
-			);
-			path = AuthenticatorUITests;
-			sourceTree = "<group>";
-		};
-		37AD0344266C8CCA0086DD10 /* ViewComponents */ = {
-			isa = PBXGroup;
-			children = (
-				37AD0345266C8CCA0086DD10 /* MenuCopyButton.swift */,
-				37D98D8D276AE53E00DF37EF /* View+copiedBanner.swift */,
-				37AD0346266C8CCA0086DD10 /* ActivityView.swift */,
-			);
-			path = ViewComponents;
-			sourceTree = "<group>";
-		};
-		37AD0347266C8CCA0086DD10 /* Token */ = {
-			isa = PBXGroup;
-			children = (
-				37AD0348266C8CCA0086DD10 /* Token.swift */,
-				37AD0349266C8CCA0086DD10 /* OTPGenerator.swift */,
-			);
-			path = Token;
-			sourceTree = "<group>";
-		};
-		37AD0352266C8CCA0086DD10 /* TokenViews */ = {
-			isa = PBXGroup;
-			children = (
-				37AD0353266C8CCA0086DD10 /* EditAccountView.swift */,
-				37AD0354266C8CCA0086DD10 /* CodeCardView.swift */,
-				37AD0355266C8CCA0086DD10 /* TokenDetailView.swift */,
-			);
-			path = TokenViews;
-			sourceTree = "<group>";
-		};
-		37AD0356266C8CCA0086DD10 /* More */ = {
-			isa = PBXGroup;
-			children = (
-				37AD0357266C8CCA0086DD10 /* ExportView.swift */,
-				37AD0358266C8CCA0086DD10 /* AboutView.swift */,
-			);
-			path = More;
-			sourceTree = "<group>";
-		};
-		37AD0359266C8CCA0086DD10 /* Adding */ = {
-			isa = PBXGroup;
-			children = (
-				37AD035A266C8CCA0086DD10 /* ScannerView.swift */,
-				37AD035B266C8CCA0086DD10 /* ManualEntryView.swift */,
-				37AD035D266C8CCA0086DD10 /* PhotoPicker.swift */,
-			);
-			path = Adding;
-			sourceTree = "<group>";
-		};
-		37AD035E266C8CCA0086DD10 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				3785223B2CEABA2C00EBCDBA /* CollectionExtensions.swift */,
-				378522392CEAB9DD00EBCDBA /* BoolExtensions.swift */,
-				37AD035F266C8CCA0086DD10 /* DateExtensions.swift */,
-				37AD0360266C8CCA0086DD10 /* URLExtensions.swift */,
-				37AD0361266C8CCA0086DD10 /* StringExtensions.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,7 +148,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				37416EDE2DA3CFEB006DDD0D /* Localization */,
+				37416F642DA3F52E006DDD0D /* Authenticator */,
 			);
 			name = Authenticator;
 			packageProductDependencies = (
@@ -387,12 +254,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AD0362266C8CCA0086DD10 /* Settings.bundle in Resources */,
-				37AD0363266C8CCA0086DD10 /* Images.xcassets in Resources */,
-				37AD0377266C8E0E0086DD10 /* Assets.xcassets in Resources */,
-				37AD031F266C8A930086DD10 /* LaunchScreen.storyboard in Resources */,
-				37E1061D2C4BF7A900EFAED5 /* PrivacyInfo.xcprivacy in Resources */,
-				37AD031C266C8A930086DD10 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,28 +278,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AD0310266C8A920086DD10 /* AppDelegate.swift in Sources */,
-				37AD0366266C8CCA0086DD10 /* Token.swift in Sources */,
-				37AD036C266C8CCA0086DD10 /* TokenDetailView.swift in Sources */,
-				37D98D8E276AE53E00DF37EF /* View+copiedBanner.swift in Sources */,
-				37AD0317266C8A920086DD10 /* Authenticator.xcdatamodeld in Sources */,
-				37AD036E266C8CCA0086DD10 /* AboutView.swift in Sources */,
-				37AD0373266C8CCA0086DD10 /* DateExtensions.swift in Sources */,
-				37AD036F266C8CCA0086DD10 /* ScannerView.swift in Sources */,
-				37AD036A266C8CCA0086DD10 /* EditAccountView.swift in Sources */,
-				3785223A2CEAB9DE00EBCDBA /* BoolExtensions.swift in Sources */,
-				37AD0370266C8CCA0086DD10 /* ManualEntryView.swift in Sources */,
-				37AD0312266C8A920086DD10 /* SceneDelegate.swift in Sources */,
-				37AD0314266C8A920086DD10 /* ContentView.swift in Sources */,
-				37AD0364266C8CCA0086DD10 /* MenuCopyButton.swift in Sources */,
-				37AD0375266C8CCA0086DD10 /* StringExtensions.swift in Sources */,
-				37AD036D266C8CCA0086DD10 /* ExportView.swift in Sources */,
-				37AD0372266C8CCA0086DD10 /* PhotoPicker.swift in Sources */,
-				37AD0365266C8CCA0086DD10 /* ActivityView.swift in Sources */,
-				3785223C2CEABA2D00EBCDBA /* CollectionExtensions.swift in Sources */,
-				37AD0374266C8CCA0086DD10 /* URLExtensions.swift in Sources */,
-				37AD0367266C8CCA0086DD10 /* OTPGenerator.swift in Sources */,
-				37AD036B266C8CCA0086DD10 /* CodeCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +285,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AD032A266C8A930086DD10 /* AuthenticatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,7 +292,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AD0335266C8A930086DD10 /* AuthenticatorUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,17 +309,6 @@
 			targetProxy = 37AD0331266C8A930086DD10 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		37AD031D266C8A930086DD10 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37AD031E266C8A930086DD10 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		37AD0337266C8A930086DD10 /* Debug */ = {
@@ -814,19 +640,6 @@
 			productName = SwiftOTP;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		37AD0315266C8A920086DD10 /* Authenticator.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				37AD0316266C8A920086DD10 /* Authenticator.xcdatamodel */,
-			);
-			currentVersion = 37AD0316266C8A920086DD10 /* Authenticator.xcdatamodel */;
-			path = Authenticator.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 37AD0304266C8A920086DD10 /* Project object */;
 }
