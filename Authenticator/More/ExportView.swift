@@ -19,7 +19,7 @@ struct ExportView: View {
                                         } label: {
                                                 HStack(spacing: 12) {
                                                         Image(systemName: "doc.on.doc").foregroundStyle(Color.primary)
-                                                        Text("Copy all Key URIs to Clipboard")
+                                                        Text("Copy all Key URIs to the Clipboard")
                                                         Spacer()
                                                 }
                                         }

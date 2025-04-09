@@ -36,7 +36,7 @@
 // Export
 "Export" = "Export";
 "Export Accounts" = "Export Accounts";
-"Copy all Key URIs to Clipboard" = "Copy all Key URIs to Clipboard";
+"Copy all Key URIs to the Clipboard" = "Copy all Key URIs to the Clipboard";
 "Export all Key URIs as plain text" = "Export all Key URIs as plain text";
 "Export all Key URIs as a %@ file" = "Export all Key URIs as a %@ file";
 "Export all Key URIs as QR Code images combined as a %@ file" = "Export all Key URIs as QR Code images combined as a %@ file";
@@ -63,4 +63,4 @@
 "Save…" = "Save…";
 
 "Delete Account?" = "Delete Account?";
-"Account Deletion Warning" = "Removing account will NOT turn off Two-Factor Authentication.\n\nMake sure you have alternate ways to sign into your service.";
+"Account Deletion Warning" = "Removing an account will NOT turn off the two-factor authentication.\n\nMake sure you have alternate ways to sign into your service.";

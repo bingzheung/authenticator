@@ -36,7 +36,7 @@
 // Export
 "Export" = "导出";
 "Export Accounts" = "导出帐号";
-"Copy all Key URIs to Clipboard" = "拷贝所有 Key URI 到剪切板";
+"Copy all Key URIs to the Clipboard" = "拷贝所有 Key URI 到剪切板";
 "Export all Key URIs as plain text" = "以纯文本格式导出所有 Key URI";
 "Export all Key URIs as a %@ file" = "导出所有 Key URI 合为一个 %@ 文件";
 "Export all Key URIs as QR Code images combined as a %@ file" = "以二维码图片形式导出所有 Key URI 合为一个 %@ 文件";
