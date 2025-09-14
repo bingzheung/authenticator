@@ -135,11 +135,6 @@ struct ContentView: View {
                                                         }
                                                 } label: {
                                                         Image(systemName: "ellipsis.circle")
-                                                                .resizable()
-                                                                .scaledToFit()
-                                                                .frame(width: 26)
-                                                                .padding(.trailing, 8)
-                                                                .contentShape(Rectangle())
                                                 }
                                         }
                                 }
@@ -159,11 +154,6 @@ struct ContentView: View {
                                                         isSheetPresented = true
                                                 } label: {
                                                         Image(systemName: "qrcode.viewfinder")
-                                                                .resizable()
-                                                                .scaledToFit()
-                                                                .frame(width: 24)
-                                                                .padding(.horizontal, 2)
-                                                                .contentShape(Rectangle())
                                                 }
                                                 #endif
                                                 Menu {
@@ -192,11 +182,6 @@ struct ContentView: View {
                                                         }
                                                 } label: {
                                                         Image(systemName: "plus")
-                                                                .resizable()
-                                                                .scaledToFit()
-                                                                .frame(width: 25)
-                                                                .padding(.leading, 8)
-                                                                .contentShape(Rectangle())
                                                 }
                                         }
                                 }
