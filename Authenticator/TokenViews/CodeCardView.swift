@@ -96,29 +96,24 @@ struct CodeCardView: View {
         private var issuerImage: Image {
                 let imageName: String = {
                         let issuer: String = token.displayIssuer.lowercased()
-                        switch issuer {
-                        case "jetbrains account", "jetbrains+account":
-                                return "jetbrains"
-                        case "wordpress.com":
-                                return "wordpress"
-                        case "gab.com":
-                                return "gab"
-                        case "crowdin.com":
-                                return "crowdin"
-                        case "truthsocial.com":
-                                return "truthsocial"
-                        case "open collective":
-                                return "opencollective"
-                        case "name.com":
-                                return "name"
-                        default:
-                                return issuer
-                        }
+                        return Self.nameMap[issuer] ?? issuer
                 }()
                 guard imageName.isNotEmpty else { return Image(systemName: "person.circle") }
                 guard let uiImage: UIImage = UIImage(named: imageName) else { return Image(systemName: "person.circle") }
                 return Image(uiImage: uiImage)
         }
+        private static let nameMap: [String : String] = [
+                "jetbrains account" : "jetbrains",
+                "jetbrains+account" : "jetbrains",
+                "wordpress.com"     : "wordpress",
+                "gab.com"           : "gab",
+                "crowdin.com"       : "crowdin",
+                "truthsocial.com"   : "truthsocial",
+                "open collective"   : "opencollective",
+                "protonmail"        : "proton",
+                "x"                 : "twitter",
+                "x.com"             : "twitter",
+        ]
 
         private var endAngle: Double {
                 return Double((30 - timeRemaining) * 12 - 89)
