@@ -10,7 +10,7 @@ struct ContentView: View {
 
         private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         @State private var timeRemaining: Int = 30 - (Int(Date().timeIntervalSince1970) % 30)
-        @State private var codes: [String] = Array(repeating: String.zeros, count: 50)
+        @State private var codes: [String] = Array(repeating: String.zeros, count: 1000)
         @State private var animationTrigger: Bool = false
 
         @State private var isSheetPresented: Bool = false
@@ -330,7 +330,7 @@ struct ContentView: View {
                 return token
         }
         private func generateCodes() {
-                let placeholder: [String] = Array(repeating: String.zeros, count: 30)
+                let placeholder: [String] = Array(repeating: String.zeros, count: 100)
                 guard fetchedTokens.isNotEmpty else {
                         codes = placeholder
                         return
